@@ -1,0 +1,86 @@
+/* Add application styles & imports to this file! */
+@import url('https://membersecure.anthem.com/member/assets/styles/main.css?20230330113210');
+@import './styles/variables';
+// p {
+//   background-color: grey;
+// }
+
+#search-bar-container {
+  div {
+    border: 0px solid;
+    padding: 2px 2px;
+  }
+
+  .search-bar-header {
+    display: flex;
+    flex-wrap: wrap;
+
+    .search-bar-left {
+      flex-grow: 1;
+    }
+    .search-bar-right {
+      flex-grow: 0;
+    }
+  }
+
+  .search-bar {
+    .motif-search-1 {
+      position: absolute;
+      color: #286ce2;
+      font-size: 1.5rem !important;
+      padding-top: 15px;
+      padding-left: 10px;
+    }
+    .search-term-wrapper {
+      flex: 1 0 60%;
+      box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+
+      .search-input {
+        height: 100%;
+        width: 100%;
+        font-size: 18px;
+        color: #666;
+        padding: 11px 40px;
+        border: 0px;
+      }
+    }
+
+    .look-up-container {
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+      width: 96.7%;
+    }
+
+    .fly-out {
+      z-index: 499;
+      position: absolute;
+      background-color: #fff;
+      margin-top: 2px;
+      padding: 0.75rem;
+    }
+  }
+
+  .search-bar-categories {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 10px;
+
+    .category {
+    }
+
+    .circleBase {
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      border: 1px solid #000;
+    }
+
+    .care {
+      background: #286ce2;
+      .drawing {
+      }
+    }
+  }
+}
