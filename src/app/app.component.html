@@ -23,7 +23,10 @@
       />
     </div>
     <!--start: result list -->
-    <div class="fly-out look-up-container" *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0">
+    <div
+      class="fly-out look-up-container"
+      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0"
+    >
       <div
         class="search-result"
         *ngFor="let keyword of this.benefitKeywordsFound"
@@ -32,9 +35,15 @@
           {{ keyword }}
         </div>
       </div>
-    </div>
-     <!--end: result list -->
 
+      <div
+        *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0"
+      >
+        No medical service found for searched text
+      </div>
+
+      <!--end: result list -->
+    </div>
   </div>
 
   <div class="search-bar-categories">
