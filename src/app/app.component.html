@@ -20,14 +20,13 @@
         placeholder="Search by service or proc edure..."
         aria-label="Enter 3 or more characters to start a search. Use the up and down arrow keys to view search suggestions. Search by doctor (name or specialty), hospital, procedure, and more"
         (keyup)="search($event)"
-        #inputKeyword="ngModel"
-        [(ngModel)]="inputKeyword"
+        #inputKeyword
       />
     </div>
     <!--start: result list -->
     <div
       class="fly-out look-up-container"
-      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0 && inputKeyword.trim().length > 0"
+      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0 && inputKeyword.value.trim().length > 0"
     >
       <div
         class="search-result"
@@ -44,7 +43,7 @@
     <div
       class="fly-out look-up-container"
       *ngIf="
-        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0 && inputKeyword.trim().length > 0
+        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0 && inputKeyword.value.trim().length > 0
       "
     >
       No medical service found for searched text
