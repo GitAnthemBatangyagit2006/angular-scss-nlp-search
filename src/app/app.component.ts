@@ -27,7 +27,7 @@ export class AppComponent {
     this.subject.next(searchText);
   }
 
-  apiCall (searchTet: string) {
+  apiCall (searchText: string) {
     this.api.get('users?page=1').subscribe(res => {
       this.users = res;
       console.log('data response', this.users);
