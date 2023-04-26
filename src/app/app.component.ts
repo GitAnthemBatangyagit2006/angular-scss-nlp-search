@@ -22,7 +22,7 @@ export class AppComponent {
           description: '',
           ariaLabel: '',
           image: '',
-          analyticTag: ''
+          analyticTag: '',
           sortNo: 1,
         },
         {
@@ -38,7 +38,7 @@ export class AppComponent {
           description: '',
           ariaLabel: '',
           image: '',
-          analyticTag: ''
+          analyticTag: '',
           sortNo: 3,
         },
         {
