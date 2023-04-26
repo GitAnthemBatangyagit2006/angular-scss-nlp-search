@@ -10,12 +10,13 @@ import { IWindow } from './interfaces/Window';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  searching = false;
   benefitKeywordsFound: any;
   results$: Observable<any>;
   subject = new Subject();
 
   content = {
-    benefitNLPSearchComponent: {
+
       categories: [
         {
           name: 'Preventative Care',
@@ -59,7 +60,6 @@ export class AppComponent {
         }
 
       ]
-    },
   };
   constructor(
     private api: ApiService,
@@ -78,6 +78,7 @@ export class AppComponent {
     const searchText = evt.target.value;
     // emits the `searchText` into the stream. This will cause the operators in its pipe function (defined in the ngOnInit method) to be run. `debounce` runs and then `map`. If the time interval of 1 sec in debounce hasn't elapsed, map will not be called, thereby saving the server from being called.
     if (searchText?.trim()) {
+      this.searching = true;
       this.subject.next(searchText);
     }
   }
@@ -86,6 +87,7 @@ export class AppComponent {
     this.api.getBenefitKeywords(searchText).subscribe((response) => {
       console.log('data response', response);
       this.buildKeywordList(response);
+      this.searching = false;
     });
   }
 

@@ -26,7 +26,11 @@
     <!--start: result list -->
     <div
       class="fly-out look-up-container"
-      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0 && inputKeyword.value.trim().length > 0"
+      *ngIf="
+        this.benefitKeywordsFound &&
+        this.benefitKeywordsFound.length > 0 &&
+        inputKeyword.value.trim().length > 0
+      "
     >
       <div
         class="search-result"
@@ -43,7 +47,9 @@
     <div
       class="fly-out look-up-container"
       *ngIf="
-        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0 && inputKeyword.value.trim().length > 0
+        this.benefitKeywordsFound &&
+        this.benefitKeywordsFound.length === 0 &&
+        inputKeyword.value.trim().length > 0
       "
     >
       No medical service found for searched text
@@ -51,23 +57,16 @@
   </div>
 
   <div class="search-bar-categories">
-    <div class="category circleBase care">
-      <div class="drawing">&nbsp;</div>
-    </div>
-    <div class="category circleBase care">
-      <div class="drawing">&nbsp;</div>
-    </div>
-    <div class="category circleBase care">
-      <div class="drawing">&nbsp;</div>
-    </div>
-    <div class="category circleBase care">
-      <div class="drawing">&nbsp;</div>
-    </div>
-    <div class="category circleBase care">
-      <div class="drawing">&nbsp;</div>
-    </div>
-    <div class="category circleBase care">
-      <div class="drawing">&nbsp;</div>
+    <div
+      *ngFor="
+        let category of this.content.categories;
+        let i = index;
+        let last = last
+      "
+    >
+      <div class="category circleBase care">
+        <div class="drawing">&nbsp;</div>
+      </div>
     </div>
   </div>
 </div>
