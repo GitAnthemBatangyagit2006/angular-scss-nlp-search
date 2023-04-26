@@ -15,7 +15,17 @@ export class AppComponent {
   subject = new Subject();
 
   content = {
-    benefitNLPSearchComponent: {},
+    benefitNLPSearchComponent: {
+      categories: [
+        {
+          name: '',
+          description: '',
+          ariaLabel: '',
+          image: '',
+          analyticTag: ''
+        }
+      ]
+    },
   };
   constructor(
     private api: ApiService,
@@ -33,7 +43,9 @@ export class AppComponent {
   search(evt) {
     const searchText = evt.target.value;
     // emits the `searchText` into the stream. This will cause the operators in its pipe function (defined in the ngOnInit method) to be run. `debounce` runs and then `map`. If the time interval of 1 sec in debounce hasn't elapsed, map will not be called, thereby saving the server from being called.
-    this.subject.next(searchText);
+    if (searchText?.trim()) {
+      this.subject.next(searchText);
+    }
   }
 
   apiCall(searchText: string) {
