@@ -13,17 +13,21 @@ export class AppComponent {
   benefitKeywordsFound: any;
   results$: Observable<any>;
   subject = new Subject();
-  constructor(private api: ApiService, @Inject('Window') private window: IWindow) {}
+
+  content = {
+    benefitNLPSearchComponent: {},
+  };
+  constructor(
+    private api: ApiService,
+    @Inject('Window') private window: IWindow
+  ) {}
 
   ngOnInit() {
-    this.results$ = this.subject.pipe(
-      debounce(() => interval(1000)),
-    );
-    
-    this.results$.subscribe((searchText)=> {
+    this.results$ = this.subject.pipe(debounce(() => interval(1000)));
+
+    this.results$.subscribe((searchText) => {
       this.apiCall(searchText);
-    })
-    
+    });
   }
 
   search(evt) {
@@ -32,13 +36,13 @@ export class AppComponent {
     this.subject.next(searchText);
   }
 
-  apiCall (searchText: string) {
-    this.api.getBenefitKeywords(searchText).subscribe(response => {
+  apiCall(searchText: string) {
+    this.api.getBenefitKeywords(searchText).subscribe((response) => {
       console.log('data response', response);
       this.buildKeywordList(response);
     });
   }
-  
+
   buildKeywordList(data: any) {
     this.benefitKeywordsFound = data.benefitKeywordsFound.map((d) => d);
   }
