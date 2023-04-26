@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { debounce } from 'rxjs/operators';
+import { Component, Inject } from '@angular/core';
+import { Observable, Subject, interval } from 'rxjs';
+import { debounce, map } from 'rxjs/operators';
 import { ApiService } from './app.service';
 import { IWindow } from './interfaces/Window';
 
@@ -13,12 +13,12 @@ export class AppComponent {
   users: any;
   results$: Observable<any>;
   subject = new Subject();
-  constructor(private api: ApiService, @inject('Window') private window: IWindow) {}
+  constructor(private api: ApiService, @Inject('Window') private window: IWindow) {}
 
   ngOnInit() {
     this.results$ = this.subject.pipe(
-      debounce(() => Rx.Observable.interval(1000)),
-      map((searchText) => this.httpClient.get('/api/search?q=' + searchText))
+      debounce(() => interval(1000)),
+      map((searchText: string) => this.apiCall(searchText))
     );
   }
   search(evt) {
@@ -27,7 +27,7 @@ export class AppComponent {
     this.subject.next(searchText);
   }
 
-  apiCall () {
+  apiCall (searchTet: string) {
     this.api.get('users?page=1').subscribe(res => {
       this.users = res;
     });
