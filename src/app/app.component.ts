@@ -18,12 +18,46 @@ export class AppComponent {
     benefitNLPSearchComponent: {
       categories: [
         {
-          name: '',
+          name: 'Preventative Care',
           description: '',
           ariaLabel: '',
           image: '',
           analyticTag: ''
+          sortNo: 1,
+        },
+        {
+          name: 'Emergency Care',
+          description: '',
+          ariaLabel: '',
+          image: '',
+          analyticTag: '',
+          sortNo: 2,
+        },
+        {
+          name: 'Office Visits',
+          description: '',
+          ariaLabel: '',
+          image: '',
+          analyticTag: ''
+          sortNo: 3,
+        },
+        {
+          name: 'Hospital Visits',
+          description: '',
+          ariaLabel: '',
+          image: '',
+          analyticTag: '',
+          sortNo: 4,
+        },
+        {
+          name: 'Physical Therapies',
+          description: '',
+          ariaLabel: '',
+          image: '',
+          analyticTag: '',
+          sortNo: 5,
         }
+
       ]
     },
   };
