@@ -36,13 +36,16 @@
         </div>
       </div>
 
-      <div
-        *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0"
-      >
-        No medical service found for searched text
-      </div>
-
       <!--end: result list -->
+    </div>
+    <!-- no matach -->
+    <div
+      class="fly-out look-up-container"
+      *ngIf="
+        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0
+      "
+    >
+      No medical service found for searched text
     </div>
   </div>
 
