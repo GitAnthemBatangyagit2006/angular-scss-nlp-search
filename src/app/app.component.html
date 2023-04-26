@@ -22,6 +22,7 @@
         (keyup)="search($event)"
       />
     </div>
+    <!--start: result list -->
     <div class="fly-out look-up-container" *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0">
       <div
         class="search-result"
@@ -32,6 +33,8 @@
         </div>
       </div>
     </div>
+     <!--end: result list -->
+
   </div>
 
   <div class="search-bar-categories">

@@ -14,5 +14,9 @@ export class ApiService {
   public get(url): Observable<any> {
     return this.http.get(API_URL + '/api/' + url).pipe(map(res => res));
   }
+
+  public getBenefitKeywords(query: string): Observable<any> {
+    return this.http.get(`http://localhost:4321/member/secure/api/tcp/benefits/benefitKeywords?query=${query}`).pipe((d) => { console.log(d) ; return d });
+  }
 }
 // /api/users

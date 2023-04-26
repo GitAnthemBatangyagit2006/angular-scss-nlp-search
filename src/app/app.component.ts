@@ -33,8 +33,8 @@ export class AppComponent {
   }
 
   apiCall (searchText: string) {
-    this.api.get('users?page=1').subscribe(res => {
-      console.log('data response', res.data);
+    this.api.getBenefitKeywords('a').subscribe(res => {
+      console.log('data response', res);
       this.buildKeywordList(res.data);
     });
   }
