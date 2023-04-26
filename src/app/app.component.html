@@ -14,7 +14,7 @@
   <div class="search-bar">
     <div class="search-term-wrapper">
       <span class="motif-icon motif-search-1"></span>
-      <input name="nameField" type="search" maxlength="150" aria-required="true" autocomplete="off" class="ant-text-input search-input ng-valid ng-touched ng-dirty" id="txt-search-field" placeholder="Search by service or procedure..." aria-label="Enter 3 or more characters to start a search. Use the up and down arrow keys to view search suggestions. Search by doctor (name or specialty), hospital, procedure, and more">
+      <input name="nameField" type="search" maxlength="150" aria-required="true" autocomplete="off" class="ant-text-input search-input ng-valid ng-touched ng-dirty" id="txt-search-field" placeholder="Search by service or proc edure..." aria-label="Enter 3 or more characters to start a search. Use the up and down arrow keys to view search suggestions. Search by doctor (name or specialty), hospital, procedure, and more" (keyup)="search($event)">
     </div>
     <div class="fly-out look-up-container">
         Result list goes here ....

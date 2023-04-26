@@ -30,6 +30,7 @@ export class AppComponent {
   apiCall (searchTet: string) {
     this.api.get('users?page=1').subscribe(res => {
       this.users = res;
+      console.log('data response', this.users);
     });
   }
 }
