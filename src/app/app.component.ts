@@ -72,6 +72,15 @@ export class AppComponent {
     this.results$.subscribe((searchText) => {
       this.apiCall(searchText);
     });
+
+    // hard code 
+
+    this.benefitKeywordsFound = [
+      'Ambulance',
+      'Ambulance Room'
+    ];
+
+
   }
 
   search(evt) {
