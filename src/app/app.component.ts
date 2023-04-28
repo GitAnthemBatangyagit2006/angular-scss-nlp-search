@@ -78,7 +78,10 @@ export class AppComponent {
 
     this.benefitKeywordsFound = [
       'Ambulance',
-      'Ambulance Room'
+      'Ambulance Room',
+      'Ambulance Car',
+      'Ambulance Transportation',
+      'Ambulance Transportation'
     ];
 
 

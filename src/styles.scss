@@ -57,7 +57,7 @@
       position: absolute;
       background-color: #fff;
       margin-top: 2px;
-      padding: 0.75rem;
+      padding-top: 16px;
     }
   }
 
@@ -85,9 +85,18 @@
     }
   }
 
+
   .search-result-container {
     .search-result-header-service {
       background: $ant-motif-light-gray;
+      padding: 10px 10px 10px 10px;
+    }
+
+    .search-result-item {
+      padding: 10px 24px 10px 24px;
+    }
+    .search-result-item:nth-child(n+2) {
+      border-top: 1px solid $ant-motif-light-gray;;
     }
   }
 }
