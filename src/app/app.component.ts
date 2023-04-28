@@ -10,6 +10,7 @@ import { IWindow } from './interfaces/Window';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  inputKeyword: string;
   searching = false;
   benefitKeywordsFound: any;
   results$: Observable<any>;
