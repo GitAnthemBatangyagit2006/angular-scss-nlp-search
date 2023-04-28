@@ -75,7 +75,7 @@
       width: 58px;
       height: 58px;
       border: 1px solid #000;
-      margin:auto;
+      margin: auto;
     }
 
     .care {
@@ -84,7 +84,6 @@
       }
     }
   }
-
 
   .search-result-container {
     .search-result-header-service {
@@ -95,8 +94,13 @@
     .search-result-item {
       padding: 10px 24px 10px 24px;
     }
-    .search-result-item:nth-child(n+2) {
-      border-top: 1px solid $ant-motif-light-gray;;
+    .search-result-item:nth-child(n + 2) {
+      border-top: 1px solid $ant-motif-light-gray;
+    }
+
+    .show-more {
+      border-top: 1px solid $ant-motif-light-gray;
+      padding: 20px 24px 20px 24px;
     }
   }
 }

@@ -36,13 +36,20 @@
           *ngFor="let keyword of this.benefitKeywordsFound"
         >
           <div>
+            <a href="#">
             {{ keyword }}
+            </a>
           </div>
         </div>
-
-        <!--end: result list -->
       </div>
+
+      <div class="show-more">
+        <a href="#"> Show more</a>
+      </div>  
+
     </div>
+    
+    <!--end: result list -->
     <!-- no matach -->
     <div
       class="fly-out look-up-container"
