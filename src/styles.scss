@@ -1,6 +1,6 @@
 /* Add application styles & imports to this file! */
 @import url('https://membersecure.anthem.com/member/assets/styles/main.css?20230330113210');
-@import './styles/variables';
+@import './styles/colors.scss';
 // p {
 //   background-color: grey;
 // }
@@ -82,6 +82,12 @@
       background: #286ce2;
       .drawing {
       }
+    }
+  }
+
+  .search-result-container {
+    .search-result-header-service {
+      background: $ant-motif-light-gray;
     }
   }
 }

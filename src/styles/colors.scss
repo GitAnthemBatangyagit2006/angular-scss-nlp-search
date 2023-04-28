@@ -1,0 +1,63 @@
+@import "deprecated-colors";
+
+/** Motif Primary Colors **/
+$ant-blue: #0079c2;
+$ant-rhino-blue-lt: #2453a6;
+$ant-rhino-blue: #37475a;
+$ant-sky-blue: #48c9ff;
+$ant-light-blue: #58abdf;
+
+/** Motif Secondary Colors **/
+$ant-teal: #0a8194;
+$ant-dark-teal: #005d6b;
+$ant-bermuda-teal: #81cfc2;
+
+/** Accent colors for Motif **/
+$ant-motif-accent-red: #cc0033;
+$ant-motif-accent-green: #078855;
+$ant-motif-accent-orange: #f78d2f;
+$ant-motif-accent-yellow: #fed74b;
+
+//new colors pending
+$ant-gray-blue: #4c6684;
+$accent-color-light-magenta: #fff0fa;
+$accent-color-green: #00cc33;
+$accent-support-green: #00a294;
+
+$primary: $ant-blue;
+$primary-dark: $ant-rhino-blue;
+$primary-light: $ant-sky-blue;
+
+$secondary: $ant-teal;
+$secondary-dark: $ant-dark-teal;
+$secondary-light: $ant-bermuda-teal;
+
+$support-info: $ant-blue;
+$support-error: $ant-motif-accent-red;
+$support-success: $ant-motif-accent-green;
+$support-danger: $ant-motif-accent-red;
+$support-warning: $ant-motif-accent-orange;
+
+$colors: () !default;
+
+$ant-motif-mine-shaft: #333333;
+$ant-motif-dark-gray: #555555;
+$ant-motif-dove-gray: #666666;
+$ant-motif-dusty-gray: #949494;
+$ant-medium-gray: #dcdcdc;
+$ant-motif-silver: #cccccc;
+$ant-motif-gallery: #eeeeee;
+$ant-motif-light-gray: #f7f7f7;
+$ant-motif-white: $white;
+$ant-motif-black: $black;
+
+$ant-motif-grays: () !default;
+$ant-motif-grays: (
+  100: $ant-motif-light-gray,
+  200: $ant-motif-silver,
+  250: $ant-medium-gray,
+  300: $ant-motif-dusty-gray,
+  400: $ant-motif-dove-gray,
+  500: $ant-motif-dark-gray,
+  600: $ant-motif-mine-shaft
+);

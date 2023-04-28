@@ -1,0 +1,51 @@
+$base-color: #fff;
+$black: #000;
+$negative-background: #fff7f7;
+
+$primary-color-lighter-blue: #4da1d4;
+$primary-color-light-blue: #0079c2;
+$primary-color-blue: #00609a;
+$primary-color-dark-blue: #002e58;
+$primary-text-color: #fff;
+$primary-text-color-inverse: #333;
+
+$neutral-dark-gray: #333;
+$gray: #666666;
+$gray-2: #a3a3a3;
+$medium-gray: #dcdcdc;
+$light-gray: #eeeeee;
+$white: #ffffff;
+
+$accent-color-salmon: #fe5e3c;
+$accent-color-peach: #faad96;
+$accent-color-peach-dark: #e19e8a;
+$accent-color-red: #e82d05;
+$accent-color-teal: #06a59d;
+$accent-color-blue: #69b3e7;
+$accent-color-light-blue: #e9f4fb;
+$accent-color-green: #00cc33;
+$accent-color-light-green: #f6ffe5;
+$accent-color-magenta: #cc0033;
+$accent-color-light-magenta: #fff0fa;
+
+// Deutsch vars
+//== Colors
+//
+//## Brand colors for use across Anthem.com.
+
+$color-xlight-gray: #f5f5f5;
+$color-dark-gray: #2d2d2d;
+$color-teal: #41c0b8;
+$color-purple: #683c7a;
+$color-magenta: #a21851;
+$color-yellow: #ffcc33;
+$color-error: #cc0033;
+$color-dark-dolphin: #00847a;
+$color-yes: #099b92;
+$color-no: #e5270a;
+$color-alert: #ffedf9;
+
+// hover colors change state button on public
+// scss used in .btn-info:hover scss
+$medium-aqua-blue: #31b0d5;
+$darker-aqua-blue: #269abc;
