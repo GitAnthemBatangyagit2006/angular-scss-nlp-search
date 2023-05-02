@@ -82,7 +82,9 @@ export class NewComponent {
     });
 
     this.documentClickedTarget.subscribe((target)=> {
-      console.log(target);
+      if(!this.eRef.nativeElement.contains(target)) {
+        this.showResultBox = false;
+      }
     })
     // hard code 
     /*
@@ -149,7 +151,12 @@ export class NewComponent {
 
   @HostListener('document:click', ['$event'])
   documentClick(event: any): void {
-    console.log(this.eRef.nativeElement)
+    this.documentClickedTarget.next(event.target)
+  }
+
+  @HostListener('document:focusout', ['$event'])
+  focusOut(event: any): void {
+    console.log(event.target);
     this.documentClickedTarget.next(event.target)
   }
 }
