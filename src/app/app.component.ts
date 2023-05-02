@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from './app.service';
@@ -70,7 +70,8 @@ export class AppComponent {
   };
   constructor(
     private api: ApiService,
-    @Inject('Window') private window: IWindow
+    @Inject('Window') private window: IWindow,
+    private eRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -148,6 +149,7 @@ export class AppComponent {
 
   @HostListener('document:click', ['$event'])
   documentClick(event: any): void {
+    console.log(this.eRef.nativeElement)
     this.documentClickedTarget.next(event.target)
   }
 }
