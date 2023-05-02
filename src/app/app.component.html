@@ -46,7 +46,7 @@
 
 
       <div class="show-more" *ngIf="showMoreOrLessLink">
-        <a  (click)="showMore()"   href="javascript:void(0);"> Show more</a>
+        <a  (click)="showMore()"   href="javascript:void(0);" [innerHTML]="showMoreText?'Show More': 'Show Less'"></a>
       </div>
 
     </div>

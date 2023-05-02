@@ -12,6 +12,7 @@ import { IWindow } from './interfaces/Window';
 export class AppComponent {
   defaultDisplayLimit = 3;
   showMoreOrLessLink = false;
+  showMoreText = true;
   displayLimit = 3;
   inputKeyword: string;
   searching = false;
@@ -129,6 +130,7 @@ export class AppComponent {
     } else {
       this.displayLimit = this.benefitKeywordsFound.length;
     }
+    this.showMoreText = !this.showMoreText;
   }
 
   onInputKeywordFocus() {
