@@ -79,18 +79,38 @@
       display:flex;
       justify-content: center;
       align-items: center;
-
-    }
-
-    .emergency-care {
       background: #286ce2;
 
+       
       .drawing {
-        background-image: url("/efssites/dam/benefits/nlp-emergency-care.svg");
         height: auto;
-        width: 28px;
+        width: 26px;
+      }
+
+      .browse-all-categories {
+        background-image: url("https://membersecure.ci1.awse1.anthem.com/efssites/dam/benefits/nlp-browse-all-categories.svg");
+      }
+      .preventative-care {
+        background-image: url("https://membersecure.ci1.awse1.anthem.com/efssites/dam/benefits/nlp-preventative-care.svg");
+      }
+      .emergency-care {
+        background-image: url("https://membersecure.ci1.awse1.anthem.com/efssites/dam/benefits/nlp-emergency-care.svg");
+      }
+      .office-visits {
+        background-image: url("https://membersecure.ci1.awse1.anthem.com/efssites/dam/benefits/nlp-office-visits.svg");
+      }
+      .hospital-visits {
+        background-image: url("https://membersecure.ci1.awse1.anthem.com/efssites/dam/benefits/nlp-hospital-visits.svg");
+      }
+      .physical-therapies {
+        background-image: url("https://membersecure.ci1.awse1.anthem.com/efssites/dam/benefits/nlp-physical-therapies.svg");
       }
     }
+
+
+
+  
+    
   }
 
   .search-result-container {
