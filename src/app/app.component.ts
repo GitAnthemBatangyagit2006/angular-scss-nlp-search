@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from './app.service';
@@ -20,6 +20,7 @@ export class AppComponent {
   results$: Observable<any>;
   subject = new Subject();
   showResultBox = false;
+  documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>();
 
   content = {
 
@@ -79,6 +80,9 @@ export class AppComponent {
       this.apiCall(searchText);
     });
 
+    this.documentClickedTarget.subscribe((target)=> {
+      console.log(target);
+    })
     // hard code 
     /*
     this.benefitKeywordsFound = [
@@ -139,5 +143,11 @@ export class AppComponent {
 
   onInputKeywordBlur() {
     this.showResultBox = false;
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  documentClick(event: any): void {
+    this.documentClickedTarget.next(event.target)
   }
 }
