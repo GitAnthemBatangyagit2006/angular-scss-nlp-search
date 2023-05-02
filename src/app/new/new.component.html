@@ -21,6 +21,7 @@
         placeholder="Search by service or proc edure..."
         aria-label="Enter 3 or more characters to start a search. Use the up and down arrow keys to view search suggestions. Search by doctor (name or specialty), hospital, procedure, and more"
         (keyup)="search($event, inputKeyword.value)"
+        (focus)="displaySearchedKeywords()"
         #inputKeyword
       />
     </div>

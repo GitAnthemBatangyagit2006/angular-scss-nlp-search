@@ -148,6 +148,9 @@ export class NewComponent {
     this.showResultBox = false;
   }
 
+  displaySearchedKeywords() {
+    this.showResultBox=true;
+  }
 
   @HostListener('document:click', ['$event'])
   documentClick(event: any): void {
@@ -155,7 +158,7 @@ export class NewComponent {
   }
 
   @HostListener('document:focusout', ['$event'])
-  focusOut(event: any): void {
+  focus(event: any): void {
     console.log(event.target);
     this.documentClickedTarget.next(event.target)
   }
