@@ -10,11 +10,13 @@ import { IWindow } from './interfaces/Window';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  displayLimit: number = 3;
   inputKeyword: string;
   searching = false;
   benefitKeywordsFound: any;
   results$: Observable<any>;
   subject = new Subject();
+  showResultBox = false;
 
   content = {
 
@@ -81,7 +83,8 @@ export class AppComponent {
       'Ambulance Room',
       'Ambulance Car',
       'Ambulance Transportation',
-      'Ambulance Transportation'
+      'Ambulance Transportation',
+      'Apple'
     ];
 
 
@@ -101,10 +104,23 @@ export class AppComponent {
       console.log('data response', response);
       this.buildKeywordList(response);
       this.searching = false;
+      this.displayLimit = 3;
     });
   }
 
   buildKeywordList(data: any) {
     this.benefitKeywordsFound = data.benefitKeywordsFound.map((d) => d);
+  }
+
+  showMore () {
+    this.displayLimit =  this.benefitKeywordsFound.length;
+  }
+
+  onInputKeywordFocus() {
+    this.showResultBox = true;
+  }
+
+  onInputKeywordBlur() {
+    this.showResultBox = false;
   }
 }

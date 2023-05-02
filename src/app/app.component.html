@@ -20,20 +20,22 @@
         placeholder="Search by service or proc edure..."
         aria-label="Enter 3 or more characters to start a search. Use the up and down arrow keys to view search suggestions. Search by doctor (name or specialty), hospital, procedure, and more"
         (keyup)="search($event)"
+        (focus)="onInputKeywordFocus($event)"
+        (blur)="onInputKeywordBlur($event)"
         #inputKeyword
       />
     </div>
     <!--start: result list -->
     <div
       class="fly-out look-up-container search-result-container"
-      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0"
+      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0  && this.showResultBox"
     >
       <div class="search-result-header-service">Service</div>
 
       <div class="search-result">
         <div
           class="search-result-item"
-          *ngFor="let keyword of this.benefitKeywordsFound"
+          *ngFor="let keyword of this.benefitKeywordsFound | slice:0: displayLimit;"
         >
           <div>
             <a href="#">
@@ -43,18 +45,18 @@
         </div>
       </div>
 
-      <div class="show-more">
-        <a href="#"> Show more</a>
+      <div class="show-more" *ngIf="this.benefitKeywordsFound.length > 3 && this.benefitKeywordsFound.length != this.displayLimit">
+        <a href="#" (click)="showMore()"> Show more</a>
       </div>  
 
     </div>
-    
+
     <!--end: result list -->
     <!-- no matach -->
     <div
       class="fly-out look-up-container"
       *ngIf="
-        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0
+        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0 && this.showResultBox
       "
     >
       No medical service found for searched text
