@@ -65,7 +65,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 20px;
 
     .category {
     }
@@ -76,11 +76,19 @@
       height: 58px;
       border: 1px solid #000;
       margin: auto;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+
     }
 
-    .care {
+    .emergency-care {
       background: #286ce2;
+
       .drawing {
+        background-image: url("/efssites/dam/benefits/nlp-emergency-care.svg");
+        height: auto;
+        width: 28px;
       }
     }
   }
