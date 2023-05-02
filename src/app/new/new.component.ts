@@ -20,7 +20,7 @@ export class NewComponent {
   results$: Observable<any>;
   subject = new Subject();
   showResultBox = false;
-  documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>();
+  eventTarget: Subject<EventTarget> = new Subject<EventTarget>();
 
   content = {
 
@@ -81,7 +81,7 @@ export class NewComponent {
       this.apiCall(searchText);
     });
 
-    this.documentClickedTarget.subscribe((target)=> {
+    this.eventTarget.subscribe((target)=> {
       if(!this.eRef.nativeElement.contains(target)) {
         this.showResultBox = false;
       }
@@ -153,13 +153,16 @@ export class NewComponent {
   }
 
   @HostListener('document:click', ['$event'])
-  documentClick(event: any): void {
-    this.documentClickedTarget.next(event.target)
+  documentClick(event: MouseEvent): void {
+    if (event.target) {
+      this.eventTarget.next(event.target);
+    }
   }
 
   @HostListener('document:focusout', ['$event'])
-  focus(event: any): void {
-    console.log(event.target);
-    this.documentClickedTarget.next(event.target)
+  focus(event: FocusEvent): void {
+    if (event.target) {
+      this.eventTarget.next(event.target);
+    }
   }
 }
