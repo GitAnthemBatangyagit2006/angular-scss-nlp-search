@@ -10,7 +10,9 @@ import { IWindow } from './interfaces/Window';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  displayLimit: number = 3;
+  defaultDisplayLimit = 3;
+  showMoreOrLessLink = false;
+  displayLimit = 3;
   inputKeyword: string;
   searching = false;
   benefitKeywordsFound: any;
@@ -77,7 +79,7 @@ export class AppComponent {
     });
 
     // hard code 
-
+    /*
     this.benefitKeywordsFound = [
       'Ambulance',
       'Ambulance Room',
@@ -86,7 +88,7 @@ export class AppComponent {
       'Ambulance Transportation',
       'Apple'
     ];
-
+*/
 
   }
 
@@ -103,17 +105,30 @@ export class AppComponent {
     this.api.getBenefitKeywords(searchText).subscribe((response) => {
       console.log('data response', response);
       this.buildKeywordList(response);
+      this.showResultBox = true;
       this.searching = false;
-      this.displayLimit = 3;
     });
   }
 
   buildKeywordList(data: any) {
     this.benefitKeywordsFound = data.benefitKeywordsFound.map((d) => d);
+
+    if (this.benefitKeywordsFound.length > this.defaultDisplayLimit) {
+      this.displayLimit = this.defaultDisplayLimit ;
+      this.showMoreOrLessLink = true;
+    }else {
+      this.displayLimit = this.benefitKeywordsFound.length; 
+      this.showMoreOrLessLink = false;
+    }
+
   }
 
   showMore () {
-    this.displayLimit =  this.benefitKeywordsFound.length;
+    if (this.displayLimit  === this.benefitKeywordsFound.length) {
+      this.displayLimit = this.defaultDisplayLimit;
+    } else {
+      this.displayLimit = this.benefitKeywordsFound.length;
+    }
   }
 
   onInputKeywordFocus() {

@@ -45,7 +45,7 @@
       </div>
 
 
-      <div class="show-more" *ngIf="this.benefitKeywordsFound.length > 3 && this.benefitKeywordsFound.length != this.displayLimit">
+      <div class="show-more" *ngIf="showMoreOrLessLink">
         <a  (click)="showMore()"   href="javascript:void(0);"> Show more</a>
       </div>
 
