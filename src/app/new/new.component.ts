@@ -21,52 +21,53 @@ export class NewComponent {
   subject = new Subject();
   showResultBox = false;
   eventTarget: Subject<EventTarget> = new Subject<EventTarget>();
-
   content = {
-
-      categories: [
-        {
-          name: 'Preventative Care',
-          description: '',
-          ariaLabel: '',
-          image: 'preventative-care',
-          analyticTag: '',
-          sortNo: 1,
-        },
-        {
-          name: 'Emergency Care',
-          description: '',
-          ariaLabel: '',
-          image: 'emergency-care',
-          analyticTag: '',
-          sortNo: 2,
-        },
-        {
-          name: 'Office Visits',
-          description: '',
-          ariaLabel: '',
-          image: 'office-visits',
-          analyticTag: '',
-          sortNo: 3,
-        },
-        {
-          name: 'Hospital Visits',
-          description: '',
-          ariaLabel: '',
-          image: 'hospital-visits',
-          analyticTag: '',
-          sortNo: 4,
-        },
-        {
-          name: 'Physical Therapies',
-          description: '',
-          ariaLabel: '',
-          image: 'physical-therapies',
-          analyticTag: '',
-          sortNo: 5,
-        }
-
-      ]
+    searchBarHint: 'Search by service or procedure...',
+    searchBarAriaLabel: 'Enter 3 or more characters to start a search.',
+    showMore: 'Show More',
+    showLess: 'Show Less',
+    categories: [
+      {
+        name: 'Preventative Care',
+        description: '',
+        ariaLabel: '',
+        image: 'preventative-care',
+        analyticTag: '',
+        sortNo: 1
+      },
+      {
+        name: 'Emergency Care',
+        description: '',
+        ariaLabel: '',
+        image: 'emergency-care',
+        analyticTag: '',
+        sortNo: 2
+      },
+      {
+        name: 'Office Visits',
+        description: '',
+        ariaLabel: '',
+        image: 'office-visits',
+        analyticTag: '',
+        sortNo: 3
+      },
+      {
+        name: 'Hospital Visits',
+        description: '',
+        ariaLabel: '',
+        image: 'hospital-visits',
+        analyticTag: '',
+        sortNo: 4
+      },
+      {
+        name: 'Physical Therapies',
+        description: '',
+        ariaLabel: '',
+        image: 'physical-therapies',
+        analyticTag: '',
+        sortNo: 5
+      }
+    ]
   };
   constructor(
     private api: ApiService,
@@ -121,6 +122,7 @@ export class NewComponent {
   buildKeywordList(data: any) {
     this.benefitKeywordsFound = data.benefitKeywordsFound.map((d) => d);
 
+    this.showMoreText = true;
     if (this.benefitKeywordsFound.length > this.defaultDisplayLimit) {
       this.displayLimit = this.defaultDisplayLimit ;
       this.showMoreOrLessLink = true;
