@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, ViewChild } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from './../app.service';
@@ -10,11 +10,15 @@ import { IWindow } from './../interfaces/Window';
   styleUrls: ['./new.component.scss'],
 })
 export class NewComponent {
+  
+  @ViewChild('inputKeyword', { static: false })
+  inputKeyword: ElementRef;
+
   defaultDisplayLimit = 3;
   showMoreOrLessLink = false;
   showMoreText = true;
   displayLimit = 3;
-  inputKeyword: string;
+  //inputKeyword: string;
   searching = false;
   benefitKeywordsFound: any;
   results$: Observable<any>;
@@ -107,10 +111,15 @@ export class NewComponent {
     if (searchText?.trim()) {
       this.searching = true;
       this.subject.next(searchText);
+    }else {
+      this.benefitKeywordsFound.length = 0;
+      this.showResultBox = false;
+      return;
     }
   }
 
   apiCall(searchText: string) {
+  
     this.api.getBenefitKeywords(searchText).subscribe((response) => {
       console.log('data response', response);
       this.buildKeywordList(response);
@@ -143,15 +152,13 @@ export class NewComponent {
   }
 
   onInputKeywordFocus() {
-    this.showResultBox = true;
+    if (this.inputKeyword.nativeElement.value) {
+      this.showResultBox = true;
+    }
   }
 
   onInputKeywordBlur() {
     this.showResultBox = false;
-  }
-
-  displaySearchedKeywords() {
-    this.showResultBox=true;
   }
 
   @HostListener('document:click', ['$event'])
