@@ -92,7 +92,7 @@ export class NewComponent {
       }
     })
     // hard code 
-    /*
+    
     this.benefitKeywordsFound = [
       'Ambulance',
       'Ambulance Room',
@@ -101,8 +101,7 @@ export class NewComponent {
       'Ambulance Transportation',
       'Apple'
     ];
-*/
-
+    this.showResultBox = true;
   }
 
   search(evt) {
