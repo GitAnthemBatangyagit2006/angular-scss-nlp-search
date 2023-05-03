@@ -14,6 +14,7 @@
   .search-bar-header {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 26px;
 
     .search-bar-left {
       flex-grow: 1;
@@ -128,5 +129,22 @@
       border-top: 1px solid $ant-motif-light-gray;
       padding: 20px 24px;
     }
+  }
+}
+
+/* 
+Remove padding and shadow for Nlp Search card container. 
+*/
+div[cardid="BenefitNLPSearch"].hw-wrapper,
+div[cardid="BenefitNLPSearch"].tcp-card.tcp-card-cmp {
+  box-shadow: none;
+  padding: 0px;
+}
+div[cardid="BenefitNLPSearch"] {
+  .section-header-two {
+    display: none;
+  }
+  .section-header-two:after {
+    display: none;
   }
 }
