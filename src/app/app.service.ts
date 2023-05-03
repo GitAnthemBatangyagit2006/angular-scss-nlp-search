@@ -16,7 +16,7 @@ export class ApiService {
   }
 
   public getBenefitKeywords(query: string): Observable<any> {
-    return this.http.get(`http://localhost:4321/member/secure/api/tcp/benefits/benefitKeywords?query=${query}`).pipe((d) => { console.log(d) ; return d });
+    return this.http.get(`http://localhost:4321/fed/nlpfindbenefits/v1/benefitKeywords?query=${query}`).pipe((d) => { console.log(d) ; return d });
   }
 }
 // /api/users

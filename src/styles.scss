@@ -33,6 +33,7 @@
     .search-term-wrapper {
       flex: 1 0 60%;
       box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+      margin-top: 5px;
 
       .search-input {
         height: 100%;
@@ -48,12 +49,12 @@
       border: 1px solid #cccccc;
       border-radius: 5px;
       box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
-      width: 96.7%;
+      width: 100%;
     }
 
     .fly-out {
       z-index: 499;
-      position: absolute;
+      position: relative;
       background-color: #fff;
       margin-top: 2px;
       padding-top: 16px;
