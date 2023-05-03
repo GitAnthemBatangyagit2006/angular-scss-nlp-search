@@ -6,11 +6,14 @@
 // }
 
 #search-bar-container {
+  border-bottom: 2px solid;
+  padding-bottom: 30px;
+
   div {
     border: 0px solid;
     padding: 2px 2px;
   }
-
+  
   .search-bar-header {
     display: flex;
     flex-wrap: wrap;
