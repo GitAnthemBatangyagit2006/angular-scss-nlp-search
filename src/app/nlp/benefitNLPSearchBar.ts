@@ -22,7 +22,7 @@ export class BenefitNLPSearchBar {
   searching = false;
   benefitKeywordsFound: any;
   results$: Observable<any>;
-  subject = new Subject();
+  keywordObserver = new Subject();
   showResultBox = false;
   eventTarget: Subject<EventTarget> = new Subject<EventTarget>();
   content = {
@@ -80,10 +80,10 @@ export class BenefitNLPSearchBar {
   ) {}
 
   ngOnInit() {
-    this.results$ = this.subject.pipe(debounce(() => interval(1000)));
+    this.results$ = this.keywordObserver.pipe(debounce(() => interval(1000)));
 
     this.results$.subscribe((searchText) => {
-      this.apiCall(searchText);
+      this.searchBenefitKeywords(searchText);
     });
 
     this.eventTarget.subscribe((target)=> {
@@ -104,12 +104,12 @@ export class BenefitNLPSearchBar {
     this.showResultBox = true;
   }
 
-  search(evt) {
+  onInputKeywordKeyUp(evt) {
     const searchText = evt.target.value;
     // emits the `searchText` into the stream. This will cause the operators in its pipe function (defined in the ngOnInit method) to be run. `debounce` runs and then `map`. If the time interval of 1 sec in debounce hasn't elapsed, map will not be called, thereby saving the server from being called.
     if (searchText?.trim()) {
       this.searching = true;
-      this.subject.next(searchText);
+      this.keywordObserver.next(searchText);
     }else {
       this.benefitKeywordsFound.length = 0;
       this.showResultBox = false;
@@ -117,7 +117,7 @@ export class BenefitNLPSearchBar {
     }
   }
 
-  apiCall(searchText: string) {
+  searchBenefitKeywords(searchText: string) {
   
     this.api.getBenefitKeywords(searchText).subscribe((response) => {
       console.log('data response', response);
