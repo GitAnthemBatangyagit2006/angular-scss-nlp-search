@@ -38,7 +38,7 @@
       <div class="search-result">
         <div
           class="search-result-item"
-          *ngFor="let keyword of this.benefitKeywordsFound | slice:0: displayLimit; "
+          *ngFor="let keyword of this.benefitKeywordsFound | slice:0: noOfKeywordsShown; "
         >
           <div>
             <a href="#">

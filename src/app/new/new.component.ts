@@ -14,14 +14,14 @@ export class NewComponent {
   @ViewChild('inputKeyword', { static: false })
   inputKeyword: ElementRef;
 
-  defaultDisplayLimit = 3;
+  defaultNoOfKeywordsShown = 3;
   showMoreOrLessLink = false;
   showMoreText = true;
-  displayLimit = 3;
+  noOfKeywordsShown = 3;
   //inputKeyword: string;
   searching = false;
   benefitKeywordsFound: any;
-  results$: Observable<any>;
+  benefitKeywordsResult: Observable<any>;
   keywordObserver = new Subject();
   showResultBox = false;
   eventTarget: Subject<EventTarget> = new Subject<EventTarget>();
@@ -80,9 +80,9 @@ export class NewComponent {
   ) {}
 
   ngOnInit() {
-    this.results$ = this.keywordObserver.pipe(debounce(() => interval(1000)));
+    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(1000)));
 
-    this.results$.subscribe((searchText) => {
+    this.benefitKeywordsResult.subscribe((searchText) => {
       this.searchBenefitKeywords(searchText);
     });
 
@@ -118,6 +118,7 @@ export class NewComponent {
       this.buildKeywordList(response);
       this.showResultBox = true;
       this.searching = false;
+      this.noOfKeywordsShown = this.defaultNoOfKeywordsShown;
     });
   }
 
@@ -125,21 +126,21 @@ export class NewComponent {
     this.benefitKeywordsFound = data.benefitKeywordsFound.map((d) => d);
 
     this.showMoreText = true;
-    if (this.benefitKeywordsFound.length > this.defaultDisplayLimit) {
-      this.displayLimit = this.defaultDisplayLimit ;
+    if (this.benefitKeywordsFound.length > this.defaultNoOfKeywordsShown) {
+      this.noOfKeywordsShown = this.defaultNoOfKeywordsShown ;
       this.showMoreOrLessLink = true;
     }else {
-      this.displayLimit = this.benefitKeywordsFound.length; 
+      this.noOfKeywordsShown = this.benefitKeywordsFound.length; 
       this.showMoreOrLessLink = false;
     }
 
   }
 
   showMore () {
-    if (this.displayLimit === this.benefitKeywordsFound.length) {
-      this.displayLimit = this.defaultDisplayLimit;
+    if (this.noOfKeywordsShown === this.benefitKeywordsFound.length) {
+      this.noOfKeywordsShown = this.defaultNoOfKeywordsShown;
     } else {
-      this.displayLimit = this.benefitKeywordsFound.length;
+      this.noOfKeywordsShown = this.benefitKeywordsFound.length;
     }
     this.showMoreText = !this.showMoreText;
   }
