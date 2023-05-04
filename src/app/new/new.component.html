@@ -23,7 +23,7 @@
         id="txt-search-field"
         [placeholder]="this.content.searchBarHint"
         [attr.aria-label]="this.content.searchBarAriaLabel"
-        (keyup)="search($event, inputKeyword.value)"
+        (keyup)="searchBenefitKeywords(inputKeyword.value)"
         (focus)="onInputKeywordFocus()"
         #inputKeyword
       />

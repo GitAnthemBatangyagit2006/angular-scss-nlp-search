@@ -142,11 +142,6 @@ export class BenefitNLPSearchBar {
   }
 
   showMore () {
-    if (this.displayLimit  === this.benefitKeywordsFound.length) {
-      this.displayLimit = this.defaultDisplayLimit;
-    } else {
-      this.displayLimit = this.benefitKeywordsFound.length;
-    }
     this.showMoreText = !this.showMoreText;
   }
 

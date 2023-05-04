@@ -10,7 +10,7 @@ import { IWindow } from './../interfaces/Window';
   styleUrls: ['./new.component.scss'],
 })
 export class NewComponent {
-  
+   
   @ViewChild('inputKeyword', { static: false })
   inputKeyword: ElementRef;
 
@@ -22,7 +22,7 @@ export class NewComponent {
   searching = false;
   benefitKeywordsFound: any;
   results$: Observable<any>;
-  subject = new Subject();
+  keywordObserver = new Subject();
   showResultBox = false;
   eventTarget: Subject<EventTarget> = new Subject<EventTarget>();
   content = {
@@ -76,18 +76,18 @@ export class NewComponent {
   constructor(
     private api: ApiService,
     @Inject('Window') private window: IWindow,
-    private eRef: ElementRef
+    private currentComponent: ElementRef
   ) {}
 
   ngOnInit() {
-    this.results$ = this.subject.pipe(debounce(() => interval(1000)));
+    this.results$ = this.keywordObserver.pipe(debounce(() => interval(1000)));
 
     this.results$.subscribe((searchText) => {
-      this.apiCall(searchText);
+      this.searchBenefitKeywords(searchText);
     });
 
     this.eventTarget.subscribe((target)=> {
-      if(!this.eRef.nativeElement.contains(target)) {
+      if(!this.currentComponent.nativeElement.contains(target)) {
         this.showResultBox = false;
       }
     })
@@ -104,20 +104,14 @@ export class NewComponent {
     this.showResultBox = true;
   }
 
-  search(evt) {
-    const searchText = evt.target.value;
-    // emits the `searchText` into the stream. This will cause the operators in its pipe function (defined in the ngOnInit method) to be run. `debounce` runs and then `map`. If the time interval of 1 sec in debounce hasn't elapsed, map will not be called, thereby saving the server from being called.
-    if (searchText?.trim()) {
+  onInputKeywordKeyUp(event: KeyboardEvent, keyword: string) {
+    if (keyword?.trim()) {
       this.searching = true;
-      this.subject.next(searchText);
-    }else {
-      this.benefitKeywordsFound.length = 0;
-      this.showResultBox = false;
-      return;
+      this.keywordObserver.next(keyword);
     }
   }
 
-  apiCall(searchText: string) {
+  searchBenefitKeywords(searchText: string) {
   
     this.api.getBenefitKeywords(searchText).subscribe((response) => {
       console.log('data response', response);
@@ -142,7 +136,7 @@ export class NewComponent {
   }
 
   showMore () {
-    if (this.displayLimit  === this.benefitKeywordsFound.length) {
+    if (this.displayLimit === this.benefitKeywordsFound.length) {
       this.displayLimit = this.defaultDisplayLimit;
     } else {
       this.displayLimit = this.benefitKeywordsFound.length;
