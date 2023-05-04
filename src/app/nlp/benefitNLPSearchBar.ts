@@ -76,7 +76,7 @@ export class BenefitNLPSearchBar {
   constructor(
     private api: ApiService,
     @Inject('Window') private window: IWindow,
-    private eRef: ElementRef
+    private currentComponent: ElementRef
   ) {}
 
   ngOnInit() {
@@ -87,7 +87,7 @@ export class BenefitNLPSearchBar {
     });
 
     this.eventTarget.subscribe((target)=> {
-      if(!this.eRef.nativeElement.contains(target)) {
+      if(!this.currentComponent.nativeElement.contains(target)) {
         this.showResultBox = false;
       }
     })
