@@ -30,6 +30,7 @@ export class NewComponent {
     searchBarAriaLabel: 'Enter 3 or more characters to start a search.',
     showMore: 'Show More',
     showLess: 'Show Less',
+    noMatchingKeywords: 'No medical service found for searched text.',
     categories: [
       {
         name: 'Preventative Care',
