@@ -84,10 +84,9 @@ export class NewComponent {
     this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(4000)));
 
     this.benefitKeywordsResult.subscribe((keyword) => {
-      if (!keyword?.trim()) {
+      if (!keyword.trim()) {
         this.benefitKeywordsFound.length = 0;
       }else {
-        console.log(`rhad ${keyword}`)
       this.searchBenefitKeywords(keyword);
       }
     });
@@ -98,7 +97,7 @@ export class NewComponent {
       }
     })
     // hard code 
-    
+    /*
     this.benefitKeywordsFound = [
       'Ambulance',
       'Ambulance Room',
@@ -108,6 +107,7 @@ export class NewComponent {
       'Apple'
     ];
     this.showResultBox = true;
+    */
   }
 
   onInputKeywordKeyUp(event: KeyboardEvent, keyword: string) {
