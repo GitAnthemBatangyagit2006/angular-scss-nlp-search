@@ -31,6 +31,7 @@
       padding-top: 15px;
       padding-left: 10px;
     }
+
     .search-term-wrapper {
       flex: 1 0 60%;
       box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
@@ -59,6 +60,17 @@
       background-color: #fff;
       margin-top: 2px;
       padding-top: 16px;
+    }
+
+    .no-matching-keywords-container {
+      margin: 0px 10px 10px;
+      .icon {
+        color: $primary;
+      }
+      .text {
+        vertical-align: text-bottom;
+        margin-left: 5px;
+      }
     }
   }
 

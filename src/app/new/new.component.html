@@ -1,8 +1,9 @@
-
 <div id="search-bar-container">
   <div class="search-bar-header">
     <div class="search-bar-left">
-      <h2 cardid="BenefitNLPSearch" class="hello">Search for Medical Coverage</h2>
+      <h2 cardid="BenefitNLPSearch" class="hello">
+        Search for Medical Coverage
+      </h2>
     </div>
     <!-- save benefits -->
     <div class="search-bar-right">
@@ -31,28 +32,39 @@
     <!--start: result list -->
     <div
       class="fly-out look-up-container search-result-container"
-      *ngIf="this.benefitKeywordsFound && this.benefitKeywordsFound.length > 0 && this.showResultBox"
+      *ngIf="
+        this.benefitKeywordsFound &&
+        this.benefitKeywordsFound.length > 0 &&
+        this.showResultBox
+      "
     >
       <div class="search-result-header-service">Service</div>
 
       <div class="search-result">
         <div
           class="search-result-item"
-          *ngFor="let keyword of this.benefitKeywordsFound | slice:0: noOfKeywordsShown; "
+          *ngFor="
+            let keyword of this.benefitKeywordsFound
+              | slice: 0:noOfKeywordsShown
+          "
         >
           <div>
             <a href="#">
-            {{ keyword }}
+              {{ keyword }}
             </a>
           </div>
         </div>
       </div>
 
-
       <div class="show-more" *ngIf="showMoreOrLessLink">
-        <a  (click)="showMore()"   href="javascript:void(0);" [innerHTML]="this.showMoreText? this.content.showMore : this.content.showLess"></a>
+        <a
+          (click)="showMore()"
+          href="javascript:void(0);"
+          [innerHTML]="
+            this.showMoreText ? this.content.showMore : this.content.showLess
+          "
+        ></a>
       </div>
-
     </div>
 
     <!--end: result list -->
@@ -60,9 +72,15 @@
     <div
       class="fly-out look-up-container"
       *ngIf="
-        this.benefitKeywordsFound && this.benefitKeywordsFound.length === 0 && this.showResultBox"
+        this.benefitKeywordsFound &&
+        this.benefitKeywordsFound.length === 0 &&
+        this.showResultBox
+      "
     >
-      No medical service found for searched text
+      <div class="no-matching-keywords-container">
+        <span class="motif-icon motif-info icon"></span>
+        <span [innerHTML]="this.content.noMatchingKeywords" class="text"></span>
+      </div>
     </div>
   </div>
 
