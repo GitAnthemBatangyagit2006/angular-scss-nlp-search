@@ -20,7 +20,7 @@ export class NewComponent {
   noOfKeywordsShown = 3;
   //inputKeyword: string;
   searching = false;
-  benefitKeywordsFound: any;
+  benefitKeywordsFound: string[] = [];
   benefitKeywordsResult: Observable<any>;
   keywordObserver = new Subject();
   showResultBox = false;
@@ -81,14 +81,10 @@ export class NewComponent {
   ) {}
 
   ngOnInit() {
-    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(4000)));
+    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(100)));
 
     this.benefitKeywordsResult.subscribe((keyword) => {
-      if (!keyword.trim()) {
-        this.benefitKeywordsFound.length = 0;
-      }else {
-      this.searchBenefitKeywords(keyword);
-      }
+       this.searchBenefitKeywords(keyword);
     });
 
     this.eventTarget.subscribe((target)=> {
@@ -110,16 +106,18 @@ export class NewComponent {
     */
   }
 
-  onInputKeywordKeyUp(event: KeyboardEvent, keyword: string) {
-    if (keyword?.trim()) {
-      this.searching = true;
-      this.keywordObserver.next(keyword);
-    } 
+  onInputKeywordKeyUp(keyword: string) {
+    this.searching = true;
+    this.keywordObserver.next(keyword);
   }
 
-  searchBenefitKeywords(searchText: string) {
-  
-    this.api.getBenefitKeywords(searchText).subscribe((response) => {
+  searchBenefitKeywords(keyword: string) {
+    if (keyword.trim()){
+      this.searchBenefitKeywords(keyword);
+    } else {
+      this.benefitKeywordsFound.length = 0;
+    }
+    this.api.getBenefitKeywords(keyword).subscribe((response) => {
       console.log('data response', response);
       this.buildKeywordList(response);
       this.showResultBox = true;

@@ -24,7 +24,7 @@
         id="txt-search-field"
         [placeholder]="this.content.searchBarHint"
         [attr.aria-label]="this.content.searchBarAriaLabel"
-        (keyup)="searchBenefitKeywords(inputKeyword.value)"
+        (keyup)="onInputKeywordKeyUp(inputKeyword.value)"
         (focus)="onInputKeywordFocus()"
         #inputKeyword
       />
