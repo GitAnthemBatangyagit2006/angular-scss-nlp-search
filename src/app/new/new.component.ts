@@ -80,7 +80,7 @@ export class NewComponent {
   ) {}
 
   ngOnInit() {
-    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(1000)));
+    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(4000)));
 
     this.benefitKeywordsResult.subscribe((searchText) => {
       this.searchBenefitKeywords(searchText);
