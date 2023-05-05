@@ -83,8 +83,13 @@ export class NewComponent {
   ngOnInit() {
     this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(4000)));
 
-    this.benefitKeywordsResult.subscribe((searchText) => {
-      this.searchBenefitKeywords(searchText);
+    this.benefitKeywordsResult.subscribe((keyword) => {
+      if (!keyword?.trim()) {
+        this.benefitKeywordsFound.length = 0;
+      }else {
+        console.log(`rhad ${keyword}`)
+      this.searchBenefitKeywords(keyword);
+      }
     });
 
     this.eventTarget.subscribe((target)=> {
@@ -109,7 +114,7 @@ export class NewComponent {
     if (keyword?.trim()) {
       this.searching = true;
       this.keywordObserver.next(keyword);
-    }
+    } 
   }
 
   searchBenefitKeywords(searchText: string) {
