@@ -81,7 +81,7 @@ export class NewComponent {
   ) {}
 
   ngOnInit() {
-    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(100)));
+    this.benefitKeywordsResult = this.keywordObserver.pipe(debounce(() => interval(500)));
 
     this.benefitKeywordsResult.subscribe((keyword) => {
        this.searchBenefitKeywords(keyword);
@@ -160,9 +160,11 @@ export class NewComponent {
   }
 
   onInputKeywordClear() {
+    console.log('fdfd');
     this.showResultBox = false;
     this.benefitKeywordsFound.length = 0;
   }
+
 
   @HostListener('document:click', ['$event'])
   documentClick(event: MouseEvent): void {
@@ -186,5 +188,4 @@ export class NewComponent {
       this.eventTarget.unsubscribe();
     }
   }
-}
 }
