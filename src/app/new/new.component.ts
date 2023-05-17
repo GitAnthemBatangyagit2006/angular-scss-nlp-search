@@ -177,4 +177,14 @@ export class NewComponent {
       this.eventTarget.next(event.target);
     }
   }
+
+  ngOnDestroy() {
+    if (this.keywordObserver) {
+      this.keywordObserver.unsubscribe();
+    }
+    if (this.eventTarget) {
+      this.eventTarget.unsubscribe();
+    }
+  }
+}
 }
