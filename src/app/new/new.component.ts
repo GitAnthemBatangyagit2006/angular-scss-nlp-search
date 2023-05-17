@@ -161,6 +161,7 @@ export class NewComponent {
 
   onInputKeywordClear() {
     this.showResultBox = false;
+    this.benefitKeywordsFound.length = 0;
   }
 
   @HostListener('document:click', ['$event'])
