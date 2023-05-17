@@ -159,6 +159,10 @@ export class NewComponent {
     this.showResultBox = false;
   }
 
+  onInputKeywordClear() {
+    this.showResultBox = false;
+  }
+
   @HostListener('document:click', ['$event'])
   documentClick(event: MouseEvent): void {
     if (event.target) {

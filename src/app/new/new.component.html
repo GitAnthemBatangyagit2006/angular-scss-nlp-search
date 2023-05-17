@@ -15,17 +15,18 @@
     <div class="search-term-wrapper">
       <span class="motif-icon motif-search-1"></span>
       <input
-        name="nameField"
+        name="benefitKeyword"
         type="search"
         maxlength="150"
         aria-required="true"
         autocomplete="off"
         class="ant-text-input search-input ng-valid ng-touched ng-dirty"
-        id="txt-search-field"
+        id="benefitKeyword"
         [placeholder]="this.content.searchBarHint"
         [attr.aria-label]="this.content.searchBarAriaLabel"
         (keyup)="onInputKeywordKeyUp(inputKeyword.value)"
         (focus)="onInputKeywordFocus()"
+        (search)="onInputKeywordClear()"
         #inputKeyword
       />
     </div>

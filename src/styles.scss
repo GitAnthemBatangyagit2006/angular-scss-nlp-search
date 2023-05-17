@@ -6,6 +6,36 @@
 // }
 
 #search-bar-container {
+
+  #benefitKeyword::-webkit-search-cancel-button{
+    color: blue;
+    //background-color: red;
+    outline: 1px solid #286CE2;
+    //border: 1px solid #286CE2;
+   // -webkit-appearance: searchfield-cancel-button;
+
+  /* 	position: absolute;
+    right: 0; */
+    border-radius: 50%;
+    //font-size: 30px;
+
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    content: "\00d7";
+    
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%286CE2'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+    cursor: pointer;
+   
+
+  }
+
+  
+  #benefitKeyword::-webkit-search-cancel-button:after{
+    content: "\00d7";
+  }
+
   border-bottom: 2px solid $ant-motif-light-gray;;
   padding-bottom: 33px;
 
@@ -76,12 +106,14 @@
 
   .search-bar-categories {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 20px;
 
     .category-name {
       margin-top: 10px;
+      max-width: 30px;
+      text-align: center;
     }
 
     .category-circle-background {
