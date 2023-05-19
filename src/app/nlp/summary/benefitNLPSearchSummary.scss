@@ -1,7 +1,5 @@
-
 @import './../../../styles/colors.scss';
 @import './../../../styles/breakpoint.scss';
-
 
 div {
   border: 0px solid black;
@@ -15,7 +13,6 @@ div {
   padding-left: 24px;
   padding-bottom: 26px;
   padding-right: 157px;
-
 }
 
 .search-result-header {
@@ -40,88 +37,105 @@ div {
 }
 
 .search-result-item {
+  display: flex;
+  flex: wrap;
   padding: 32px;
   background-color: $ant-motif-white;
 
-  .place-of-service {
-    font-family: Lato;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 15px;
-    letter-spacing: 0.14em;
-    text-align: left;
-
-    margin-bottom: 14px;
-  }
-
-  .name-and-desc {
-    .benefit-name {
-    font-family: Lato;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 22px;
-    letter-spacing: 0em;
-    text-align: left;
-    }
-
-    .network {
-      background-color: $ant-motif-accent-forest-green;
-      color: $ant-motif-white;
-      height: 18px;
-      width: 85px;
-      left: 0px;
-      top: 108px;
-      border-radius: 2px;
-      padding: 3px 6px 3px 6px;
-    }
-  }
 
   .more-details-wrapper {
-
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
-    
+
+
+    .place-of-service {
+      display: flex;
+      flex-basis: 100%;
+      font-family: Lato;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 15px;
+      letter-spacing: 0.14em;
+      text-align: left;
+
+  
+      margin-bottom: 14px;
+    }
 
     .col1 {
-     max-width: 400px;
+      max-width: 276px;
+      margin-right: 34px;
+    
+      .benefit-name {
+        font-family: Lato;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+  
+      .benefit-description {
+        font-family: Lato;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0px;
+        text-align: left;
+      }
+      .network {
+        background-color: $ant-motif-accent-forest-green;
+        color: $ant-motif-white;
+        height: 18px;
+        width: 85px;
+        left: 0px;
+        top: 108px;
+        border-radius: 2px;
+        padding: 3px 6px 3px 6px;
+      }
+
     }
 
     .col2 {
-      min-width: 300px;
-      border: 1px solid black;
+      min-width: 238px;
+      border: 0px solid black;
+      margin-left: auto;
 
       @media screen and (max-width: $breakpoint-sm) {
         width: 100%;
       }
       .type {
         display: flex;
-        
 
         .label {
-
+          font-family: Lato;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 22px;
+          letter-spacing: 0px;
+          text-align: left;
         }
 
         .value {
-          color: red;
           margin-left: auto;
+          font-family: Lato;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 22px;
+          letter-spacing: 0px;
         }
       }
-      
     }
-    .col3 {
-      border: 1px solid black;
-     
-      @media screen and (max-width: $breakpoint-sm) {
-        width: 100%;
-      }
 
-      button {
-        @media screen and (max-width: $breakpoint-sm) {
-          width: 100%;
-        }
-      }
-
-    }
   }
-  
+
+
+
+  .view-details {
+    width: 100px;
+    border: 0px solid black;
+    border-left: 1px solid $ant-motif-silver;
+    margin-left: 34px;
+    padding-left: 34px;
+  }
 }
