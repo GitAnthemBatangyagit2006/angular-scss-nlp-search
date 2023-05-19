@@ -57,7 +57,7 @@
     position: relative;
     .motif-search-1 {
       position: absolute;
-      color: #286ce2;
+      color: $ant-motif-accent-medium-gray;
       font-size: 1.5rem !important;
       padding-top: 15px;
       padding-left: 10px;
@@ -65,7 +65,7 @@
 
     .search-term-wrapper {
       flex: 1 0 60%;
-      box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+      box-shadow: $ant-medium-gray 0 10px 36px, $ant-medium-gray 0 0 0 1px;
       margin-top: 5px;
 
       .search-input {
@@ -81,7 +81,7 @@
     .look-up-container {
       border: 1px solid #cccccc;
       border-radius: 5px;
-      box-shadow: #00000029 0 10px 36px, #0000000f 0 0 0 1px;
+      box-shadow: $ant-medium-gray 0 10px 36px, $ant-medium-gray 0 0 0 
       width: 100%;
     }
 

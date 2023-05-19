@@ -61,3 +61,125 @@ $ant-motif-grays: (
   500: $ant-motif-dark-gray,
   600: $ant-motif-mine-shaft
 );
+
+// -------------------------------------------
+//	Motif Colors
+// -------------------------------------------
+
+/**
+ ******************************************************************************
+ * DO NOT ADD CSS OR MIXINS TO THIS FILE :: IT WILL RESULT IN DUPLICATE STYLES
+ ******************************************************************************
+ */
+
+// UTILITIES =======
+$ant-motif-highlight-ocean: #286ce2;
+$ant-brand-primary: $ant-motif-highlight-ocean;
+$ant-motif-highlight-mauve: #d20a3c;
+$ant-motif-highlight-green: #53b1a3;
+$ant-motif-highlight-midnight-blue: #2453a6;
+$ant-motif-highlight-dark-blue: #37475a;
+
+$highlight-colors: (
+  "highlight-one": $ant-motif-highlight-mauve,
+  "highlight-two": $ant-motif-highlight-green,
+  "highlight-three": $ant-motif-highlight-ocean,
+  "highlight-four": $ant-motif-highlight-midnight-blue
+);
+$colors: map-merge($colors, $highlight-colors);
+
+// ACCENTS =======
+$ant-motif-accent-cinnabar: #e95a3c;
+$ant-motif-accent-pumpkin: #f59a5f;
+$ant-motif-accent-rasberry: #d5367e;
+$ant-motif-accent-aquamarine: #7fcdbb;
+$ant-motif-accent-bluegreen: #2ab5ca;
+$ant-motif-accent-capri: #58abdf;
+
+// DATA VISUALIZATION =======
+$ant-motif-accent-pale-green: #00D795;
+$ant-motif-accent-forest-green: #108808;
+$ant-motif-accent-bright-green: #3BB273;
+$ant-motif-accent-medium-gray: #CCCCCC;
+$ant-motif-accent-light-gray: #D8D8D8;
+$ant-motif-accent-dark-yellow: #FFCF6C;
+$ant-motif-dark-gray: #333333;
+$ant-motif-accent-indigo: #511785;
+$ant-motif-accent-coral: #FF4C61;
+$ant-motif-accent-tomato: #FE5E3C;
+$ant-motif-accent-gold: #F2BC35;
+
+$data-visualization-colors: (
+  "data-visualization-one": $ant-motif-accent-pale-green,
+  "data-visualization-two": $ant-motif-accent-forest-green,
+  "data-visualization-three": $ant-motif-accent-bright-green,
+  "data-visualization-four": $ant-motif-accent-medium-gray,
+  "data-visualization-five": $ant-motif-accent-light-gray,
+  "data-visualization-six": $ant-motif-accent-dark-yellow,
+  "data-visualization-seven": $ant-motif-dark-gray,
+  "data-visualization-eight": $ant-motif-accent-indigo,
+  "data-visualization-nine": $ant-motif-accent-coral,
+  "data-visualization-ten": $ant-motif-accent-tomato,
+  "data-visualization-eleven": $ant-motif-accent-gold,
+);
+$colors: map-merge($colors, $data-visualization-colors);
+
+$accent-colors: (
+  "accent-one": $ant-motif-accent-cinnabar,
+  "accent-two": $ant-motif-accent-pumpkin,
+  "accent-three": $ant-motif-accent-rasberry,
+  "accent-four": $ant-motif-accent-aquamarine,
+  "accent-five": $ant-motif-accent-bluegreen,
+  "accent-six": $ant-motif-accent-capri
+);
+$colors: map-merge($colors, $accent-colors);
+
+// ###########################################
+// ## Color Replacements
+// ###########################################
+$support-success: $ant-motif-highlight-green;
+
+// TODO: Refactor to point to internal variables when integrating variables/_colors into this file
+$colors: map-merge(
+  (
+    "primary": $ant-motif-highlight-ocean,
+    "primary-light": $primary-light,
+    "primary-dark": $ant-motif-highlight-midnight-blue,
+    "secondary": $secondary,
+    "secondary-light": $secondary-light,
+    "secondary-dark": $secondary-dark,
+    "support-info": $support-info,
+    "support-error": $support-error,
+    "support-success": $support-success,
+    "support-warning": $support-warning,
+    "support-danger": $support-danger
+  ),
+  $colors
+);
+
+// TODO: Move mixins and functions to separate file.
+// Tuesday, June 11 2019
+@mixin motif-blue-gradient($angle) {
+  background: linear-gradient($angle, $ant-sky-blue 0%, $ant-blue 100%);
+}
+@mixin motif-blue-gradient-dk($angle) {
+  background: linear-gradient($angle, rgba(42, 181, 202, 1) 0%, $ant-blue 100%);
+}
+
+@mixin motif-gray-gradient($angle) {
+  background: linear-gradient($angle, map-get($ant-motif-grays, 100), #fbfbfb);
+}
+
+@mixin motif-orange-gradient($angle) {
+  background: linear-gradient($angle, accent(accent-two), accent(accent-one));
+}
+
+@function highlight($key: "highlight-one") {
+  $highlight: map-get($highlight-colors, $key);
+  @return $highlight;
+}
+
+@function accent($key: "accent-one") {
+  $accent: map-get($accent-colors, $key);
+  @return $accent;
+}
