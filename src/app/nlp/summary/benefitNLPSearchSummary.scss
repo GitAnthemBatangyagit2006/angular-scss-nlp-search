@@ -43,6 +43,39 @@ div {
   padding: 32px;
   background-color: $ant-motif-white;
 
+  .place-of-service {
+    font-family: Lato;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0.14em;
+    text-align: left;
+
+    margin-bottom: 14px;
+  }
+
+  .name-and-desc {
+    .benefit-name {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    }
+
+    .network {
+      background-color: $ant-motif-accent-forest-green;
+      color: $ant-motif-white;
+      height: 18px;
+      width: 85px;
+      left: 0px;
+      top: 108px;
+      border-radius: 2px;
+      padding: 3px 6px 3px 6px;
+    }
+  }
+
   .more-details-wrapper {
 
     display:flex;
