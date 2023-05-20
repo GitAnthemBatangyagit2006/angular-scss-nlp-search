@@ -70,13 +70,16 @@ div {
   @media screen and (max-width: $breakpoint-sm) {
     margin-right: 0px;
     padding: 20px;
+
   }
   .more-details-wrapper {
     display: flex;
     flex-wrap: wrap;
     flex-basis: 68%;
 
-
+    @media screen and (max-width: $breakpoint-sm) {
+      flex-basis: 100%;
+    }
     .place-of-service {
       flex-basis: 100%;
       font-family: Lato;
