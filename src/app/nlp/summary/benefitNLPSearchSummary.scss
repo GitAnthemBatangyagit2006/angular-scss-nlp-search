@@ -29,10 +29,15 @@ div {
   padding-left: 24px;
   padding-bottom: 26px;
   //padding-right: 157px;
+  @media screen and (max-width: $breakpoint-sm) {
+   padding: 0px;
+   margin-right:0px;
+  }
+
+
 }
 
 .search-result-header {
-  border: 1px solid black;
 
   .search-summary-title {
     font-size: 14px;
@@ -62,15 +67,15 @@ div {
   margin-right: 57px;
   border: 1px solid $ant-motif-silver;
 
-  div {
-    border: 0px solid black;
+  @media screen and (max-width: $breakpoint-sm) {
+    margin-right: 0px;
+    padding: 20px;
   }
-
   .more-details-wrapper {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black;
-    flex-basis: 73%;
+    flex-basis: 68%;
+
 
     .place-of-service {
       flex-basis: 100%;
@@ -125,8 +130,6 @@ div {
 
       .col2 {
         min-width: 238px;
-        border: 1px solid black;
-        //margin-left: auto;
 
         @media screen and (max-width: $breakpoint-sm) {
           width: 100%;
@@ -162,6 +165,7 @@ div {
     margin-left: 34px;
     padding-left: 34px;
 
+
     @media screen and (max-width: $breakpoint-sm) {
       flex-wrap: wrap;
       border-left: 0px;
@@ -170,12 +174,14 @@ div {
       margin-left: 0px;
       width: 100%;
       padding: 0px;
-      padding-top: 10px;
     }
 
+
     button.benefit-details {
+      margin-top: 34.5px;
       @media screen and (max-width: $breakpoint-sm) {
         width: 100%;
+        margin-top: 25.5px;
       }
     }
   }
