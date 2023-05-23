@@ -18,5 +18,15 @@ export class ApiService {
   public getBenefitKeywords(query: string): Observable<any> {
     return this.http.get(`http://localhost:4321/fed/nlpfindbenefits/v1/benefitKeywords?query=${query}`).pipe((d) => { console.log(d) ; return d });
   }
+  public getBenefitSummary(query: string): Observable<any> {
+    return this.http
+      .get(
+        `http://localhost:4321/fed/benefits/v1/nlp/benefitSummary?query=${query}`
+      )
+      .pipe((d) => {
+        console.log(d);
+        return d;
+      });
+  }
 }
 // /api/users
