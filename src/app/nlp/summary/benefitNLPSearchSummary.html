@@ -1,34 +1,49 @@
 <div class="container">
   <div class="search-summary-container">
     <div class="left-pane">
-      <input type="search" id="search" >
-
-      <div> Back to Benefits</div>
+      <div
+        [innerHtml]="content.backToBenefits"
+        [attr.aria-label]="content.backToBenefitsAriaLabel"
+        [attr.data-analytics]="content.backToBenefitsAnalyticTag"
+      ></div>
 
       <div class="filter-header">
-          <div>Filter</div>
-          <div>Clar All</div>
+        <div [innerHtml]="content.filter.title"></div>
+        <div
+          [innerHtml]="content.filter.clearAll | titlecase"
+          [attr.aria-label]="content.clearAllAriaLabel"
+          [attr.data-analytics]="content.clearAllAnalyticTag"
+        ></div>
       </div>
 
       <div>
-         <div>Service Location</div>
-         <ul>
-            <li><input type="checkbox">Pharmacy</li>
-            <li><input type="checkbox">School</li>
-            <li><input type="checkbox">Office</li>
-            <li><input type="checkbox">Home</li>
-         </ul>
-        <div>Show More</div> 
-      </div>  
+        <div [innerHtml]="content.filter.serviceLocation"></div>
+        <ul
+          *ngFor="
+            let filter of benefitNLPSearchSummaryData.filters;
+            let index = index
+          "
+        >
+          <li *ngIf="filter.type === 'PLACE_OF_SERVICE'">
+            <input type="checkbox" /><label [innerHtml]="filter.value"></label>
+          </li>
+        </ul>
+        <div>Show More</div>
+      </div>
 
       <div>
-        <div>Network</div>
-        <ul>
-           <li><input type="checkbox">In Network</li>
-           <li><input type="checkbox">Out of Network</li>
+        <div [innerHtml]="content.filter.network"></div>
+        <ul
+          *ngFor="
+            let filter of benefitNLPSearchSummaryData.filters;
+            let index = index
+          "
+        >
+          <li *ngIf="filter.type === 'NETWORK'">
+            <input type="checkbox" /><label [innerHtml]="filter.value"></label>
+          </li>
         </ul>
-     </div>  
-        
+      </div>
     </div>
 
     <div class="right-pane">
@@ -36,59 +51,111 @@
 
       <div class="search-summary-result-container">
         <div class="search-result-header">
-          <div><h2 class="search-summary-title">BENEFIT COVERAGE</h2></div>
           <div>
-            <h2 class="search-summary-results-found">35 results found</h2>
+            <h2
+              class="search-summary-title"
+              [innerHtml]="content.title | uppercase"
+            ></h2>
+          </div>
+          <div>
+            <h2
+              class="search-summary-results-found"
+              [innerHtml]="content.resultText"
+            ></h2>
           </div>
         </div>
 
-        <div class="search-result-item">
+        <div
+          class="search-result-item"
+          *ngFor="
+            let benefit of benefitNLPSearchSummaryData.filterBenefitSummary;
+            let index = index
+          "
+        >
           <div class="more-details-wrapper">
-            <div class="place-of-service">
-              HOSPITAL
-            </div>
-    
+            <div
+              class="place-of-service"
+              *ngFor="
+                let placeOfService of benefit.placeOfService;
+                let index = index
+              "
+              [innerHtml]="placeOfService"
+            ></div>
 
             <div class="name-and-desc">
               <div class="col1">
-                <div class="benefit-name">Applied Behavioural</div>
-                <p class="benefit-description">
-                  This is a psychological intervention that applies empirical
-                  approaches based upon the principles of respondent and operant
-                  cond...
-                </p>
+                <div
+                  class="benefit-name"
+                  [innerHtml]="benefit.benefitName"
+                ></div>
+                <p
+                  class="benefit-description"
+                  [innerHtml]="benefit.benefitDescription"
+                ></p>
                 <div>
-                  <span class="network"> NETWORK </span>
+                  <span class="network" [innerHtml]="benefit.network"> </span>
                 </div>
               </div>
 
               <div class="col2 costshares" role="table">
                 <div role="row" class="type">
-                  <span role="cell" class="label">Copay</span>
-                  <span role="cell" class="value">$40.00 per visit</span>
+                  <span role="cell" class="label"
+                    ><label [innerHtml]="content.benefit.copay"></label
+                  ></span>
+                  <span
+                    role="cell"
+                    class="value"
+                    [innerHtml]="benefit.coPayment"
+                  ></span>
                 </div>
                 <div role="row" class="type">
-                  <span role="cell" class="label">Coinsurance</span>
-                  <span role="cell" class="value">$40.00 per visit</span>
+                  <span role="cell" class="label"
+                    ><label [innerHtml]="content.benefit.coinsurance"></label
+                  ></span>
+                  <span
+                    role="cell"
+                    class="value"
+                    [innerHtml]="benefit.coInsurance"
+                  ></span>
                 </div>
                 <div role="row" class="type">
-                  <span role="cell" class="label">Deductible Applies</span>
-                  <span role="cell" class="value">Yes</span>
+                  <span role="cell" class="label"
+                    ><label
+                      [innerHtml]="content.benefit.deductibleApplies"
+                    ></label
+                  ></span>
+                  <span
+                    role="cell"
+                    class="value"
+                    [innerHtml]="benefit.deductibleApplies"
+                  ></span>
                 </div>
                 <div role="row" class="type">
-                  <span role="cell" class="label">Prior Authorization</span>
-                  <span role="cell" class="value">Yes</span>
+                  <span role="cell" class="label"
+                    ><label
+                      [innerHtml]="content.benefit.priorAuthorization"
+                    ></label
+                  ></span>
+                  <span
+                    role="cell"
+                    class="value"
+                    [innerHtml]="benefit.priorAuthorization"
+                  ></span>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="view-details">
-            <button class="btn btn-primary benefit-details">View Details</button>
+            <button
+              class="btn btn-primary benefit-details"
+              [innerHtml]="content.benefit.viewDetails"
+              [attr.aria-label]="content.viewDetailAriaLabel"
+              [attr.data-analytics]="content.viewDetailAnalyticTag"
+            ></button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>
