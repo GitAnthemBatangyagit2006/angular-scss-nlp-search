@@ -3,7 +3,8 @@ import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from '../../app.service';
 import { IWindow } from '../../interfaces/Window';
-import { BenefitSummarySearchResult } from './benefitNLP';
+import { BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult } from './benefitNLP';
+import { transformBenefitSummaryToModel } from './benefitNLPSearchSummaryModel';
 
 @Component({
   selector: 'search-summary',
@@ -11,7 +12,7 @@ import { BenefitSummarySearchResult } from './benefitNLP';
   styleUrls: ['./benefitNLPSearchSummary.scss'],
 })
 export class BenefitNLPSearchSummaryComponent implements OnInit {
-  benefitNLPSearchSummaryData: BenefitSummarySearchResult | undefined;
+
   content = {
     title: 'Benefit Coverage',
     searchBar: {
@@ -47,14 +48,187 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
     backToBenefitsAnalyticTag: 'backToBenefitsAnalyticTag',
     backToBenefitsAriaLabel: 'backToBenefitsAriaLabel',
   };
+
+
+
+  benefitNLPSearchSummaryData = {
+  "contractUid": "6V4X",
+  "dateOfServicepPlanType": "01012023",
+  "benefitSummary": [
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Radiology / X-ray Professional Component - Professional",
+      "placeOfService": [
+        "Independent Laboratory",
+        "Off Campus - Outpatient Hospital"
+      ],
+      "benefitDescription": "",
+      "network": "In Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": true,
+      "priorAuthorization": true
+    },
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Radiology / X-ray Professional Component - Professional",
+      "placeOfService": [
+        "Independent Laboratory",
+        "Off Campus - Outpatient Hospital"
+      ],
+      "benefitDescription": "",
+      "network": "Specialty Participating Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": true,
+      "priorAuthorization": true
+    },
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Radiology / X-ray Professional Component - Professional",
+      "placeOfService": [
+        "Independent Laboratory",
+        "Off Campus - Outpatient Hospital"
+      ],
+      "benefitDescription": "",
+      "network": "Out of Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": false,
+      "priorAuthorization": false
+    },
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Urgent Care X-ray",
+      "placeOfService": [
+        "Urgent Care Facility"
+      ],
+      "benefitDescription": "",
+      "network": "In Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": true,
+      "priorAuthorization": false
+    },
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Urgent Care X-ray",
+      "placeOfService": [
+        "Urgent Care Facility"
+      ],
+      "benefitDescription": "",
+      "network": "Out of Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": false,
+      "priorAuthorization": false
+    }
+  ],
+  "filterBenefitSummary": [
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Radiology / X-ray Professional Component - Professional",
+      "placeOfService": [
+        "Independent Laboratory",
+        "Off Campus - Outpatient Hospital"
+      ],
+      "benefitDescription": "",
+      "network": "In Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": true,
+      "priorAuthorization": true
+    },
+    {
+      "documentId": "",
+      "planType": "",
+      "benefitSystemId": "",
+      "benefitName": "Urgent Care X-ray",
+      "placeOfService": [
+        "Urgent Care Facility"
+      ],
+      "benefitDescription": "",
+      "network": "In Network",
+      "coPayment": "",
+      "coInsurance": "",
+      "deductibleApplies": true,
+      "priorAuthorization": false
+    }
+  ],
+  "filters": [
+    {
+      "type": "PLACE_OF_SERVICE",
+      "value": "Independent Laboratory"
+    },
+    {
+      "type": "PLACE_OF_SERVICE",
+      "value": "Off Campus - Outpatient Hospital"
+    },
+    {
+      "type": "NETWORK",
+      "value": "In Network"
+    },
+    {
+      "type": "NETWORK",
+      "value": "Specialty Participating Network"
+    },
+    {
+      "type": "NETWORK",
+      "value": "Out of Network"
+    },
+    {
+      "type": "PLACE_OF_SERVICE",
+      "value": "Urgent Care Facility"
+    }
+  ],
+  "benefitAssociatedDetails": {
+    "benefitId": "",
+    "planType": ""
+  }
+};
   constructor(
-    private api: ApiService,
+    private apiService: ApiService,
     @Inject('Window') private window: IWindow,
-    private currentComponent: ElementRef
   ) {}
 
   ngOnInit() {
    
   }
+  async getBenfitSummary() {
+    const filterKeys: BenefitSummaryFilter[] = [
+      {
+        type: BenefitSummaryFilterType.NETWORK,
+        value: 'In Network',
+      },
+    ];
 
+    /*
+    this.apiService.getBenefitSummary('test').subscribe((response) => {
+      console.log('data response', response);
+      this.benefitNLPSearchSummaryData = transformBenefitSummaryToModel(
+        response,
+        '6V4X',
+        '01012023',
+        filterKeys
+      );
+      console.log(
+        'this.benefitNLPSearchSummaryData',
+        JSON.stringify(this.benefitNLPSearchSummaryData.filterBenefitSummary)
+      );
+    });
+    */
+    // eslint-disable-next-line no-console
+  }
 }
