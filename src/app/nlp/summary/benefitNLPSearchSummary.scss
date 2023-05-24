@@ -75,9 +75,10 @@ div {
   .more-details-wrapper {
     display: flex;
     flex-wrap: wrap;
-    flex-basis: 67%;
-    @media screen and (max-width: $breakpoint-sm) {
-      flex-basis: 100%;
+    flex-basis: 100%;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      flex-basis: 67%;
     }
     .place-of-service {
       //flex-basis: 100%;
@@ -91,13 +92,12 @@ div {
       margin-bottom: 14px;
     }
     .name-and-desc {
-      display: flex;
+        display: flex;
+        flex: 1;
 
-      @media screen and (max-width: $breakpoint-sm) {
-        flex-wrap: wrap;
-      }
-
+  
       .col1 {
+        flex-basis: 50%;
         // min-width: 276px;
         margin-right: 34px;
 
@@ -131,11 +131,9 @@ div {
       }
 
       .col2 {
-        min-width: 238px;
+       // min-width: 238px;
 
-        @media screen and (max-width: $breakpoint-sm) {
-          width: 100%;
-        }
+  
         .type {
           display: flex;
 
