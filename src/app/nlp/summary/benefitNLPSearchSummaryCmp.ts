@@ -337,7 +337,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const resp = transformBenefitSummaryToModel(this.d,'dfdf','fdfd',[]);
+    this.benefitNLPSearchSummaryData = transformBenefitSummaryToModel(this.d,'dfdf','fdfd',[]);
     //console.clear();
     //console.log(`rhad: ${JSON.stringify(resp)}`);
    

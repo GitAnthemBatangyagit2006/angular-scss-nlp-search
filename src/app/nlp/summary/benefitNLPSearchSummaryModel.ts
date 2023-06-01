@@ -77,8 +77,8 @@ export const getTransformemBenefitsListAndFilters = (
 
   (benefitSummaryResponseDTO.benefitResults || []).forEach(
     (benefitResult: BenefitResult) => {
-      console.log(`rhad`);
-      console.log(`rhad1 ${JSON.stringify(benefitResult)}`);
+      console.log(`rhadxx`);
+     // console.log(`rhad1 ${JSON.stringify(benefitResult)}`);
       benefitResult.serviceCategory?.forEach(
         (serviceCategory: ServiceCategory) => {
           console.log(`rhad2 ${JSON.stringify(serviceCategory)}`);
@@ -96,14 +96,14 @@ export const getTransformemBenefitsListAndFilters = (
             priorAuthorization: false,
           };
           serviceCategory?.categories?.forEach((category: Categories) => {
-            console.log(`rhad3 ${JSON.stringify(category)}`);
+            //console.log(`rhad3 ${JSON.stringify(category)}`);
             category?.services?.forEach((service: Services) => {
               service?.benefits?.forEach((benefit) => {
-                console.log(`benefitx ${JSON.stringify(transformedBenefitsListAndFilters)}`);
+               // console.log(`benefitx ${JSON.stringify(transformedBenefitsListAndFilters)}`);
                 benefitModel.benefitName =
                   benefit.benefitNm ?? benefit.serviceNm ?? '';
                 benefit?.situations?.forEach((situation) => {
-                  console.log(`model12 ${JSON.stringify(transformedBenefitsListAndFilters)}`);
+                //  console.log(`model12 ${JSON.stringify(transformedBenefitsListAndFilters)}`);
                   // Reset array
                   benefitModel.placeOfService = [];
                   situation.pos?.forEach((pos) => {
@@ -135,7 +135,7 @@ export const getTransformemBenefitsListAndFilters = (
       );
     }
   );
-  console.log(`rhadxx ${JSON.stringify(transformedBenefitsListAndFilters)}`);
+  //console.log(`rhadxx ${JSON.stringify(transformedBenefitsListAndFilters)}`);
   transformedBenefitsListAndFilters.availableFilters =
     Array.from<BenefitSummaryFilter>(filters).map((item) => item);
   return transformedBenefitsListAndFilters;
