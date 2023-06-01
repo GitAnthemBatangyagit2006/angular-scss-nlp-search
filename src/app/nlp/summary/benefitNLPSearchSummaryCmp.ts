@@ -198,12 +198,148 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
     "planType": ""
   }
 };
+
+
+  d = {
+  "benefitResults": [
+      {
+          "mcid": "311977782",
+          "contractUID": "9856396FB58D00B4C75EC0A892FA7937",
+          "contractCd": "1VR7",
+          "docID": "190711534958-01012023",
+          "effectiveDt": "01012023",
+          "inquiryUsed": "Allergy",
+          "serviceCategory": [
+              {
+                  "planType": "Medical",
+                  "categories": [
+                      {
+                          "parentCategoryNm": "Others",
+                          "services": [
+                              {
+                                  "categoryNm": "Allergy",
+                                  "benefits": [
+                                      {
+                                          "benefitNm": "Allergy Treatment",
+                                          "benefitSysID": "034b4f80-05af-407e-a599-75cbf918abe9",
+                                          "situations": [
+                                              {
+                                                  "pos": [
+                                                      {
+                                                          "posCd": "11",
+                                                          "posDesc": "Office"
+                                                      }
+                                                  ],
+                                                  "networks": [
+                                                      {
+                                                          "code": "INN",
+                                                          "type": "In Network",
+                                                          "deductibleApplies": "N",
+                                                          "precertRequired": "N",
+                                                          "costshares": [
+                                                              {
+                                                                  "type": "Coinsurance",
+                                                                  "value": "30%"
+                                                              },
+                                                              {
+                                                                  "type": "Copayment",
+                                                                  "value": "Not Applicable"
+                                                              }
+                                                          ]
+                                                      },
+                                                      {
+                                                          "code": "OON",
+                                                          "type": "Out of Network",
+                                                          "deductibleApplies": "N",
+                                                          "precertRequired": "N",
+                                                          "costshares": [
+                                                              {
+                                                                  "type": "Coinsurance",
+                                                                  "value": "50%"
+                                                              },
+                                                              {
+                                                                  "type": "Copayment",
+                                                                  "value": "Not Applicable"
+                                                              }
+                                                          ]
+                                                      }
+                                                  ]
+                                              }
+                                          ]
+                                      }
+                                  ]
+                              },
+                              {
+                                  "categoryNm": "Allergy",
+                                  "benefits": [
+                                      {
+                                          "benefitNm": "Allergy Testing",
+                                          "benefitSysID": "65d9a541-a1c1-4bd8-b46c-e0580f8dc758",
+                                          "situations": [
+                                              {
+                                                  "pos": [
+                                                      {
+                                                          "posCd": "11",
+                                                          "posDesc": "Office"
+                                                      }
+                                                  ],
+                                                  "networks": [
+                                                      {
+                                                          "code": "INN",
+                                                          "type": "In Network",
+                                                          "deductibleApplies": "N",
+                                                          "precertRequired": "N",
+                                                          "costshares": [
+                                                              {
+                                                                  "type": "Coinsurance",
+                                                                  "value": "30%"
+                                                              },
+                                                              {
+                                                                  "type": "Copayment",
+                                                                  "value": "Not Applicable"
+                                                              }
+                                                          ]
+                                                      },
+                                                      {
+                                                          "code": "OON",
+                                                          "type": "Out of Network",
+                                                          "deductibleApplies": "N",
+                                                          "precertRequired": "N",
+                                                          "costshares": [
+                                                              {
+                                                                  "type": "Coinsurance",
+                                                                  "value": "50%"
+                                                              },
+                                                              {
+                                                                  "type": "Copayment",
+                                                                  "value": "Not Applicable"
+                                                              }
+                                                          ]
+                                                      }
+                                                  ]
+                                              }
+                                          ]
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ]
+      }
+  ]
+}
+
   constructor(
     private apiService: ApiService,
     @Inject('Window') private window: IWindow,
   ) {}
 
   ngOnInit() {
+    const resp = transformBenefitSummaryToModel(this.d,'dfdf','fdfd',[]);
+    //console.clear();
+    //console.log(`rhad: ${JSON.stringify(resp)}`);
    
   }
   async getBenfitSummary() {

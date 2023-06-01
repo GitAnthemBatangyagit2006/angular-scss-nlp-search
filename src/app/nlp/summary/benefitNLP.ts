@@ -56,7 +56,7 @@ export interface Categories {
 
 export interface Services {
   categoryNm: string;
-  benefit?: Benefit[];
+  benefits?: Benefit[];
 }
 
 export interface Benefit {
