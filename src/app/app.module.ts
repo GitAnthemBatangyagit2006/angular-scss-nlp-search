@@ -8,6 +8,7 @@ import { NewComponent } from './new/new.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ApiService } from './app.service';
 import { BenefitNLPSearchSummaryComponent } from './nlp/summary/benefitNLPSearchSummaryCmp';
+import { BenefitNLPSearchDetailsComponent } from './nlp/details/benefitNLPSearchDetails';
 
 export function getWindow() {
   return window;
@@ -15,7 +16,7 @@ export function getWindow() {
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule],
-  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent],
+  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent],
   providers: [
     HttpClient,
     ApiService,
