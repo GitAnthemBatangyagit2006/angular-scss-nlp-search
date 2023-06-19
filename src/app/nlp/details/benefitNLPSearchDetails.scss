@@ -1,0 +1,34 @@
+@import './../../../styles/colors.scss';
+
+.nlp-benefit-details {
+  margin: 20px 20px;
+  .nlp-name-and-description {
+    border-bottom: 1px solid $ant-motif-accent-medium-gray;
+    padding-bottom: 48px;
+    margin-bottom: 24px;
+  }
+
+  .nlp-service-details {
+    border-bottom: 1px solid $ant-motif-accent-medium-gray;
+    margin-bottom: 24px;
+    padding-bottom: 48px;
+
+    .costshares {
+      border: 1px solid;
+
+      .row {
+        margin: auto;
+        display: flex;
+        .costshare-label {
+          margin-right: auto;
+        }
+      }
+    }
+  }
+
+  .nlp-service-limits {
+    border-bottom: 1px solid $ant-motif-accent-medium-gray;
+    margin-bottom: 24px;
+    padding-bottom: 48px;
+  }
+}
