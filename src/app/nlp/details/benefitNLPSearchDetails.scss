@@ -14,14 +14,30 @@
     padding-bottom: 48px;
 
     .costshares {
-      border: 1px solid;
+
+      padding: 16px 16px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      background-color: $ant-motif-light-gray;
 
       .row {
         margin: auto;
         display: flex;
+
+        padding-bottom: 10px;
         .costshare-label {
           margin-right: auto;
+          font-weight: bold;
+          line-height: 22px;
         }
+      }
+      .row:nth-child(n+2) {
+        border-bottom: 1px solid $ant-motif-accent-medium-gray;
+        margin-bottom: 10px;
+      }
+      .row:nth-last-child(1) {
+        border-bottom: 0px solid;
+        margin-bottom: 0px;
       }
     }
   }
