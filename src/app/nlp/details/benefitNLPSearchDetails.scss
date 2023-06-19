@@ -3,11 +3,9 @@
 .nlp-benefit-details {
   margin: 20px 20px;
 
-
   h4.section-title {
     margin-bottom: 24px;
   }
-
 
   .nlp-name-and-description {
     border-bottom: 1px solid $ant-motif-accent-medium-gray;
@@ -21,7 +19,6 @@
     padding-bottom: 48px;
 
     .costshares {
-
       padding: 16px 16px;
       border-radius: 8px;
       box-sizing: border-box;
@@ -38,13 +35,31 @@
           line-height: 22px;
         }
       }
-      .row:nth-child(n+2) {
+      .row:nth-child(n + 2) {
         border-bottom: 1px solid $ant-motif-accent-medium-gray;
         margin-bottom: 10px;
       }
       .row:nth-last-child(1) {
         border-bottom: 0px solid;
         margin-bottom: 0px;
+      }
+    }
+
+    .nlp-service-additional-information1 {
+      padding: 16px 16px;
+
+      ul {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+
+        li {
+          padding: 18px 0px 18px 0px;
+        }
+        .caption,
+        .value {
+          display: block;
+        }
       }
     }
   }
