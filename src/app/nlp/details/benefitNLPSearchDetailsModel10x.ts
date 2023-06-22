@@ -137,7 +137,7 @@ export class BenefitDetailsCostShares {
 export class BenefitDetailsNetworks {
   @IsString()
   @IsNotEmpty()
-  benefitScript!: string[];
+  benefitScript!: string;
 
   @IsString()
   @IsNotEmpty()

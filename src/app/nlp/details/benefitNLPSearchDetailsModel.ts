@@ -285,14 +285,6 @@ const transformNetwork = (situations: BenefitDetailsSituations): BenefitsNetwork
    });
 }
 
-benefitOption?: CodeDescription<string>;
-benefitSummary: string;
-costShares?: CostShareInformation[];
-isDeductibleApplied: boolean;
-isPriorAuthorizationRequired: boolean;
-networkName: string;
-serviceLocations: string[];
-
 const transformCostShares = (costShares: BenefitDetailsCostShares[]): CostShareInformation[] => {
     
  return costShares.map((costShare: BenefitDetailsCostShares) => {
