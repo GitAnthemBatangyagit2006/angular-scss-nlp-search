@@ -119,15 +119,16 @@ export interface NlpBenefitsSummaryDetails {
     serviceNote: string;
     serviceType: string;
 }
-export type BenefitsNetwork = OverrideType<Network, {
-    benefitOption?: CodeDescription<string>;
-    benefitSummary: string;
-    costShares?: CostShareInformation[];
+
+export interface BenefitsNetwork {
+    benefitSummary?: string;
+    costShares?: CostShareInformation[]; // use CostShareInformation.name/CostShareInformation.benefitCode(Type) and CostShareInformation.value
     isDeductibleApplied: boolean;
     isPriorAuthorizationRequired: boolean;
     networkName: string;
     serviceLocations: string[];
-}>;
+  }
+
 export interface ServiceLimit {
     limit: string;
     remaining: string;
@@ -242,18 +243,6 @@ const benefitDetails = {
 const transform  = () => {
     
   const benefitDetailsModel: NlpBenefitsSummaryDetails = {
-   /*   
-  benefitDescription:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitDesc,
-  benefitName:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitNm,
-  benefitSummary: "????",
-  category: benefitDetails.benefitResults[0].serviceCategory[0].services[0].categoryNm, 
-  excludedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].includedServices,
-  includedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].excludedServices,
-  networks: this.transformNetwork(),
-  // serviceLimits: transformServiceLimits(), ??????
-  serviceNotes: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].notes?.join('\n'),
-  serviceType: "" // >>>>
-    */
 
   benefit: {
     name:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitDesc,
@@ -273,15 +262,16 @@ const transform  = () => {
 const transformNetwork = (situations: BenefitDetailsSituations): BenefitsNetwork[] => {
 
   return (situations.networks || []).map((network: BenefitDetailsNetworks) => {
-      return {
+      const networks: BenefitsNetwork =
+      {
           costShares: transformCostShares(network.costshares),
-          networkType: network.type,
-          isPriorAuthorizationRequired: network.precertRequired,
-          isDeductibleApplied: network.deductibleApplies,
-          networkName: network.code
-          serviceLocation: situations.pos.map((placeOfService) => placeOfService.posDesc ).join(',')  ,
+          isPriorAuthorizationRequired: (network.precertRequired === 'Yes' || network.precertRequired === 'Y'),
+          isDeductibleApplied: (network.deductibleApplies === 'Yes' || network.precertRequired === 'Y'),
+          networkName: network.type,
+          serviceLocations: situations.pos.map((placeOfService) => placeOfService.posDesc ),
           benefitSummary: network.benefitScript
       }
+      return networks;
    });
 }
 
