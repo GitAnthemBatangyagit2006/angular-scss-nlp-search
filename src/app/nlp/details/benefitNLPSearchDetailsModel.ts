@@ -274,14 +274,14 @@ const transformCostShares = (costShares: BenefitDetailsCostShares[]): CostShareI
     
  return costShares.map((costShare: BenefitDetailsCostShares) => {
     const costShareInfo: CostShareInformation = {
-    name: "",
-    value: ""
-};
-
+    name: costShare.type,
+    value: costShare.value,
+    remaining: costShare.remaining,
+    spent: costShare.accumulated
+    };
     return costShareInfo;
- }):
-
-}
+    })
+};
 
 const transformServiceLimits = () => {
 
