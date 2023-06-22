@@ -1,37 +1,50 @@
-import { BenefitDetailsCostShares, BenefitDetailsNetworks } from "./benefitNLPSearchDetailsModel10x";
+import { BenefitDetailsCostShares, BenefitDetailsNetworks, BenefitDetailsSituations } from "./benefitNLPSearchDetailsModel10x";
 
 export type OverrideType<T, R> = Omit<T, keyof R> & R;
 
 export declare enum BenefitCode {
-    AUTO_RESTORE = "autorestore",
-    BENEFIT_PERIOD = "bperiod",
-    BENEFIT_PERIOD_MAXIMUM = "benefitperiodmax",
-    COINSURANCE = "coinsurance",
-    COINSURANCE_DETAIL = "coinsdetail",
-    COPAYMENT = "copayment",
-    COPAYMENT_MAXIMUM = "copaymentmax",
-    COPAY_MAXIMUM = "oopmaxcopay",
-    CROSS_ACCUMULATION_DEDUCTIBLE = "carded",
-    CROSS_ACCUMULATION_OUT_OF_POCKET = "caroop",
-    DEDUCTIBLE = "deductible",
-    DOLLAR_LIMIT = "dollarlimit",
-    DRUG_SPECIFIC = "drugspecific",
-    DRUG_SPECIFIC_CAP = "Drug Specific Cap",
-    FAMILY = "family",
-    FIRST_DOLLAR_COVERAGE = "firstdollarcvrg",
-    HEALTHY_REWARDS = "healthyrewards",
-    INDIVIDUAL = "individual",
-    LIFE_TIME_MAXIMUM = "lifetimemax",
-    LQCDDED = "lqcdded",
-    LQCDOOP = "lqcdoop",
-    MEMBER_CLAIMS_FILING_LIMIT = "mlimit",
-    MISCELLANEOUS = "misc",
-    OUT_OF_POCKET = "outofpocket",
-    OUT_OF_POCKET_MAXIMUM = "outofpocketmax",
-    PHARMACY_COPAYMENT = "PharCopayment",
-    PRE_AUTHORIZATION = "preauth",
-    UNLIMITED = "unlimited",
-    UP_FRONT_DEDUCTIBLE = "upfrontdeductible"
+    ADDITIONAL_DEDUCTIBLE = 'additionaldeductible',
+    ADDITIONAL_DEDUCTIBLE_INDIVIDUAL = 'additionaldeductibleindividual',
+    AUTO_RESTORE = 'autorestore',
+    BENEFIT_PERIOD = 'bperiod',
+    BENEFIT_PERIOD_MAXIMUM = 'benefitperiodmax',
+    COINSURANCE = 'coinsurance',
+    COINSURANCE_DETAIL = 'coinsdetail',
+    COINSURANCE_MAXIMUM = 'coninsurancemaximum',
+    COINSURANCE_MINIMUM = 'coinsuranceminimum',
+    COPAYMENT = 'copayment',
+    COPAYMENT_MAXIMUM = 'copaymentmax',
+    COPAY_MAXIMUM = 'oopmaxcopay',
+    CROSS_ACCUMULATION_DEDUCTIBLE = 'carded',
+    CROSS_ACCUMULATION_OUT_OF_POCKET = 'caroop',
+    DEDUCTIBLE = 'deductible',
+    DOLLAR_LIMIT = 'dollarlimit',
+    DRUG_SPECIFIC = 'drugspecific',
+    DRUG_SPECIFIC_CAP = 'Drug Specific Cap',
+    FAMILY = 'family',
+    FIRST_DOLLAR_COVERAGE = 'firstdollarcvrg',
+    HEALTHY_REWARDS = 'healthyrewards',
+    INDIVIDUAL = 'individual',
+    INITIAL_COPAYMENT = 'initialcopayment',
+    LIFE_TIME_MAXIMUM = 'lifetimemax',
+    LIMIT = 'limit',
+    LQCDDED = 'lqcdded',
+    LQCDOOP = 'lqcdoop',
+    MEMBER_CLAIMS_FILING_LIMIT = 'mlimit',
+    MISCELLANEOUS = 'misc',
+    OUT_OF_POCKET = 'outofpocket',
+    OUT_OF_POCKET_MAXIMUM = 'outofpocketmax',
+    PENALTY = 'penalty',
+    PHARMACY_COPAYMENT = 'PharCopayment',
+    PRE_AUTHORIZATION = 'preauth',
+    RENEWAL_PERIOD = 'renewalperiod',
+    SERVICE_COINSURANCE_MAXIMUM = 'servicecoinsurancemaximum',
+    SERVICE_COPAYMENT_MINIMUM = 'servicecopaymentminimum',
+    SERVICE_DEDUCTIBLE = 'servicedeductible',
+    SERVICE_DEDUCTIBLE_MAXIMUM = 'servicedeductiblemaximum',
+    SERVICE_OUT_OF_POCKET = 'serviceoutofpocket',
+    UNLIMITED = 'unlimited',
+    UP_FRONT_DEDUCTIBLE = 'upfrontdeductible',
 }
 
 export declare enum CoverageTypeCode {
@@ -252,23 +265,33 @@ const transform  = () => {
   includedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].includedServices,
   //networks: this.transformNetwork(),
   //serviceLimit: ServiceLimit;
-  //serviceNote: string;
+  //serviceNote: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].notes
   //serviceType: string;
 
 };
 
-const transformNetwork = (networks: BenefitDetailsNetworks[]) => {
+const transformNetwork = (situations: BenefitDetailsSituations): BenefitsNetwork[] => {
 
-   (networks || []).map((network) => {
+  return (situations.networks || []).map((network: BenefitDetailsNetworks) => {
       return {
           costShares: transformCostShares(network.costshares),
           networkType: network.type,
-          priorAuthorization: network.precertRequired,
-          deductibleApplies: network.deductibleApplies,
-          serviceLocation: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0].pos.map((placeOfService) => placeOfService.posDesc ).join(',')   
+          isPriorAuthorizationRequired: network.precertRequired,
+          isDeductibleApplied: network.deductibleApplies,
+          networkName: network.code
+          serviceLocation: situations.pos.map((placeOfService) => placeOfService.posDesc ).join(',')  ,
+          benefitSummary: network.benefitScript
       }
-   })
+   });
 }
+
+benefitOption?: CodeDescription<string>;
+benefitSummary: string;
+costShares?: CostShareInformation[];
+isDeductibleApplied: boolean;
+isPriorAuthorizationRequired: boolean;
+networkName: string;
+serviceLocations: string[];
 
 const transformCostShares = (costShares: BenefitDetailsCostShares[]): CostShareInformation[] => {
     
