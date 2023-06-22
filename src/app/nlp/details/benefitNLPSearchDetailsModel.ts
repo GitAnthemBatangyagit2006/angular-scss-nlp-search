@@ -1,61 +1,124 @@
+export type OverrideType<T, R> = Omit<T, keyof R> & R;
 
- interface NlpBenefitSummaryDetails {
-
-  benefitDescription: string;
-
-  benefitName: string;
-
-  benefitSummary: string;
-
-  category: string;
-
-  excludedServices: string[];
-
-  includedServices: string[];
-
-  networks: Network[];
-
-  serviceLimits: ServiceLimits;
-
-  serviceNotes: string;
-
-  serviceType: string;
-
-
+export declare enum BenefitCode {
+    AUTO_RESTORE = "autorestore",
+    BENEFIT_PERIOD = "bperiod",
+    BENEFIT_PERIOD_MAXIMUM = "benefitperiodmax",
+    COINSURANCE = "coinsurance",
+    COINSURANCE_DETAIL = "coinsdetail",
+    COPAYMENT = "copayment",
+    COPAYMENT_MAXIMUM = "copaymentmax",
+    COPAY_MAXIMUM = "oopmaxcopay",
+    CROSS_ACCUMULATION_DEDUCTIBLE = "carded",
+    CROSS_ACCUMULATION_OUT_OF_POCKET = "caroop",
+    DEDUCTIBLE = "deductible",
+    DOLLAR_LIMIT = "dollarlimit",
+    DRUG_SPECIFIC = "drugspecific",
+    DRUG_SPECIFIC_CAP = "Drug Specific Cap",
+    FAMILY = "family",
+    FIRST_DOLLAR_COVERAGE = "firstdollarcvrg",
+    HEALTHY_REWARDS = "healthyrewards",
+    INDIVIDUAL = "individual",
+    LIFE_TIME_MAXIMUM = "lifetimemax",
+    LQCDDED = "lqcdded",
+    LQCDOOP = "lqcdoop",
+    MEMBER_CLAIMS_FILING_LIMIT = "mlimit",
+    MISCELLANEOUS = "misc",
+    OUT_OF_POCKET = "outofpocket",
+    OUT_OF_POCKET_MAXIMUM = "outofpocketmax",
+    PHARMACY_COPAYMENT = "PharCopayment",
+    PRE_AUTHORIZATION = "preauth",
+    UNLIMITED = "unlimited",
+    UP_FRONT_DEDUCTIBLE = "upfrontdeductible"
 }
 
- interface Network {
-
-  costShares: CostShare[];
-
-  networkType: string;
-
-  priorAuthorization: string;
-  deductibleApplies: string;
-  serviceDeductibles: string;
-  serviceLocation: string;
-
+export declare enum CoverageTypeCode {
+    ACCIDENTAL_DEATH_AND_DISMEMBERMENT = "ADD",
+    DENTAL = "DEN",
+    DISABILITY = "DISABILITY",
+    EMPLOYEE_ASSISTANCE_PROGRAM = "EAP",
+    LIFE = "LIF",
+    LONG_TERM_DISABILITY = "LTD",
+    MEDICAL = "MED",
+    PHARMACY = "PHAR",
+    SHORT_TERM_DISABILITY = "STD",
+    SUPPLEMENT = "SUPP",
+    SUPPLEMENTAL_ACCIDENTAL_DEATH_AND_DISMEMBERMENT = "SADD",
+    VISION = "VSN",
+    VOLUNTARY_LONG_TERM_DISABILITY = "VLTD",
+    VOLUNTARY_SHORT_TERM_DISABILITY = "VSTD"
 }
 
-
- interface CostShare {
-
-  type: string;
-
-  value: string;
-
+}
+export interface Network {
+    benefitOption: CodeDescription<string>;
+    costShare: CostShareInformation[];
+    costShareCode?: string;
+    coverageLevel?: string;
+    networkName?: string;
 }
 
- interface ServiceLimits {
-
-  limit: string;
-
-  memberCode: string;
-
-  remaining: string;
-
-  used: string;
+export interface CostShareInformation {
+    benefitCode?: BenefitCode;
+    hasUnlimitedLimitAndRemaining?: boolean;
+    isZeroDeductible?: boolean;
+    isZeroOutOfPocket?: boolean;
+    memberCode?: string;
+    name: string;
+    planPercentage?: number;
+    remaining?: number;
+    spent?: number;
+    total?: number;
+    value: string;
 }
+
+export interface CodeDescription<Type> {
+    code: Type;
+    description?: string;
+}
+
+export declare class NlpBenefitsKeywordSearchResult {
+    benefitsKeywords: string[];
+}
+export interface NlpBenefitsSummarySearchResult {
+    benefitsSummaries: NlpBenefitsSummary[];
+    documentId: string;
+}
+export interface NlpBenefit {
+    description: string;
+    name: string;
+    systemId: string;
+}
+export interface NlpBenefitsSummary {
+    benefit: NlpBenefit;
+    coverageType: CoverageTypeCode;
+    network: BenefitsNetwork;
+}
+export interface NlpBenefitsSummaryDetails {
+    benefit: NlpBenefit;
+    category: string;
+    excludedServices: string[];
+    includedServices: string[];
+    networks: BenefitsNetwork[];
+    serviceLimit: ServiceLimit;
+    serviceNote: string;
+    serviceType: string;
+}
+export type BenefitsNetwork = OverrideType<Network, {
+    benefitOption?: CodeDescription<string>;
+    benefitSummary: string;
+    costShares?: CostShareInformation[];
+    isDeductibleApplied: boolean;
+    isPriorAuthorizationRequired: boolean;
+    networkName: string;
+    serviceLocations: string[];
+}>;
+export interface ServiceLimit {
+    limit: string;
+    remaining: string;
+    used: string;
+}
+
 
 const benefitDetails = {
     "benefitResults": [
@@ -162,7 +225,9 @@ const benefitDetails = {
 }
 
 const transform  = () => {
-  const benefitDetailsModel: NlpBenefitSummaryDetails = {
+    
+  const benefitDetailsModel: NlpBenefitsSummaryDetails = {
+   /*   
   benefitDescription:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitDesc,
   benefitName:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitNm,
   benefitSummary: "????",
@@ -173,9 +238,24 @@ const transform  = () => {
   // serviceLimits: transformServiceLimits(), ??????
   serviceNotes: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].notes?.join('\n'),
   serviceType: "" // >>>>
+    */
+
+  benefit: {
+    name:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitDesc,
+    description:  benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].benefitNm,
+    systemId: benefitDetails.benefitResults[0].benefitSysId,
+  },
+  category: benefitDetails.benefitResults[0].serviceCategory[0].services[0].categoryNm,
+  excludedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].excludedServices,
+  includedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].includedServices,
+  networks: this.transformNetwork(),
+  serviceLimit: ServiceLimit;
+  serviceNote: string;
+  serviceType: string;
+
 };
 
-const transformNetwork = () => {
+const transformNetwork = (network: BenefitDetailsNetworks) => {
 
    benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0].networks.map((network) => {
       return {
