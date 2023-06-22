@@ -60,7 +60,7 @@ export interface Network {
     networkName?: string;
 }
 
-export interface CostShareInformation {
+export interface  CostShareInformation {
     benefitCode?: BenefitCode;
     hasUnlimitedLimitAndRemaining?: boolean;
     isZeroDeductible?: boolean;
@@ -250,10 +250,10 @@ const transform  = () => {
   category: benefitDetails.benefitResults[0].serviceCategory[0].services[0].categoryNm,
   excludedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].excludedServices,
   includedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].includedServices,
-  networks: this.transformNetwork(),
-  serviceLimit: ServiceLimit;
-  serviceNote: string;
-  serviceType: string;
+  //networks: this.transformNetwork(),
+  //serviceLimit: ServiceLimit;
+  //serviceNote: string;
+  //serviceType: string;
 
 };
 
@@ -272,16 +272,15 @@ const transformNetwork = (networks: BenefitDetailsNetworks[]) => {
 
 const transformCostShares = (costShares: BenefitDetailsCostShares[]): CostShareInformation[] => {
     
-   return  costShares.map((costShare) => {
-       const costShareInfo
-    benefitCode:  benefitCode: BenefitCode[Object.keys(BenefitCode)[Object.values<string>(BenefitCode).indexOf(costShare.type),
-    name: costShare.name,
-    planPercentage?: number;
-    remaining: costShare.remaining,
-    spent?: costShare.accumulated
-    value: costShare.value;
-    })
-  
+ return costShares.map((costShare: BenefitDetailsCostShares) => {
+    const costShareInfo: CostShareInformation = {
+    name: "",
+    value: ""
+};
+
+    return costShareInfo;
+ }):
+
 }
 
 const transformServiceLimits = () => {
