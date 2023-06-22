@@ -123,6 +123,15 @@ export class BenefitDetailsCostShares {
   @IsString()
   @IsNotEmpty()
   value!: string;
+
+
+  @IsString()
+  @IsNotEmpty()
+  accumulated!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  remaining!: string;
 }
 
 export class BenefitDetailsNetworks {

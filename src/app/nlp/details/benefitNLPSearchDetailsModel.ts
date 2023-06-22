@@ -1,3 +1,5 @@
+import { BenefitDetailsCostShares, BenefitDetailsNetworks } from "./benefitNLPSearchDetailsModel10x";
+
 export type OverrideType<T, R> = Omit<T, keyof R> & R;
 
 export declare enum BenefitCode {
@@ -66,8 +68,8 @@ export interface CostShareInformation {
     memberCode?: string;
     name: string;
     planPercentage?: number;
-    remaining?: number;
-    spent?: number;
+    remaining?: number | string; // need to discuss with naman
+    spent?: number | string; // need to discuss with naman
     total?: number;
     value: string;
 }
@@ -255,18 +257,31 @@ const transform  = () => {
 
 };
 
-const transformNetwork = (network: BenefitDetailsNetworks) => {
+const transformNetwork = (networks: BenefitDetailsNetworks[]) => {
 
-   benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0].networks.map((network) => {
+   (networks || []).map((network) => {
       return {
-          costShares: network.costshares,
+          costShares: transformCostShares(network.costshares),
           networkType: network.type,
           priorAuthorization: network.precertRequired,
           deductibleApplies: network.deductibleApplies,
-          serviceLocation: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0].pos.map((placeOfService) => placeOfService.posDesc ).join(',')
-          
+          serviceLocation: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0].pos.map((placeOfService) => placeOfService.posDesc ).join(',')   
       }
    })
+}
+
+const transformCostShares = (costShares: BenefitDetailsCostShares[]): CostShareInformation[] => {
+    
+   return  costShares.map((costShare) => {
+       const costShareInfo
+    benefitCode:  benefitCode: BenefitCode[Object.keys(BenefitCode)[Object.values<string>(BenefitCode).indexOf(costShare.type),
+    name: costShare.name,
+    planPercentage?: number;
+    remaining: costShare.remaining,
+    spent?: costShare.accumulated
+    value: costShare.value;
+    })
+  
 }
 
 const transformServiceLimits = () => {
