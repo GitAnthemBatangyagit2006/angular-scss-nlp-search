@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   data: any;
   
   ngOnInit () {
-    this.data = new nlpDetails();
-    this.data.transform(mockBenefitDetails);
+    const nlp = new nlpDetails();
+    this.data = JSON.stringify(nlp.transform(mockBenefitDetails.benefitResults[0]));
   }
 }
