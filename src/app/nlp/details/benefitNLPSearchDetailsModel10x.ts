@@ -86,7 +86,7 @@ export class ErrorMessage {
 }
 
 export class BenefitDetailsPOS {
-  posCd?: string;
+  posCdx?: string;
   posDesc?: string;
 }
 
