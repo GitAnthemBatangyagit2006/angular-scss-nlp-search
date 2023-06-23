@@ -101,20 +101,21 @@ export const benefitDetails = {
 export class nlpDetails {
   transform(benefitDetails: Nlp.BenefitDetailsResponseDTO) {
     const service = benefitDetails.serviceCategory[0]?.services[0]?.service[0];
+    
     if (!service) {
       return;
     }
-
+    const categoryName = benefitDetails.serviceCategory[0].services[0].categoryNm;
     const benefitDetailsModel: Nlp.NlpBenefitsSummaryDetails = {
       benefit: {
         name: service.benefitDesc,
         description: service.benefitNm,
         systemId: benefitDetails.benefitSysId,
       },
-      category: service.categoryNm,
+      category: categoryName,
       excludedServices: service.excludedServices,
       includedServices: service.includedServices,
-      networks: this.transformNetwork(service.situationxs[0]),
+      networks: this.transformNetwork(service.situations[0]),
       serviceNote: service.notes.join(''),
     };
   }

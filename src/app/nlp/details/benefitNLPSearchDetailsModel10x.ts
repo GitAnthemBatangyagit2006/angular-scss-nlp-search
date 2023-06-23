@@ -192,6 +192,14 @@ export class BenefitDetailsService {
 
   @IsString()
   @IsNotEmpty()
+  includedServices!: string[];
+
+  @IsString()
+  @IsNotEmpty()
+  excludedServices!: string[];
+
+  @IsString()
+  @IsNotEmpty()
   srvcDefnId!: string[];
 
   @IsString()
