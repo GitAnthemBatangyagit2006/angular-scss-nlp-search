@@ -143,8 +143,8 @@ export class nlpDetails {
     situations: Nlp.BenefitDetailsSituations
   ): Nlp.BenefitsNetwork[] {
     return (situations.networks || []).map(
-      (network: BenefitDetailsNetworks) => {
-        const networks: BenefitsNetwork = {
+      (network: Nlp.BenefitDetailsNetworks) => {
+        const networks: Nlp.BenefitsNetwork = {
           costShares: this.transformCostShares(network.costshares),
           isPriorAuthorizationRequired:
             network.precertRequired === 'Yes' ||
