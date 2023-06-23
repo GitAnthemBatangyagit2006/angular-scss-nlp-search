@@ -187,8 +187,7 @@ export class BenefitDetailsService {
   benefitNm!: string;
 
   @IsString()
-  @IsNotEmpty()
-  benefitDesc!: string;
+  benefitDesc?: string;
 
   @IsString()
   @IsNotEmpty()

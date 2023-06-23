@@ -17,7 +17,7 @@ export const mockBenefitDetails = {
               service: [
                 {
                   benefitNm: 'Live Donor Health Services',
-                  benefitDesc: 'Hello world',
+                 // benefitDesc: 'Hello world',
                   srvcDefnId: [
                     'DONORPROF',
                     'UNRDNRFAC',
@@ -31,7 +31,7 @@ export const mockBenefitDetails = {
                     {
                       pos: [
                         {
-                          posCd: '',
+                          //posCd: '',
                           posDesc:
                             'Blue Distinction Center Transplant  Facility',
                         },
