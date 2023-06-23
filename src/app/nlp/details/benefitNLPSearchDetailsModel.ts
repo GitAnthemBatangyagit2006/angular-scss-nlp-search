@@ -1,6 +1,6 @@
 import * as Nlp from './benefitNLPSearchDetailsModel10x';
 
-export const benefitDetails = {
+export const mockBenefitDetails = {
   benefitResults: [
     {
       mcid: '326378610',
@@ -161,11 +161,5 @@ export class nlpDetails {
         return networks;
       }
     );
-  }
-
-  transformServiceLocation() {
-    return benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0].pos
-      .map((placeOfService) => placeOfService.posDesc)
-      .join(',');
   }
 }
