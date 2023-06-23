@@ -101,7 +101,7 @@ export class BenefitDetailsSituations {
 
   @IsString()
   @IsNotEmpty()
-  providerSpecialty!: string[];
+  providerSpecialty?: string[];
 
   @IsString()
   @IsNotEmpty()
@@ -191,11 +191,11 @@ export class BenefitDetailsService {
 
   @IsString()
   @IsNotEmpty()
-  includedServices!: string[];
+  includedServices?: string[];
 
   @IsString()
   @IsNotEmpty()
-  excludedServices!: string[];
+  excludedServices?: string[];
 
   @IsString()
   @IsNotEmpty()
