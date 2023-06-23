@@ -91,9 +91,21 @@ export class BenefitDetailsPOS {
 }
 
 export class BenefitDetailsSituations {
-  pos?: BenefitDetailsPOS[];
+
+  @IsOptional()
+  pos: BenefitDetailsPOS[];
+
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
   diagnosisCd?: string[];
+
+  @IsString()
+  @IsNotEmpty()
   providerSpecialty!: string[];
+
+  @IsString()
+  @IsNotEmpty()
   networks!: BenefitDetailsNetworks[];
 }
 
@@ -104,10 +116,16 @@ export class BenefitDetailsProviderSpecialty {
 }
 
 export class BenefitDetailsCostShares {
+
+  @IsString()
+  @IsNotEmpty()
+  benefitScript!: string;
+
   @IsString()
   @IsNotEmpty()
   type!: string;
 
+  
   @IsString()
   @IsNotEmpty()
   value!: string;
@@ -123,9 +141,8 @@ export class BenefitDetailsCostShares {
 }
 
 export class BenefitDetailsNetworks {
-  @IsString()
-  @IsNotEmpty()
-  benefitScript!: string;
+
+  benefitScriptxxx?: string;
 
   @IsString()
   @IsNotEmpty()

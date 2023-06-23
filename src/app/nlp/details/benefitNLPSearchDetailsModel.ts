@@ -167,6 +167,7 @@ const benefitDetails = {
                                         {
                                             "pos": [
                                                 {
+                                                    "posCd": "",
                                                     "posDesc": "Blue Distinction Center Transplant  Facility"
                                                 }
                                             ],
@@ -218,7 +219,7 @@ const benefitDetails = {
                                                         }
                                                     ]
                                                 }
-                                            ]
+                                            ],
                                         }
                                     ],
                                     "includedServices": [
@@ -241,8 +242,7 @@ const benefitDetails = {
 }
 
 const transform  = () => {
-   const serviceDetails = benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0]; 
-   const situations = this.transformNetwork(benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations);
+
   const benefitDetailsModel: NlpBenefitsSummaryDetails = {
 
   benefit: {
@@ -253,7 +253,7 @@ const transform  = () => {
   category: benefitDetails.benefitResults[0].serviceCategory[0].services[0].categoryNm,
   excludedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].excludedServices,
   includedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].includedServices,
-  networks: transformNetwork(benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations),
+  networks: transformNetwork(benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations[0]),
   //serviceLimit: ServiceLimit;
  // serviceNote: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].notes
   //serviceType: string;
@@ -269,7 +269,7 @@ const transformNetwork = (situations: BenefitDetailsSituations): BenefitsNetwork
           isPriorAuthorizationRequired: (network.precertRequired === 'Yes' || network.precertRequired === 'Y'),
           isDeductibleApplied: (network.deductibleApplies === 'Yes' || network.precertRequired === 'Y'),
           networkName: network.type,
-          serviceLocations: situations.pos.map((placeOfService) => placeOfService.posDesc ),
+          serviceLocations: situations.pos?.map((placeOfService) => placeOfService.posDesc ),
           benefitSummary: network.benefitScript
       }
       return networks;
