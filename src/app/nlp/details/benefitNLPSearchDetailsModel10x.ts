@@ -523,7 +523,7 @@ export interface BenefitsNetwork {
   costShares?: CostShareInformation[]; // use CostShareInformation.name/CostShareInformation.benefitCode(Type) and CostShareInformation.value
   isDeductibleApplied: boolean;
   isPriorAuthorizationRequired: boolean;
-  networkName: string;
+  networkCode: CodeDescription<string>;
   serviceLocations: string[];
 }
 

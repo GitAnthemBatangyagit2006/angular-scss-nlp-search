@@ -152,7 +152,10 @@ export class nlpDetails {
           isDeductibleApplied:
             network.deductibleApplies === 'Yes' ||
             network.precertRequired === 'Y',
-          networkName: network.type,
+            networkCode: {
+              code: network.code,
+              description: network.type
+            },
           serviceLocations: situations.pos?.map(
             (placeOfService) => placeOfService.posDesc
           ),
