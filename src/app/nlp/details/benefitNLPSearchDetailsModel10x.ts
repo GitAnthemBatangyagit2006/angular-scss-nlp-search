@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 // Just added to have a descripive type. Expecting upcoming changes on the structure.
 export type BenefitsKeywordAssistResponseDTO = string[];
@@ -86,26 +86,14 @@ export class ErrorMessage {
 }
 
 export class BenefitDetailsPOS {
-  @IsString()
-  @IsNotEmpty()
   posCd!: string;
-
-  @IsString()
-  @IsNotEmpty()
   posDesc!: string;
 }
 
 export class BenefitDetailsSituations {
-  @IsString()
-  @IsNotEmpty()
-  pos!: BenefitDetailsPOS[];
-
-  @IsString()
-  @IsNotEmpty()
-  diagnosisCd!: string[];
-
-  @IsString()
-  @IsNotEmpty()
+  pos?: BenefitDetailsPOS[];
+  diagnosisCd?: string[];
+  providerSpecialty!: string[];
   networks!: BenefitDetailsNetworks[];
 }
 

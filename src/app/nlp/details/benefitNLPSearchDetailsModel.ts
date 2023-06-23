@@ -241,7 +241,8 @@ const benefitDetails = {
 }
 
 const transform  = () => {
-    
+   const serviceDetails = benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0]; 
+   const situations = this.transformNetwork(benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations);
   const benefitDetailsModel: NlpBenefitsSummaryDetails = {
 
   benefit: {
@@ -252,9 +253,9 @@ const transform  = () => {
   category: benefitDetails.benefitResults[0].serviceCategory[0].services[0].categoryNm,
   excludedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].excludedServices,
   includedServices: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].includedServices,
-  //networks: this.transformNetwork(),
+  networks: transformNetwork(benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].situations),
   //serviceLimit: ServiceLimit;
-  //serviceNote: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].notes
+ // serviceNote: benefitDetails.benefitResults[0].serviceCategory[0].services[0].service[0].notes
   //serviceType: string;
 
 };
