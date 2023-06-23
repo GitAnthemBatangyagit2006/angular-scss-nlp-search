@@ -119,10 +119,6 @@ export class BenefitDetailsCostShares {
 
   @IsString()
   @IsNotEmpty()
-  benefitScript!: string;
-
-  @IsString()
-  @IsNotEmpty()
   type!: string;
 
   
@@ -141,6 +137,10 @@ export class BenefitDetailsCostShares {
 }
 
 export class BenefitDetailsNetworks {
+
+  @IsString()
+  @IsNotEmpty()
+  benefitScript!: string;
 
   @IsString()
   @IsNotEmpty()
@@ -166,12 +166,17 @@ export class BenefitDetailsNetworks {
   @IsNotEmpty()
   precertNotes!: string[];
 
+
+  @IsString()
+  @IsNotEmpty()
+  referralRequired!: string;
+
   @IsString()
   @IsNotEmpty()
   costshares!: BenefitDetailsCostShares[];
 
-  benefitScript!: string;
 }
+ 
 
 export class SharedServices {
   @IsString()
