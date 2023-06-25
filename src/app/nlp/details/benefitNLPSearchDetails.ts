@@ -78,12 +78,14 @@ export class BenefitNLPSearchDetailsModel
   serviceNote: string;
   serviceType: string;
 
-  selectedNetworkCode: Benefits.CodeDescription<string>;
-  getSelectedNetwork = (): Benefits.BenefitsNetwork => {
-    return this.networks.find(
-      (network: Benefits.BenefitsNetwork) => 
-        network.networkCode.code === this.selectedNetworkCode.code
-    );
+  selectedNetwork: Benefits.BenefitsNetwork;
+  setSelectedNetwork = (
+    selectedNetworkCode: Benefits.CodeDescription<string>
+  ) => {
+    return this.networks.find((network: Benefits.BenefitsNetwork) => {
+      if (network.networkCode.code === selectedNetworkCode.code) {
+        this.selectedNetwork = network;
+      }
+    });
   };
-  
 }
