@@ -77,7 +77,13 @@ export class BenefitNLPSearchDetailsModel
   networks: Benefits.BenefitsNetwork[];
   serviceNote: string;
   serviceType: string;
-
+  serviceLimits: [
+    {
+      descripton: string;
+      used: string;
+      remaining: string;
+    }
+  ];
   selectedNetwork: Benefits.BenefitsNetwork;
   setSelectedNetwork = (
     selectedNetworkCode: Benefits.CodeDescription<string>
@@ -85,7 +91,21 @@ export class BenefitNLPSearchDetailsModel
     return this.networks.find((network: Benefits.BenefitsNetwork) => {
       if (network.networkCode.code === selectedNetworkCode.code) {
         this.selectedNetwork = network;
+        this.setServiceLimits(network.costShares);
       }
     });
   };
+
+  // Will replace this with ENUM  that be defined in sydney/model
+  setServiceLimits(costshares: Benefits.NlpCostShareInformation[]) {
+    costshares.map((costshare: Benefits.NlpCostShareInformation) => {
+      if (costshare.name.toLowerCase() === 'limit') {
+        return {
+          description: costshare.value,
+          spent: costshare.spent,
+          remaining: costshare.remaining,
+        };
+      }
+    });
+  }
 }
