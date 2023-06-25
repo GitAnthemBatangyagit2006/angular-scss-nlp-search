@@ -19,6 +19,7 @@ import { mockTranformedDetails1 } from './mockTransFormedObjects';
   styleUrls: ['./benefitNLPSearchDetails.scss'],
 })
 export class BenefitNLPSearchDetailsComponent implements OnInit {
+  model;
   content = {
     title: 'Benefit Coverage',
     searchBar: {
@@ -59,8 +60,9 @@ export class BenefitNLPSearchDetailsComponent implements OnInit {
     private apiService: ApiService,
     @Inject('Window') private window: IWindow
   ) {}
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  //this.model = mockTranformedDetails1;
   }
 
 
