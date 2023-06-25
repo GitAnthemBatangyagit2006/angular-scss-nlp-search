@@ -1,4 +1,5 @@
 import * as Nlp from './benefitNLPSearchDetailsModel10x';
+import * as Benefits from './benefitNLP';
 
 export const mockBenefitDetails = {
   "benefitResults": [
@@ -100,70 +101,54 @@ export const mockBenefitDetails = {
 }
 
 export class nlpDetails {
-  transform(benefitDetails: Nlp.BenefitDetailsResponseDTO) {
-    const service = benefitDetails.serviceCategory[0]?.services[0]?.service[0];
-
-    if (!service) {
-      return;
-    }
-    const categoryName =
-      benefitDetails.serviceCategory[0].services[0].categoryNm;
-    const benefitDetailsModel: Nlp.NlpBenefitsSummaryDetails = {
+  
+ transformResponseToNlpBenefitsSummaryDetails(benefitsDetailsResponse: Nlp.BenefitDetailsResponseDTO): Benefits.NlpBenefitsSummaryDetails {
+    const service = benefitsDetailsResponse.benefitResults[0]?.serviceCategory[0]?.services[0]?.service[0];
+    const categoryName = benefitsDetailsResponse.benefitResults[0]?.serviceCategory[0]?.services[0].categoryNm;
+    const benefitSystemId = benefitsDetailsResponse.benefitResults[0].benefitSysId;
+    const benefitDetailsModel: Benefits.NlpBenefitsSummaryDetails = {
       benefit: {
-        description: service.benefitDesc || 'NA',
+        description: service.benefitDesc || 'NA', // this field will be mandatory in august, 'NA' in July 2023 in dark.
         name: service.benefitNm,
-        systemId: benefitDetails.benefitSysId,
+        systemId: benefitSystemId
       },
       category: categoryName,
       excludedServices: service.excludedServices,
       includedServices: service.includedServices,
       networks: this.transformNetwork(service.situations[0]),
       serviceNote: service.notes.join(''),
-      serviceLimit: undefined,
-      serviceType: '',
+      serviceType: ''
     };
 
     return benefitDetailsModel;
   }
 
-  transformCostShares(
-    costShares: Nlp.BenefitDetailsCostShares[]
-  ): Nlp.CostShareInformation[] {
+  private transformCostShares(costShares: Nlp.BenefitDetailsCostShares[]): Benefits.NlpCostShareInformation[] {
     return costShares.map((costShare: Nlp.BenefitDetailsCostShares) => {
-      const costShareInfo: Nlp.CostShareInformation = {
+      const costShareInfo: Benefits.NlpCostShareInformation = {
         name: costShare.type,
         value: costShare.value,
         remaining: costShare.remaining,
-        spent: costShare.accumulated,
+        spent: costShare.accumulated
       };
       return costShareInfo;
     });
   }
 
-  transformNetwork(
-    situations: Nlp.BenefitDetailsSituations
-  ): Nlp.BenefitsNetwork[] {
-    return (situations.networks || []).map(
-      (network: Nlp.BenefitDetailsNetworks) => {
-        const networks: Nlp.BenefitsNetwork = {
-          costShares: this.transformCostShares(network.costshares),
-          isPriorAuthorizationRequired:
-            network.precertRequired === 'Yes' ||
-            network.precertRequired === 'Y',
-          isDeductibleApplied:
-            network.deductibleApplies === 'Yes' ||
-            network.precertRequired === 'Y',
-            networkCode: {
-              code: network.code,
-              description: network.type
-            },
-          serviceLocations: situations.pos?.map(
-            (placeOfService) => placeOfService.posDesc
-          ),
-          benefitSummary: network.benefitScript,
-        };
-        return networks;
-      }
-    );
+  private transformNetwork(situations: Nlp.BenefitDetailsSituations): Benefits.BenefitsNetwork[] {
+    return (situations.networks || []).map((network: Nlp.BenefitDetailsNetworks) => {
+      const networks: Benefits.BenefitsNetwork = {
+        costShares: this.transformCostShares(network.costshares),
+        isPriorAuthorizationRequired: network.precertRequired === 'Yes' || network.precertRequired === 'Y',
+        isDeductibleApplied: network.deductibleApplies === 'Yes' || network.precertRequired === 'Y',
+        networkCode: {
+          code: network.code,
+          description: network.type
+        },
+        serviceLocations: situations.pos?.map((placeOfService) => placeOfService.posDesc),
+        benefitSummary: network.benefitScript
+      };
+      return networks;
+    });
   }
 }
