@@ -19,7 +19,7 @@ import { mockTranformedDetails1 } from './mockTransFormedObjects';
   styleUrls: ['./benefitNLPSearchDetails.scss'],
 })
 export class BenefitNLPSearchDetailsComponent implements OnInit {
-  model;
+  //model;
   content = {
     title: 'Benefit Coverage',
     searchBar: {
