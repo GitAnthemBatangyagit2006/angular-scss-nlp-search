@@ -79,9 +79,9 @@ export class BenefitNLPSearchDetailsModel
   serviceType: string;
   serviceLimits: [
     {
-      descripton: string;
-      used: string;
-      remaining: string;
+      description: string;
+      used?: string | number;
+      remaining?: string | number;
     }
   ];
   selectedNetwork: Benefits.BenefitsNetwork;
@@ -99,12 +99,13 @@ export class BenefitNLPSearchDetailsModel
   // Will replace this with ENUM  that be defined in sydney/model
   setServiceLimits(costshares: Benefits.NlpCostShareInformation[]) {
     costshares.map((costshare: Benefits.NlpCostShareInformation) => {
+
       if (costshare.name.toLowerCase() === 'limit') {
-        return {
+        this.serviceLimits.push( {
           description: costshare.value,
-          spent: costshare.spent,
+          used: costshare.spent,
           remaining: costshare.remaining,
-        };
+        });
       }
     });
   }
