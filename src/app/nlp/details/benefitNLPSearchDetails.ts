@@ -63,7 +63,9 @@ export class BenefitNLPSearchDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.model = mockTranformedDetails1;
+
+    this.model = new BenefitNLPSearchDetailsModel();
+    this.model.transform(mockTranformedDetails1);
   }
 }
 
@@ -96,7 +98,11 @@ export class BenefitNLPSearchDetailsModel
     });
   };
 
-  // Will replace this with ENUM  that be defined in sydney/model
+  /*
+   Will replace this with ENUM  that will be defined in sydney/model.
+   The service limits can bet set only for login user. Need to call again the API to retrieve
+   the limits for other members (solution need to discuss further).
+  */ 
   setServiceLimits(costshares: Benefits.NlpCostShareInformation[]) {
     costshares.map((costshare: Benefits.NlpCostShareInformation) => {
 
@@ -108,5 +114,15 @@ export class BenefitNLPSearchDetailsModel
         });
       }
     });
+  }
+
+  transform(benefitDetails:  Benefits.NlpBenefitsSummaryDetails) {
+    this.benefit  = benefitDetails.benefit;
+    this.category = benefitDetails.category;
+    this.excludedServices =  benefitDetails.excludedServices;
+    this.includedServices =  benefitDetails.includedServices;
+    this.networks = benefitDetails.networks;
+    this.serviceNote = benefitDetails.serviceNote;
+    this.serviceType = benefitDetails.serviceType;
   }
 }
