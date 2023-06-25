@@ -10,6 +10,8 @@ import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from '../../app.service';
 import { IWindow } from '../../interfaces/Window';
+import { BenefitDetailsRequest } from './benefitNLPSearchDetailsModel10x';
+import { mockTranformedDetails1 } from './mockTransFormedObjects';
 
 @Component({
   selector: 'search-details',
@@ -59,5 +61,10 @@ export class BenefitNLPSearchDetailsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+  }
+
+
+  transform() {
+ 
   }
 }
