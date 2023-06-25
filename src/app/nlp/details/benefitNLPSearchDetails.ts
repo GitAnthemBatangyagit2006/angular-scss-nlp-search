@@ -12,6 +12,7 @@ import { ApiService } from '../../app.service';
 import { IWindow } from '../../interfaces/Window';
 import { BenefitDetailsRequest } from './benefitNLPSearchDetailsModel10x';
 import { mockTranformedDetails1 } from './mockTransFormedObjects';
+import * as Benefits from './benefitNLP';
 
 @Component({
   selector: 'search-details',
@@ -19,7 +20,7 @@ import { mockTranformedDetails1 } from './mockTransFormedObjects';
   styleUrls: ['./benefitNLPSearchDetails.scss'],
 })
 export class BenefitNLPSearchDetailsComponent implements OnInit {
-  //model;
+  model;
   content = {
     title: 'Benefit Coverage',
     searchBar: {
@@ -62,11 +63,27 @@ export class BenefitNLPSearchDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  //this.model = mockTranformedDetails1;
+    this.model = mockTranformedDetails1;
   }
+}
 
+export class BenefitNLPSearchDetailsModel
+  implements Benefits.NlpBenefitsSummaryDetails
+{
+  benefit: Benefits.NlpBenefit;
+  category: string;
+  excludedServices: string[];
+  includedServices: string[];
+  networks: Benefits.BenefitsNetwork[];
+  serviceNote: string;
+  serviceType: string;
 
-  transform() {
- 
-  }
+  selectedNetworkCode: Benefits.CodeDescription<string>;
+  getSelectedNetwork = (): Benefits.BenefitsNetwork => {
+    return this.networks.find(
+      (network: Benefits.BenefitsNetwork) => 
+        network.networkCode.code === this.selectedNetworkCode.code
+    );
+  };
+  
 }

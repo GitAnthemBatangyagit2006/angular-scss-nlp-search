@@ -8,8 +8,8 @@
 
 <div class="nlp-benefit-details">
   <div class="nlp-name-and-description">
-    <h2 ></h2>
-    <p></p>
+    <h2 [innerHTML]="model.benefit.name"></h2>
+    <p [innerHTML]="model.benefit.description"></p>
   </div>
 
   <div class="nlp-service-details">
@@ -41,11 +41,11 @@
       <ul columns="2">
         <li>
           <span class="caption">Category</span>
-          <span class="value">Rehabiitation Theraphy</span>
+          <span class="value" [innerHTML]="model.category"></span>
         </li>
         <li>
           <span class="caption">Deductible Applies</span>
-          <span class="value">Yes</span>
+          <span class="value" [innerHTML]="model.isDeductibleApplied">Yes</span>
         </li>
         <li>
           <span class="caption">Service Deductible</span>
