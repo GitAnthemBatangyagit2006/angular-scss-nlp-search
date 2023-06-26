@@ -62,11 +62,40 @@
         }
       }
     }
+
+    .nlp-service-additional-information2, .nlp-service-additional-information1 {
+      ul {
+        columns: 2;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+      } 
+    }
+
   }
 
   .nlp-service-limits {
     border-bottom: 1px solid $ant-motif-accent-medium-gray;
     margin-bottom: 24px;
     padding-bottom: 48px;
+
+    .nlp-limit-and-usage {
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+      }
+       .body {
+        display: flex;
+        justify-content: space-between;
+        border: 1 solid $ant-motif-accent-medium-gray; 
+        background-color:  $ant-motif-light-gray;
+        padding: 16px 16px;
+        span {
+          border: 1px solid
+        }
+       }
+    }
   }
 }
+
+

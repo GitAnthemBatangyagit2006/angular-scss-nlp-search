@@ -1,10 +1,3 @@
-<style>
-  ul {
-    columns: 2;
-    -webkit-columns: 2;
-    -moz-columns: 2;
-  }
-</style>
 
 <div class="nlp-benefit-details">
   <div class="nlp-name-and-description">
@@ -69,7 +62,7 @@
     <div class="nlp-service-additional-information2">
       <h6>Additional Information</h6>
       <p class="title">Included Services</p>
-      <ul columns="2">
+      <ul class="list-included-services">
         <li
           *ngFor="
         let includeService of model.includedServices;
@@ -81,7 +74,7 @@
       </ul>
 
       <p class="title">Excluded Services</p>
-      <ul columns="2">
+      <ul class=list-excluded-services>
         <li
           *ngFor="
     let excludedService of model.excludedServices;
@@ -114,19 +107,19 @@
     </select>
 
     <div class="nlp-limit-and-usage" role="table">
-      <div role="row" class="">
+      <div role="row" class="header">
         <span type="cell" class="costshare-label">Limit</span>
         <span type="cell" class="costshare-value">Used</span>
         <span type="cell" class="costshare-value">Used</span>
       </div>
-      <div
+      <div role = row class="body"
         *ngFor="
       let limit of model.serviceLimits;
       let index = index
     "
       >
         <span class="costshare-label" [innerHTML]="limit.description"></span>
-        <span class="costshare-value" [innerHTML]="limit.used "></span>
+        <span class="costshare-value" [innerHTML]="limit.used"></span>
         <span class="costshare-value" [innerHTML]="limit.remaining "></span>
       </div>
     </div>
