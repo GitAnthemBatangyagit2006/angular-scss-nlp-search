@@ -1,4 +1,14 @@
+<div> 
+  Ng-template Content 
+  <div *ngIf="false else showNgTemplateContent"> 
+     Shouldnt be displayed 
+  </div>
+</div>
 
+<ng-template #showNgTemplateContent> {{'Should be displayed'}}
+</ng-template> 
+
+<ng-template #view>
 <div class="nlp-benefit-details">
   <div class="nlp-name-and-description">
     <h2 [innerHTML]="model.benefit.name"></h2>
@@ -138,3 +148,4 @@
     <div>Show More</div>
   </div>
 </div>
+</ng-template>
