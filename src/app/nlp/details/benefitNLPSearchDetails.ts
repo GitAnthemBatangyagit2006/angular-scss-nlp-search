@@ -21,6 +21,8 @@ import { nlpDetails } from './benefitNLPSearchDetailsModel';
   styleUrls: ['./benefitNLPSearchDetails.scss'],
 })
 export class BenefitNLPSearchDetailsComponent implements OnInit {
+  serviceNoteShowMore: boolean ;
+  benefitSummaryShowMore: boolean ;
   model;
   content = {
     title: 'Benefit Coverage',

@@ -1,151 +1,165 @@
-<div> 
-  Ng-template Content 
-  <div *ngIf="false else showNgTemplateContent"> 
-     Shouldnt be displayed 
-  </div>
+<div>
+  Ng-template Content
+  <div *ngIf="false else view">Shouldnt be displayed</div>
 </div>
 
-<ng-template #showNgTemplateContent> {{'Should be displayed'}}
-</ng-template> 
-
 <ng-template #view>
-<div class="nlp-benefit-details">
-  <div class="nlp-name-and-description">
-    <h2 [innerHTML]="model.benefit.name"></h2>
-    <p [innerHTML]="model.benefit.description"></p>
-  </div>
-
-  <div class="nlp-service-details">
-    <h4 class="section-title">Service Details</h4>
-
-    <div class="costshares" role="table">
-      <div role="row" class="row">
-        <span class="cell costshare-label" role="cell">In Network</span>
-      </div>
-      <div role="row" class="row">
-        <span class="cell costshare-label" role="cell"
-          >Individual Deductible</span
-        >
-        <span class="cell costshare-value" role="cell">$5,900</span>
-      </div>
-      <div role="row" class="row">
-        <span class="cell costshare-label" role="cell">Family Deductible</span>
-        <span class="cell costshare-value" role="cell">$11,800</span>
-      </div>
-      <div role="row" class="row">
-        <span class="cell costshare-label" role="cell">Family Deductible</span>
-        <span class="cell costshare-value" role="cell"
-          >30% after dedutible</span
-        >
-      </div>
+  <div class="nlp-benefit-details">
+    <div class="nlp-name-and-description">
+      <h2 [innerHTML]="model.benefit.name"></h2>
+      <p [innerHTML]="model.benefit.description"></p>
     </div>
 
-    <div class="nlp-service-additional-information1">
-      <ul columns="2">
-        <li>
-          <span class="caption">Category</span>
-          <span class="value" [innerHTML]="model.category"></span>
-        </li>
-        <li>
-          <span class="caption">Deductible Applies</span>
-          <span class="value" [innerHTML]="model.isDeductibleApplied">Yes</span>
-        </li>
-        <li>
-          <span class="caption">Service Deductible</span>
-          <span class="value">no</span>
-        </li>
-        <li>
-          <span class="caption">Service Type</span>
-          <span class="text">Professional</span>
-        </li>
-        <li>
-          <span class="caption">Prior Authorization</span>
-          <span class="text">No</span>
-        </li>
-        <li>
-          <span class="caption">Servic location</span>
-          <span class="text">Office, Hospital, In Patient</span>
-        </li>
-      </ul>
-    </div>
+    <div class="nlp-service-details">
+      <h4 class="section-title">Service Details</h4>
 
-    <div class="nlp-service-additional-information2">
-      <h6>Additional Information</h6>
-      <p class="title">Included Services</p>
-      <ul class="list-included-services">
-        <li
-          *ngFor="
+      <div class="costshares" role="table">
+        <div role="row" class="row">
+          <span class="cell costshare-label" role="cell">In Network</span>
+        </div>
+        <div role="row" class="row">
+          <span class="cell costshare-label" role="cell"
+            >Individual Deductible</span
+          >
+          <span class="cell costshare-value" role="cell">$5,900</span>
+        </div>
+        <div role="row" class="row">
+          <span class="cell costshare-label" role="cell"
+            >Family Deductible</span
+          >
+          <span class="cell costshare-value" role="cell">$11,800</span>
+        </div>
+        <div role="row" class="row">
+          <span class="cell costshare-label" role="cell"
+            >Family Deductible</span
+          >
+          <span class="cell costshare-value" role="cell"
+            >30% after dedutible</span
+          >
+        </div>
+      </div>
+
+      <div class="nlp-service-additional-information1">
+        <ul columns="2">
+          <li>
+            <span class="caption">Category</span>
+            <span class="value" [innerHTML]="model.category"></span>
+          </li>
+          <li>
+            <span class="caption">Deductible Applies</span>
+            <span class="value" [innerHTML]="model.isDeductibleApplied"
+              >Yes</span
+            >
+          </li>
+          <li>
+            <span class="caption">Service Deductible</span>
+            <span class="value">no</span>
+          </li>
+          <li>
+            <span class="caption">Service Type</span>
+            <span class="text">Professional</span>
+          </li>
+          <li>
+            <span class="caption">Prior Authorization</span>
+            <span class="text">No</span>
+          </li>
+          <li>
+            <span class="caption">Servic location</span>
+            <span class="text">Office, Hospital, In Patient</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nlp-service-additional-information2">
+        <h6>Additional Information</h6>
+        <p class="title">Included Services</p>
+        <ul class="list-included-services">
+          <li
+            *ngFor="
         let includeService of model.includedServices;
         let index = index
       "
-        >
-          <span [innerHTML]="includeService"></span>
-        </li>
-      </ul>
+          >
+            <span [innerHTML]="includeService"></span>
+          </li>
+        </ul>
 
-      <p class="title">Excluded Services</p>
-      <ul class=list-excluded-services>
-        <li
-          *ngFor="
+        <p class="title">Excluded Services</p>
+        <ul class="list-excluded-services">
+          <li
+            *ngFor="
     let excludedService of model.excludedServices;
     let index = index
   "
-        >
-          <span [innerHTML]="excludedService"></span>
-        </li>
-      </ul>
+          >
+            <span [innerHTML]="excludedService"></span>
+          </li>
+        </ul>
 
-      <p class="title">Service Notes</p>
-      <p>
-        Any services or days found not to be medically necessary will not be
-        covered. If claims are not pre-certified, they will suspend to request
-        medical records...
-      </p>
-      <div>Show More</div>
-    </div>
-  </div>
-  <div class="nlp-service-limits">
-    <h4 class="section-title">Service Limits</h4>
-    <p>
-      Your plan covers this health service, but only so many times in a year. If
-      you go over that amount you will need to cover the cost.
-    </p>
-
-    <label>member</label>
-    <select>
-      <option>Rhadomil Paras</option>
-    </select>
-
-    <div class="nlp-limit-and-usage" role="table">
-      <div role="row" class="header">
-        <span type="cell" class="costshare-label">Limit</span>
-        <span type="cell" class="costshare-value">Used</span>
-        <span type="cell" class="costshare-value">Used</span>
+        <p class="title">Service Notes</p>
+        <div  #content
+        class="note-field"
+        [class.show]="show"
+        [class.note-text]="content.scrollHeight > 18">
+        <p class="note-field">
+          Any services or days found not to be medically necessary will not be
+          covered. If claims are not pre-certified, they will suspend to request
+          medical records...
+        </p>
+        </div>
+        <div>
+          <a
+            role="link"
+            *ngIf="content.scrollHeight > 18"
+            (click)="serviceNoteShowMore = !serviceNoteShowMore"
+            >{{ serviceNoteShowMore ? 'Show less' : 'Show more' }}</a
+          >
+        </div>
       </div>
-      <div role = row class="body"
-        *ngFor="
+    </div>
+    <div class="nlp-service-limits">
+      <h4 class="section-title">Service Limits</h4>
+      <p>
+        Your plan covers this health service, but only so many times in a year.
+        If you go over that amount you will need to cover the cost.
+      </p>
+
+      <label>member</label>
+      <select>
+        <option>Rhadomil Paras</option>
+      </select>
+
+      <div class="nlp-limit-and-usage" role="table">
+        <div role="row" class="header">
+          <span type="cell" class="costshare-label">Limit</span>
+          <span type="cell" class="costshare-value">Used</span>
+          <span type="cell" class="costshare-value">Used</span>
+        </div>
+        <div
+          role="row"
+          class="body"
+          *ngFor="
       let limit of model.serviceLimits;
       let index = index
     "
-      >
-        <span class="costshare-label" [innerHTML]="limit.description"></span>
-        <span class="costshare-value" [innerHTML]="limit.used"></span>
-        <span class="costshare-value" [innerHTML]="limit.remaining "></span>
+        >
+          <span class="costshare-label" [innerHTML]="limit.description"></span>
+          <span class="costshare-value" [innerHTML]="limit.used"></span>
+          <span class="costshare-value" [innerHTML]="limit.remaining "></span>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="nlp-service-summary">
-    <h4 class="section-title">Benefit Summary</h4>
-    <p [innerHTML]="model.selectedNetwork.benefitSummary">
-      <!--
+    <div class="nlp-service-summary">
+      <h4 class="section-title">Benefit Summary</h4>
+      <p [innerHTML]="model.selectedNetwork.benefitSummary">
+        <!--
       This is a covered benefit on this policy, based on medical necessity. In
       an Office setting, the deductible does not apply. There is a $60 copayment
       per visit. Your responsibility is 0% Coinsurance of the allowed amount.
       The Individual max out of pocket amount is $8000 Per Calendar Year.
-      -->
-    </p>
-    <div>Show More</div>
+      --></p>
+      <div>Show More</div>
+    </div>
   </div>
-</div>
 </ng-template>
