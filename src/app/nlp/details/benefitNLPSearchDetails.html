@@ -100,13 +100,13 @@
         <div  #content
         class="note-field"
         [class.show]="serviceNoteShowMore"
-        [class.note-text]="content.scrollHeight > 20">
+        [class.note-text]="content.scrollHeight > 18">
         <p class="note-field" [innerHTML]="model.serviceNote"></p>
         </div>
         <div>
           <a
             role="link"
-            *ngIf="content.scrollHeight > 20"
+            *ngIf="content.scrollHeight > 18"
             (click)="serviceNoteShowMore = !serviceNoteShowMore"
             >{{ serviceNoteShowMore ? 'Show less' : 'Show more' }}</a
           >
