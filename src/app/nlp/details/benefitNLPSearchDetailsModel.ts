@@ -103,6 +103,7 @@ export const mockBenefitDetails = {
 export class nlpDetails {
   
  transformResponseToNlpBenefitsSummaryDetails(benefitsDetailsResponse: Nlp.BenefitDetailsResponseDTO): Benefits.NlpBenefitsSummaryDetails {
+    
     const service = benefitsDetailsResponse.benefitResults[0]?.serviceCategory[0]?.services[0]?.service[0];
     const categoryName = benefitsDetailsResponse.benefitResults[0]?.serviceCategory[0]?.services[0].categoryNm;
     const benefitSystemId = benefitsDetailsResponse.benefitResults[0].benefitSysId;
@@ -119,7 +120,6 @@ export class nlpDetails {
       serviceNote: service.notes.join(''),
       serviceType: ''
     };
-
     return benefitDetailsModel;
   }
 
@@ -137,6 +137,7 @@ export class nlpDetails {
 
   private transformNetwork(situations: Nlp.BenefitDetailsSituations): Benefits.BenefitsNetwork[] {
     return (situations.networks || []).map((network: Nlp.BenefitDetailsNetworks) => {
+
       const networks: Benefits.BenefitsNetwork = {
         costShares: this.transformCostShares(network.costshares),
         isPriorAuthorizationRequired: network.precertRequired === 'Yes' || network.precertRequired === 'Y',

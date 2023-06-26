@@ -1,3 +1,118 @@
+export const mock10xRawDetails1WithAccums= {
+  "benefitResults": [
+      {
+          "mcid": "326378610",
+          "contractUID": "335E8957370545B46C9BA579E99A189A",
+          "effectiveDt": "01012023",
+          "benefitSysId": "82d68584-7a0d-420c-bde0-313d01ac27a7",
+          "serviceCategory": [
+              {
+                  "planType": "Medical",
+                  "services": [
+                      {
+                          "parentCategoryNm": "Others",
+                          "categoryNm": "Durable Medical Equipment",
+                          "service": [
+                              {
+                                  "benefitNm": "Hearing Aid Services",
+                                  "srvcDefnId": [
+                                      "HRGSRVPRF",
+                                      "HRNGAID",
+                                      "HRGSRVFAC",
+                                      "HRGADSPRF",
+                                      "HRGEVLFAC",
+                                      "HRGEVLPRF",
+                                      "HRGADSFAC"
+                                  ],
+                                  "notes": [
+                                      "\n\n##Cost-Share\n\nHardware: Hearing Aids\n\n##Cost-Share\n\nLimit combined In- and Out-of-Network.\n\n##Cost-Share\n\nBone Anchored Hearing Aids are covered under DME.\n\n##Cost-Share\n\nHearing aid exams and accessories applies to the maximum (claims incurred on or after 1/1/19), Replacement parts, batteries and repairs are not covered."
+                                  ],
+                                  "includedServices": [
+                                      "Hearing Aids",
+                                      "Hearing aid exams"
+                                  ],
+                                  "excludedServices": [
+                                      "Replacement parts",
+                                      "batteries",
+                                      "repairs"
+                                  ],
+                                  "situations": [
+                                      {
+                                          "pos": [
+                                              {
+                                                  "posDesc": "ALL"
+                                              }
+                                          ],
+                                          "networks": [
+                                              {
+                                                  "code": "INN",
+                                                  "type": "In Network",
+                                                  "limitations": [
+                                                      "Limit : $3000"
+                                                  ],
+                                                  "deductibleApplies": "Yes",
+                                                  "precertRequired": "N",
+                                                  "costshares": [
+                                                      {
+                                                          "type": "Coinsurance",
+                                                          "value": "10%"
+                                                      },
+                                                      {
+                                                          "type": "Copayment",
+                                                          "value": "Not Applicable"
+                                                      },
+                                                      {
+                                                          "type": "Limit",
+                                                          "value": "$3000 Every 3 Years",
+                                                          "accumName": "HRAIDMY",
+                                                          "accumulated": "$15.08",
+                                                          "remaining": "$2984.92",
+                                                          "accumstartdt": "2023-01-01",
+                                                          "accumenddt": "2025-12-31"
+                                                      }
+                                                  ]
+                                              },
+                                              {
+                                                  "code": "OON",
+                                                  "type": "Out of Network",
+                                                  "limitations": [
+                                                      "Limit : $3000"
+                                                  ],
+                                                  "deductibleApplies": "Yes",
+                                                  "precertRequired": "N",
+                                                  "costshares": [
+                                                      {
+                                                          "type": "Coinsurance",
+                                                          "value": "30%"
+                                                      },
+                                                      {
+                                                          "type": "Copayment",
+                                                          "value": "Not Applicable"
+                                                      },
+                                                      {
+                                                          "type": "Limit",
+                                                          "value": "$3000 Every 3 Years",
+                                                          "accumName": "HRAIDMY",
+                                                          "accumulated": "$15.08",
+                                                          "remaining": "$2984.92",
+                                                          "accumstartdt": "2023-01-01",
+                                                          "accumenddt": "2025-12-31"
+                                                      }
+                                                  ]
+                                              }
+                                          ]
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ]
+      }
+  ]
+}
+
 export const mockTranformedDetails1 = {
   benefit: {
     description: 'NA',
@@ -26,6 +141,7 @@ export const mockTranformedDetails1 = {
       isDeductibleApplied: false,
       networkCode: { code: 'INN', description: 'In Network' },
       serviceLocations: ['Office'],
+      benefitSummary: 'Hello World'
     },
     {
       costShares: [
@@ -36,6 +152,7 @@ export const mockTranformedDetails1 = {
       isDeductibleApplied: true,
       networkCode: { code: 'OON', description: 'Out of Network' },
       serviceLocations: ['Office'],
+      benefitSummary: 'Hello World'
     },
   ],
   serviceNote:

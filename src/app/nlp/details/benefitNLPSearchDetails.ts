@@ -11,8 +11,9 @@ import { debounce, map } from 'rxjs/operators';
 import { ApiService } from '../../app.service';
 import { IWindow } from '../../interfaces/Window';
 import { BenefitDetailsRequest } from './benefitNLPSearchDetailsModel10x';
-import { mockTranformedDetails1 } from './mockTransFormedObjects';
+import { mock10xRawDetails1WithAccums, mockTranformedDetails1 } from './mockTransFormedObjects';
 import * as Benefits from './benefitNLP';
+import { nlpDetails } from './benefitNLPSearchDetailsModel';
 
 @Component({
   selector: 'search-details',
@@ -64,14 +65,26 @@ export class BenefitNLPSearchDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
+    const nlp = new nlpDetails();
+    // there are fields not define in our DTO sydney model.
+    const mockTranformedDetailsForUI = nlp.transformResponseToNlpBenefitsSummaryDetails(mock10xRawDetails1WithAccums);
     this.model = new BenefitNLPSearchDetailsModel();
-    this.model.transform(mockTranformedDetails1);
+    this.model.transform(mockTranformedDetailsForUI, {code: 'INN'});
   }
+}
+
+export type ServiceLimit = {
+  description: string;
+  used?: string | number;
+  remaining?: string | number;
 }
 
 export class BenefitNLPSearchDetailsModel
   implements Benefits.NlpBenefitsSummaryDetails
 {
+
+
   benefit: Benefits.NlpBenefit;
   category: string;
   excludedServices: string[];
@@ -79,21 +92,18 @@ export class BenefitNLPSearchDetailsModel
   networks: Benefits.BenefitsNetwork[];
   serviceNote: string;
   serviceType: string;
-  serviceLimits: [
-    {
-      description: string;
-      used?: string | number;
-      remaining?: string | number;
-    }
-  ];
+  serviceLimits: ServiceLimit[] = [];
+
   selectedNetwork: Benefits.BenefitsNetwork;
   setSelectedNetwork = (
-    selectedNetworkCode: Benefits.CodeDescription<string>
+    selectedNetworkCode?: Benefits.CodeDescription<string>
   ) => {
     return this.networks.find((network: Benefits.BenefitsNetwork) => {
+ 
       if (network.networkCode.code === selectedNetworkCode.code) {
         this.selectedNetwork = network;
         this.setServiceLimits(network.costShares);
+        console.log(this.serviceLimits);
       }
     });
   };
@@ -116,7 +126,7 @@ export class BenefitNLPSearchDetailsModel
     });
   }
 
-  transform(benefitDetails:  Benefits.NlpBenefitsSummaryDetails) {
+  transform(benefitDetails:  Benefits.NlpBenefitsSummaryDetails, selectedNetworkCode: Benefits.CodeDescription<string>) {
     this.benefit  = benefitDetails.benefit;
     this.category = benefitDetails.category;
     this.excludedServices =  benefitDetails.excludedServices;
@@ -124,5 +134,6 @@ export class BenefitNLPSearchDetailsModel
     this.networks = benefitDetails.networks;
     this.serviceNote = benefitDetails.serviceNote;
     this.serviceType = benefitDetails.serviceType;
+    this.setSelectedNetwork(selectedNetworkCode);
   }
 }
