@@ -99,18 +99,14 @@
         <p class="title">Service Notes</p>
         <div  #content
         class="note-field"
-        [class.show]="show"
-        [class.note-text]="content.scrollHeight > 18">
-        <p class="note-field">
-          Any services or days found not to be medically necessary will not be
-          covered. If claims are not pre-certified, they will suspend to request
-          medical records...
-        </p>
+        [class.show]="serviceNoteShowMore"
+        [class.note-text]="content.scrollHeight > 20">
+        <p class="note-field" [innerHTML]="model.serviceNote"></p>
         </div>
         <div>
           <a
             role="link"
-            *ngIf="content.scrollHeight > 18"
+            *ngIf="content.scrollHeight > 20"
             (click)="serviceNoteShowMore = !serviceNoteShowMore"
             >{{ serviceNoteShowMore ? 'Show less' : 'Show more' }}</a
           >
