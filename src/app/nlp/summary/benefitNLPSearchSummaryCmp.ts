@@ -337,7 +337,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.benefitNLPSearchSummaryData = transformBenefitSummaryToModel(this.d,'dfdf','fdfd',[]);
+    this.benefitNLPSearchSummaryData = transformBenefitSummaryToModel(this.d,'dfdf','fdfd',[],);
     //console.clear();
     //console.log(`rhad: ${JSON.stringify(resp)}`);
    
@@ -347,6 +347,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
       {
         type: BenefitSummaryFilterType.NETWORK,
         value: 'In Network',
+        selected: true,
       },
     ];
 
