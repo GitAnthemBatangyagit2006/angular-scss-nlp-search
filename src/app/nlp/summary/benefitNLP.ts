@@ -310,3 +310,9 @@ export interface IMemberBasic {
   dobDisplay?: string;
   dobAria?: string;
 }
+
+export declare enum NetworkType {
+  ALL = "ALL",
+  IN_NETWORK = "In Network",
+  OUT_NETWORK = "Out of Network"
+}

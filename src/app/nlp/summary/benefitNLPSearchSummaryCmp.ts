@@ -3,8 +3,9 @@ import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from '../../app.service';
 import { IWindow } from '../../interfaces/Window';
-import { BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult } from './benefitNLP';
-import { transformBenefitSummaryToModel } from './benefitNLPSearchSummaryModel';
+import { BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult, NetworkType } from './benefitNLP';
+import { BenefitNLPSearchSummaryModel } from './benefitNLPSearchSummaryModel';
+
 
 @Component({
   selector: 'search-summary',
@@ -49,299 +50,145 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
     backToBenefitsAriaLabel: 'backToBenefitsAriaLabel',
   };
 
-
-
-  benefitNLPSearchSummaryData = {
-  "contractUid": "6V4X",
-  "dateOfServicepPlanType": "01012023",
-  "benefitSummary": [
+   filterKeys = [
     {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Radiology / X-ray Professional Component - Professional",
-      "placeOfService": [
-        "Independent Laboratory",
-        "Off Campus - Outpatient Hospital"
-      ],
-      "benefitDescription": "",
-      "network": "In Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": true,
-      "priorAuthorization": true
-    },
-    {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Radiology / X-ray Professional Component - Professional",
-      "placeOfService": [
-        "Independent Laboratory",
-        "Off Campus - Outpatient Hospital"
-      ],
-      "benefitDescription": "",
-      "network": "Specialty Participating Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": true,
-      "priorAuthorization": true
-    },
-    {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Radiology / X-ray Professional Component - Professional",
-      "placeOfService": [
-        "Independent Laboratory",
-        "Off Campus - Outpatient Hospital"
-      ],
-      "benefitDescription": "",
-      "network": "Out of Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": false,
-      "priorAuthorization": false
-    },
-    {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Urgent Care X-ray",
-      "placeOfService": [
-        "Urgent Care Facility"
-      ],
-      "benefitDescription": "",
-      "network": "In Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": true,
-      "priorAuthorization": false
-    },
-    {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Urgent Care X-ray",
-      "placeOfService": [
-        "Urgent Care Facility"
-      ],
-      "benefitDescription": "",
-      "network": "Out of Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": false,
-      "priorAuthorization": false
+      type: BenefitSummaryFilterType.NETWORK,
+      value: NetworkType.IN_NETWORK,
+      selected: true
     }
-  ],
-  "filterBenefitSummary": [
-    {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Radiology / X-ray Professional Component - Professional",
-      "placeOfService": [
-        "Independent Laboratory",
-        "Off Campus - Outpatient Hospital"
-      ],
-      "benefitDescription": "",
-      "network": "In Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": true,
-      "priorAuthorization": true
-    },
-    {
-      "documentId": "",
-      "planType": "",
-      "benefitSystemId": "",
-      "benefitName": "Urgent Care X-ray",
-      "placeOfService": [
-        "Urgent Care Facility"
-      ],
-      "benefitDescription": "",
-      "network": "In Network",
-      "coPayment": "",
-      "coInsurance": "",
-      "deductibleApplies": true,
-      "priorAuthorization": false
-    }
-  ],
-  "filters": [
-    {
-      "type": "PLACE_OF_SERVICE",
-      "value": "Independent Laboratory"
-    },
-    {
-      "type": "PLACE_OF_SERVICE",
-      "value": "Off Campus - Outpatient Hospital"
-    },
-    {
-      "type": "NETWORK",
-      "value": "In Network"
-    },
-    {
-      "type": "NETWORK",
-      "value": "Specialty Participating Network"
-    },
-    {
-      "type": "NETWORK",
-      "value": "Out of Network"
-    },
-    {
-      "type": "PLACE_OF_SERVICE",
-      "value": "Urgent Care Facility"
-    }
-  ],
-  "benefitAssociatedDetails": {
-    "benefitId": "",
-    "planType": ""
-  }
-};
+  ];
 
-
-  d = {
-  "benefitResults": [
+  benefitSummaryResponse = {
+    benefitsSummaries: [
       {
-          "mcid": "311977782",
-          "contractUID": "9856396FB58D00B4C75EC0A892FA7937",
-          "contractCd": "1VR7",
-          "docID": "190711534958-01012023",
-          "effectiveDt": "01012023",
-          "inquiryUsed": "Allergy",
-          "serviceCategory": [
-              {
-                  "planType": "Medical",
-                  "categories": [
-                      {
-                          "parentCategoryNm": "Others",
-                          "services": [
-                              {
-                                  "categoryNm": "Allergy",
-                                  "benefits": [
-                                      {
-                                          "benefitNm": "Allergy Treatment",
-                                          "benefitSysID": "034b4f80-05af-407e-a599-75cbf918abe9",
-                                          "situations": [
-                                              {
-                                                  "pos": [
-                                                      {
-                                                          "posCd": "11",
-                                                          "posDesc": "Office"
-                                                      }
-                                                  ],
-                                                  "networks": [
-                                                      {
-                                                          "code": "INN",
-                                                          "type": "In Network",
-                                                          "deductibleApplies": "N",
-                                                          "precertRequired": "N",
-                                                          "costshares": [
-                                                              {
-                                                                  "type": "Coinsurance",
-                                                                  "value": "30%"
-                                                              },
-                                                              {
-                                                                  "type": "Copayment",
-                                                                  "value": "Not Applicable"
-                                                              }
-                                                          ]
-                                                      },
-                                                      {
-                                                          "code": "OON",
-                                                          "type": "Out of Network",
-                                                          "deductibleApplies": "N",
-                                                          "precertRequired": "N",
-                                                          "costshares": [
-                                                              {
-                                                                  "type": "Coinsurance",
-                                                                  "value": "50%"
-                                                              },
-                                                              {
-                                                                  "type": "Copayment",
-                                                                  "value": "Not Applicable"
-                                                              }
-                                                          ]
-                                                      }
-                                                  ]
-                                              }
-                                          ]
-                                      }
-                                  ]
-                              },
-                              {
-                                  "categoryNm": "Allergy",
-                                  "benefits": [
-                                      {
-                                          "benefitNm": "Allergy Testing",
-                                          "benefitSysID": "65d9a541-a1c1-4bd8-b46c-e0580f8dc758",
-                                          "situations": [
-                                              {
-                                                  "pos": [
-                                                      {
-                                                          "posCd": "11",
-                                                          "posDesc": "Office"
-                                                      }
-                                                  ],
-                                                  "networks": [
-                                                      {
-                                                          "code": "INN",
-                                                          "type": "In Network",
-                                                          "deductibleApplies": "N",
-                                                          "precertRequired": "N",
-                                                          "costshares": [
-                                                              {
-                                                                  "type": "Coinsurance",
-                                                                  "value": "30%"
-                                                              },
-                                                              {
-                                                                  "type": "Copayment",
-                                                                  "value": "Not Applicable"
-                                                              }
-                                                          ]
-                                                      },
-                                                      {
-                                                          "code": "OON",
-                                                          "type": "Out of Network",
-                                                          "deductibleApplies": "N",
-                                                          "precertRequired": "N",
-                                                          "costshares": [
-                                                              {
-                                                                  "type": "Coinsurance",
-                                                                  "value": "50%"
-                                                              },
-                                                              {
-                                                                  "type": "Copayment",
-                                                                  "value": "Not Applicable"
-                                                              }
-                                                          ]
-                                                      }
-                                                  ]
-                                              }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ]
-                      }
-                  ]
-              }
-          ]
+        benefit: {
+          name: 'Allergy Treatment',
+          description: 'NA',
+          systemId: '034b4f80-05af-407e-a599-75cbf918abe9'
+        },
+        coverageType: 'MEDICAL',
+        network: {
+          costShares: [
+            {
+              name: 'Coinsurance',
+              value: '30%'
+            },
+            {
+              name: 'Copayment',
+              value: 'Not Applicable'
+            }
+          ],
+          isDeductibleApplied: false,
+          isPriorAuthorizationRequired: false,
+          networkCode: {
+            code: 'INN',
+            description: 'In Network'
+          },
+          serviceLocations: ['Office']
+        }
+      },
+      {
+        benefit: {
+          name: 'Allergy Treatment',
+          description: 'NA',
+          systemId: '034b4f80-05af-407e-a599-75cbf918abe9'
+        },
+        coverageType: 'MEDICAL',
+        network: {
+          costShares: [
+            {
+              name: 'Coinsurance',
+              value: '50%'
+            },
+            {
+              name: 'Copayment',
+              value: 'Not Applicable'
+            }
+          ],
+          isDeductibleApplied: false,
+          isPriorAuthorizationRequired: false,
+          networkCode: {
+            code: 'OON',
+            description: 'Out of Network'
+          },
+          serviceLocations: ['Office']
+        }
+      },
+      {
+        benefit: {
+          name: 'Allergy Testing',
+          description: 'NA',
+          systemId: '65d9a541-a1c1-4bd8-b46c-e0580f8dc758'
+        },
+        coverageType: 'MEDICAL',
+        network: {
+          costShares: [
+            {
+              name: 'Coinsurance',
+              value: '30%'
+            },
+            {
+              name: 'Copayment',
+              value: 'Not Applicable'
+            }
+          ],
+          isDeductibleApplied: false,
+          isPriorAuthorizationRequired: false,
+          networkCode: {
+            code: 'INN',
+            description: 'In Network'
+          },
+          serviceLocations: ['Office']
+        }
+      },
+      {
+        benefit: {
+          name: 'Allergy Testing',
+          description: 'NA',
+          systemId: '65d9a541-a1c1-4bd8-b46c-e0580f8dc758'
+        },
+        coverageType: 'MEDICAL',
+        network: {
+          costShares: [
+            {
+              name: 'Coinsurance',
+              value: '50%'
+            },
+            {
+              name: 'Copayment',
+              value: 'Not Applicable'
+            }
+          ],
+          isDeductibleApplied: false,
+          isPriorAuthorizationRequired: false,
+          networkCode: {
+            code: 'OON',
+            description: 'Out of Network'
+          },
+          serviceLocations: ['Office']
+        }
       }
-  ]
-}
+    ],
+    documentId: '190711534958-01012023'
+  };
 
   constructor(
     private apiService: ApiService,
     @Inject('Window') private window: IWindow,
+    private summaryModel: BenefitNLPSearchSummaryModel
   ) {}
 
   ngOnInit() {
-    this.benefitNLPSearchSummaryData = transformBenefitSummaryToModel(this.d,'dfdf','fdfd',[],);
-    //console.clear();
-    //console.log(`rhad: ${JSON.stringify(resp)}`);
-   
+    this.summaryModel.transformBenefitSummaryToModel
+    const transformBenefitSummaryRequest = {
+      nlpBenefitsSummarySearchResult: this.benefitSummaryResponse,
+      contractUid: '9856396FB58D00B4C75EC0A892FA7937',
+      effectiveDate: '2023-01-01',
+      filterKeys: this.filterKeys
+    };
+    const response = this.summaryModel.transformBenefitSummaryToModel(transformBenefitSummaryRequest);
   }
+
   async getBenfitSummary() {
     const filterKeys: BenefitSummaryFilter[] = [
       {
