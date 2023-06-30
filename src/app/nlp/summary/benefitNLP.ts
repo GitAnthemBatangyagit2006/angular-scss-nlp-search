@@ -72,7 +72,7 @@ export interface CodeDescription<Type> {
   name?: BankErrorCode | string;
 }
 
-export declare enum CoverageTypeCode {
+export enum CoverageTypeCode {
   ACCIDENTAL_DEATH_AND_DISMEMBERMENT = "ADD",
   DENTAL = "DEN",
   DISABILITY = "DISABILITY",
@@ -311,7 +311,7 @@ export interface IMemberBasic {
   dobAria?: string;
 }
 
-export declare enum NetworkType {
+export enum NetworkType {
   ALL = "ALL",
   IN_NETWORK = "In Network",
   OUT_NETWORK = "Out of Network"
