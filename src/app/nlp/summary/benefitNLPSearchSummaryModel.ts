@@ -99,6 +99,8 @@ export class BenefitNLPSearchSummaryModel {
         });
       }
     );
+
+    console.log(this.filters);
     transformedBenefitsListAndFilters.availableFilters =
       Array.from<BenefitsNLP.BenefitSummaryFilter>(this.filters).map(
         (item) => item
