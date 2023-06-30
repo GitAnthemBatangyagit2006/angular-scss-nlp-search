@@ -3,7 +3,7 @@ import { Observable, Subject, interval } from 'rxjs';
 import { debounce, map } from 'rxjs/operators';
 import { ApiService } from '../../app.service';
 import { IWindow } from '../../interfaces/Window';
-import { BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult, NetworkType } from './benefitNLP';
+import { BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult, CoverageTypeCode, NetworkType } from './benefitNLP';
 import { BenefitNLPSearchSummaryModel } from './benefitNLPSearchSummaryModel';
 
 
@@ -66,7 +66,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
           description: 'NA',
           systemId: '034b4f80-05af-407e-a599-75cbf918abe9'
         },
-        coverageType: 'MEDICAL',
+        coverageType: CoverageTypeCode.MEDICAL,
         network: {
           costShares: [
             {
@@ -93,7 +93,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
           description: 'NA',
           systemId: '034b4f80-05af-407e-a599-75cbf918abe9'
         },
-        coverageType: 'MEDICAL',
+        coverageType: CoverageTypeCode.MEDICAL,
         network: {
           costShares: [
             {
@@ -120,7 +120,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
           description: 'NA',
           systemId: '65d9a541-a1c1-4bd8-b46c-e0580f8dc758'
         },
-        coverageType: 'MEDICAL',
+        coverageType: CoverageTypeCode.MEDICAL,
         network: {
           costShares: [
             {
@@ -147,7 +147,7 @@ export class BenefitNLPSearchSummaryComponent implements OnInit {
           description: 'NA',
           systemId: '65d9a541-a1c1-4bd8-b46c-e0580f8dc758'
         },
-        coverageType: 'MEDICAL',
+        coverageType: CoverageTypeCode.MEDICAL,
         network: {
           costShares: [
             {
