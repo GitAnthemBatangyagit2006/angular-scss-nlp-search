@@ -3,7 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { BenefitSummaryFilterType, CoverageTypeCode, NetworkType } from './nlp/summary/benefitNLP';
+import { BenefitSummaryFilterType, BenefitSummarySearchResult, CoverageTypeCode, NetworkType } from './nlp/summary/benefitNLP';
 import { BenefitNLPSearchSummaryModel } from './nlp/summary/benefitNLPSearchSummaryModel';
 import { benefitSummaryResponse, filterKeys } from './nlp/summary/mock';
 
@@ -15,6 +15,7 @@ import { benefitSummaryResponse, filterKeys } from './nlp/summary/mock';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  model: BenefitSummarySearchResult;
   data: any;
   constructor(  public summaryModel: BenefitNLPSearchSummaryModel) {}
 
@@ -27,8 +28,15 @@ export class AppComponent implements OnInit {
       effectiveDate: '2023-01-01',
       filterKeys: filterKeys
     };
-    const response = this.summaryModel.transformBenefitSummaryToModel(transformBenefitSummaryRequest);
-    console.log(response)
+    this.model = this.summaryModel.transformBenefitSummaryToModel(transformBenefitSummaryRequest);
+    console.log(this.model.filterBenefitSummary)
+  }
+  
+  filter() {
+    this.model.filterBenefitSummary = this.summaryModel.filteredBenefitSummary( this.model.benefitSummary,this.model.selectedFilters)
+
+    console.log(this.model.selectedFilters);
+    console.log(this.model.filterBenefitSummary)
   }
 }
 
