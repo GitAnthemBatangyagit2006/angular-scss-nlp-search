@@ -17,50 +17,58 @@ import { benefitSummaryResponse, filterKeys } from './nlp/summary/mock';
 })
 export class AppComponent implements OnInit {
   filterType = BenefitSummaryFilterType;
-  model: BenefitSummarySearchResult;
+  benefitNLPSearchSummaryData: BenefitSummarySearchResult;
   data: any;
-  constructor(public summaryModel: BenefitNLPSearchSummaryModel) {}
+  constructor(
+    public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
+  ) {}
 
   ngOnInit() {
-    this.summaryModel.transformBenefitSummaryToModel;
+    this.benefitNLPSearchSummaryModel.transformBenefitSummaryToModel;
     const transformBenefitSummaryRequest = {
       nlpBenefitsSummarySearchResult: benefitSummaryResponse,
       contractUid: '9856396FB58D00B4C75EC0A892FA7937',
       effectiveDate: '2023-01-01',
       filterKeys: filterKeys,
     };
-    this.model = this.summaryModel.transformBenefitSummaryToModel(
-      transformBenefitSummaryRequest
-    );
-    console.log(this.model.filteredBenefitSummary);
+    this.benefitNLPSearchSummaryData =
+      this.benefitNLPSearchSummaryModel.transformBenefitSummaryToModel(
+        transformBenefitSummaryRequest
+      );
+    console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
   }
 
   filter() {
-    this.model.filteredBenefitSummary = this.summaryModel.filterBenefitSummary(
-      this.model.benefitSummary,
-      this.model.selectedFilters
-    );
+    this.benefitNLPSearchSummaryData.filteredBenefitSummary =
+      this.benefitNLPSearchSummaryModel.filterBenefitSummary(
+        this.benefitNLPSearchSummaryData.benefitSummary,
+        this.benefitNLPSearchSummaryData.selectedFilters
+      );
 
-    console.log(this.model.selectedFilters);
-    console.log(this.model.filteredBenefitSummary);
+    console.log(this.benefitNLPSearchSummaryData.selectedFilters);
+    console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
   }
 
-  toggleFilter(filter: BenefitSummaryFilter) {
-    filter.selected = !filter.selected;
+  toggleFilter(targetFilter: BenefitSummaryFilter) {
+    targetFilter.selected = !targetFilter.selected;
     // remove from the filter if unchecked
-    if (!filter.selected) {
-      this.model.selectedFilters = this.model.selectedFilters.filter(
-        (f) => f.value !== filter.value && f.type === filter.type
-      );
+    if (!targetFilter.selected) {
+      this.benefitNLPSearchSummaryData.selectedFilters =
+        this.benefitNLPSearchSummaryData.selectedFilters.filter(
+          (filter) =>
+            filter.value !== targetFilter.value &&
+            filter.type === targetFilter.type
+        );
     } else {
-      this.model.selectedFilters.push(filter);
+      this.benefitNLPSearchSummaryData.selectedFilters.push(targetFilter);
     }
-    console.log(this.model.selectedFilters);
-    this.model.filteredBenefitSummary = this.summaryModel.filterBenefitSummary(
-      this.model.benefitSummary,
-      this.model.selectedFilters
-    );
+    console.log(this.benefitNLPSearchSummaryData.selectedFilters);
+    this.benefitNLPSearchSummaryData.filteredBenefitSummary =
+      this.benefitNLPSearchSummaryModel.filterBenefitSummary(
+        this.benefitNLPSearchSummaryData.benefitSummary,
+        this.benefitNLPSearchSummaryData.selectedFilters
+      );
 
-    console.log( this.model.filteredBenefitSummary);
+    console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
   }
 }

@@ -8,7 +8,7 @@
 <button (click) = "filter()" value="hitme">filter</button>
 <ul>
 
-    <ng-container *ngFor="let filter of this.model.filters">
+    <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData.filters">
         <ng-container *ngIf="filter.type===filterType.NETWORK">
          <li>
             <input type="checkbox" [checked]="filter.selected" (change)="toggleFilter(filter)">
