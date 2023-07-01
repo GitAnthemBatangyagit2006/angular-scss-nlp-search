@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as BenefitsNLP from './benefitNLP';
 
-
 @Injectable({ providedIn: 'root' })
 export class BenefitNLPSearchSummaryModel {
-  filters = new Set<BenefitsNLP.BenefitSummaryFilter>();
-
   transformBenefitSummaryToModel(
     transformBenefitSummaryRequest: BenefitsNLP.TransformBenefitSummaryRequest
   ): BenefitsNLP.BenefitSummarySearchResult {
@@ -30,17 +27,10 @@ export class BenefitNLPSearchSummaryModel {
             transformBenefitSummaryRequest.filterKeys
           )
         : transformedBenefitsListAndFilters.benefitsSummaries,
-      filters: [
-        ...new Map(
-          transformedBenefitsListAndFilters.availableFilters.map((item) => [
-            item['value'],
-            item,
-          ])
-        ).values(),
-      ],
+      filters: transformedBenefitsListAndFilters.availableFilters,
       selectedFilters:
         transformedBenefitsListAndFilters.availableFilters.filter(
-          (filter) => filter.selected === true
+          (filter) => filter.selected
         ),
     };
   }
@@ -71,14 +61,16 @@ export class BenefitNLPSearchSummaryModel {
     benefitSummaryResponseDTO: BenefitsNLP.NlpBenefitsSummarySearchResult,
     filterKeys: BenefitsNLP.BenefitSummaryFilter[]
   ): BenefitsNLP.BenefitsListAndFilters {
+    const filterMap = new Map();
     const transformedBenefitsListAndFilters: BenefitsNLP.BenefitsListAndFilters =
       { benefitsSummaries: [], availableFilters: [] };
     transformedBenefitsListAndFilters.benefitsSummaries =
       benefitSummaryResponseDTO.benefitsSummaries;
     benefitSummaryResponseDTO.benefitsSummaries?.forEach(
       (benefit: BenefitsNLP.NlpBenefitsSummary) => {
+
         benefit.network.serviceLocations?.forEach((serviceLocation: string) => {
-          this.filters.add({
+          const serviceLocationFilter = {
             type: BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE,
             value: serviceLocation,
             selected: this.match(
@@ -86,9 +78,14 @@ export class BenefitNLPSearchSummaryModel {
               BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE,
               serviceLocation
             ),
-          });
+          };
+          filterMap.set(
+            `${BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE}-${serviceLocation}`,
+            serviceLocationFilter
+          );
         });
-        this.filters.add({
+
+        const availableNetworkFilter = {
           type: BenefitsNLP.BenefitSummaryFilterType.NETWORK,
           value: benefit.network.networkCode.description ?? '',
           selected: this.match(
@@ -96,15 +93,16 @@ export class BenefitNLPSearchSummaryModel {
             BenefitsNLP.BenefitSummaryFilterType.NETWORK,
             benefit.network.networkCode.description ?? ''
           ),
-        });
+        };
+        filterMap.set(
+          `${BenefitsNLP.BenefitSummaryFilterType.NETWORK}-${benefit.network.networkCode.description}`,
+          availableNetworkFilter
+        );
       }
     );
 
-    console.log(this.filters);
-    transformedBenefitsListAndFilters.availableFilters =
-      Array.from<BenefitsNLP.BenefitSummaryFilter>(this.filters).map(
-        (item) => item
-      );
+    console.log('hello', filterMap);
+    transformedBenefitsListAndFilters.availableFilters = [...filterMap.values()]
     return transformedBenefitsListAndFilters;
   }
 
