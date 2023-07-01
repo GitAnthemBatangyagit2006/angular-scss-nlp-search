@@ -15,6 +15,7 @@ import { benefitSummaryResponse, filterKeys } from './nlp/summary/mock';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  filterType = BenefitSummaryFilterType
   model: BenefitSummarySearchResult;
   data: any;
   constructor(  public summaryModel: BenefitNLPSearchSummaryModel) {}

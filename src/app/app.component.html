@@ -4,4 +4,17 @@
 <search-summary></search-summary>
 
 -->
+
 <button (click) = "filter()" value="hitme">filter</button>
+<ul>
+
+    <ng-container *ngFor="let filter of this.model.filters">
+        <ng-container *ngIf="filter.type===filterType.NETWORK">
+         <li>
+            <input type="checkbox" [checked]="filter.selected" onchange="toggleFilter(filter)">
+            <span [innerHTML]="filter.value"></span>
+        </li>
+        </ng-container>
+    </ng-container>
+</ul>
+
