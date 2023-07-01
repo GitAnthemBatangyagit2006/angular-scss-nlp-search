@@ -73,7 +73,7 @@ export class BenefitNLPSearchSummaryModel {
     };
     const key = `${BenefitSummaryFilterType.PLACE_OF_SERVICE}-${filterValue}`;
     const map = new Map();
-    return [key, modifiedFilter] as const;
+    return [key, modifiedFilter]
   }
 
   getTransformedBenefitsListAndFilters(
