@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
     } else {
       this.model.selectedFilters.push(filter);
     }
+    this.model.filterBenefitSummary = this.summaryModel.filteredBenefitSummary( this.model.benefitSummary,this.model.selectedFilters);
     console.log( this.model.selectedFilters);
   }
 }
