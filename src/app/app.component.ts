@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   }
 
   toggleFilter(targetFilter: BenefitSummaryFilter) {
-    targetFilter.selected = !targetFilter.selected;
+   // targetFilter.selected = !targetFilter.selected;
     // remove from the filter if unchecked
     if (!targetFilter.selected) {
       this.benefitNLPSearchSummaryData.selectedFilters =

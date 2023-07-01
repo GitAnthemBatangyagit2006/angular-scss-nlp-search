@@ -11,7 +11,7 @@
     <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData.filters">
         <ng-container *ngIf="filter.type===filterType.NETWORK">
          <li>
-            <input type="checkbox" [checked]="filter.selected" (change)="toggleFilter(filter)">
+            <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
             <span [innerHTML]="filter.value"></span>
         </li>
         </ng-container>
