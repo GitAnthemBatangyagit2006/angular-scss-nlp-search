@@ -223,7 +223,7 @@ export interface BenefitSummarySearchResult {
   contractUid: string;
   dateOfServicepPlanType: string;
   documentId: string;
-  filterBenefitSummary: NlpBenefitsSummary[];
+  filteredBenefitSummary: NlpBenefitsSummary[];
   filters: BenefitSummaryFilter[];
   selectedFilters?: BenefitSummaryFilter[];
 }

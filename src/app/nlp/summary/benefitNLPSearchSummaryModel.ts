@@ -18,11 +18,11 @@ export class BenefitNLPSearchSummaryModel {
       contractUid: transformBenefitSummaryRequest.contractUid,
       dateOfServicepPlanType: transformBenefitSummaryRequest.effectiveDate,
       benefitSummary: transformedBenefitsListAndFilters.benefitsSummaries,
-      filterBenefitSummary: this.filteredBenefitSummary(
+      filteredBenefitSummary: this.filterBenefitSummary(
         transformedBenefitsListAndFilters.benefitsSummaries,
         transformBenefitSummaryRequest.filterKeys
       ).length
-        ? this.filteredBenefitSummary(
+        ? this.filterBenefitSummary(
             transformedBenefitsListAndFilters.benefitsSummaries,
             transformBenefitSummaryRequest.filterKeys
           )
@@ -35,7 +35,7 @@ export class BenefitNLPSearchSummaryModel {
     };
   }
 
-  filteredBenefitSummary(
+  filterBenefitSummary(
     benefitSummarylist: BenefitsNLP.NlpBenefitsSummary[],
     filterKeys: BenefitsNLP.BenefitSummaryFilter[]
   ): BenefitsNLP.NlpBenefitsSummary[] {
