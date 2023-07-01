@@ -11,7 +11,7 @@
     <ng-container *ngFor="let filter of this.model.filters">
         <ng-container *ngIf="filter.type===filterType.NETWORK">
          <li>
-            <input type="checkbox" [checked]="filter.selected" onchange="toggleFilter(filter)">
+            <input type="checkbox" [checked]="filter.selected" (change)="toggleFilter(filter)">
             <span [innerHTML]="filter.value"></span>
         </li>
         </ng-container>

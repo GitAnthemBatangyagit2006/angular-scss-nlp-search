@@ -3,7 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { BenefitSummaryFilterType, BenefitSummarySearchResult, CoverageTypeCode, NetworkType } from './nlp/summary/benefitNLP';
+import { BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult, CoverageTypeCode, NetworkType } from './nlp/summary/benefitNLP';
 import { BenefitNLPSearchSummaryModel } from './nlp/summary/benefitNLPSearchSummaryModel';
 import { benefitSummaryResponse, filterKeys } from './nlp/summary/mock';
 
@@ -38,6 +38,17 @@ export class AppComponent implements OnInit {
 
     console.log(this.model.selectedFilters);
     console.log(this.model.filterBenefitSummary)
+  }
+
+  toggleFilter(filter: BenefitSummaryFilter) {
+    filter.selected = !filter.selected;
+    // remove from the filter if unchecked
+    if (!filter.selected) {
+     this.model.selectedFilters = this.model.selectedFilters.filter((f) => f.value !== filter.value && f.type !== filter.type);
+    } else {
+      this.model.selectedFilters.push(filter);
+    }
+    console.log( this.model.selectedFilters);
   }
 }
 
