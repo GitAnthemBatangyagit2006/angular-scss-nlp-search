@@ -57,9 +57,25 @@ export class BenefitNLPSearchSummaryModel {
     });
   }
 
+  getModfiedFilter(
+    filterType: BenefitsNLP.BenefitSummaryFilterType,
+    filterValue: string,
+    defaultFilters: BenefitsNLP.BenefitSummaryFilter[]
+  ): Map<string, BenefitsNLP.BenefitSummaryFilter> {
+    const modifiedFilter = {
+      type: filterType,
+      value: filterValue,
+      selected: this.match(defaultFilters, filterType, filterValue),
+    };
+    const key = `${BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE}-${filterValue}`;
+    const map = new Map();
+    map.set(key,filterValue)
+    return map;
+  }
+
   getTransformedBenefitsListAndFilters(
     benefitSummaryResponseDTO: BenefitsNLP.NlpBenefitsSummarySearchResult,
-    filterKeys: BenefitsNLP.BenefitSummaryFilter[]
+    defaultFilters: BenefitsNLP.BenefitSummaryFilter[]
   ): BenefitsNLP.BenefitsListAndFilters {
     const filterMap = new Map();
     const transformedBenefitsListAndFilters: BenefitsNLP.BenefitsListAndFilters =
@@ -68,32 +84,11 @@ export class BenefitNLPSearchSummaryModel {
       benefitSummaryResponseDTO.benefitsSummaries;
     benefitSummaryResponseDTO.benefitsSummaries?.forEach(
       (benefit: BenefitsNLP.NlpBenefitsSummary) => {
-
-        benefit.network.serviceLocations?.forEach((serviceLocation: string) => {
-          const serviceLocationFilter = {
-            type: BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE,
-            value: serviceLocation,
-            selected: this.match(
-              filterKeys,
-              BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE,
-              serviceLocation
-            ),
-          };
-          filterMap.set(
-            `${BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE}-${serviceLocation}`,
-            serviceLocationFilter
-          );
+        benefit.network.serviceLocations?.forEach((serviceLocation: string) => {        
+          const item = this.getModfiedFilter(BenefitsNLP.BenefitSummaryFilterType.PLACE_OF_SERVICE, serviceLocation, defaultFilters);
+          filterMap.set(Object.entries(item));
         });
 
-        const availableNetworkFilter = {
-          type: BenefitsNLP.BenefitSummaryFilterType.NETWORK,
-          value: benefit.network.networkCode.description ?? '',
-          selected: this.match(
-            filterKeys,
-            BenefitsNLP.BenefitSummaryFilterType.NETWORK,
-            benefit.network.networkCode.description ?? ''
-          ),
-        };
         filterMap.set(
           `${BenefitsNLP.BenefitSummaryFilterType.NETWORK}-${benefit.network.networkCode.description}`,
           availableNetworkFilter
@@ -102,7 +97,9 @@ export class BenefitNLPSearchSummaryModel {
     );
 
     console.log('hello', filterMap);
-    transformedBenefitsListAndFilters.availableFilters = [...filterMap.values()]
+    transformedBenefitsListAndFilters.availableFilters = [
+      ...filterMap.values(),
+    ];
     return transformedBenefitsListAndFilters;
   }
 
