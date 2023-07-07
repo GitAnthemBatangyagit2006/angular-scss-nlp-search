@@ -5,10 +5,6 @@ import { FilterTagDirective } from "../filterTag/filterTagDirective";
 
 
 
-export interface FilterTagMainComponent {
-  data: any;
-}
-
 @Component({
   selector: '[nlp-summary-filter]',
   template: `

@@ -9,7 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ApiService } from './app.service';
 import { BenefitNLPSearchSummaryComponent } from './nlp/summary/benefitNLPSearchSummaryCmp';
 import { BenefitNLPSearchDetailsComponent } from './nlp/details/benefitNLPSearchDetails';
-import { FilterTagMainComponent } from './nlp/filterTag/filterTagMainCmp';
+import { FilterTagMainComponent } from './nlp/summary/filterTag/filterTagMainCmp';
 
 export function getWindow() {
   return window;
