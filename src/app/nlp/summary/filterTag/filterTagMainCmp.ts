@@ -8,6 +8,7 @@ import { FilterTagDirective } from "../filterTag/filterTagDirective";
 
 
 @Component({
+  styleUrls: ['filterTags.scss'],
   selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
   <div class="ad-banner-example">
@@ -30,15 +31,10 @@ export class FilterTagMainComponent  implements OnInit {
   private clearTimer: VoidFunction | undefined;
 
   ngOnInit(): void {
-
-    this.addComponent({body:'Hello worldzzs', headline: 'headline...'});
-
-    this.changing?.subscribe(v => { 
-      console.log('value is changing', v);
-    });
   }
 
   addComponent(data: any) {
+    this.currentAdIndex += 1;
     data.index = this.currentAdIndex;
     data.body = data.body + this.currentAdIndex;
     const viewContainerRef = this.adHost.viewContainerRef;
