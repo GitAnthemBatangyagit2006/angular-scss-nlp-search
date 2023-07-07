@@ -20,6 +20,7 @@
 </ul>
 -->
 <div>
-    <nlp-summary-filter></nlp-summary-filter>  
+    <nlp-summary-filter #nlpFilter [changing]="changingValue"></nlp-summary-filter>  
+    <button (click)="addFilter($event)">add filter</button>
 </div>
 

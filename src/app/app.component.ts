@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import {
   BenefitSummaryFilter,
@@ -8,6 +9,8 @@ import {
   NetworkType,
 } from './nlp/summary/benefitNLP';
 import { BenefitNLPSearchSummaryModel } from './nlp/summary/benefitNLPSearchSummaryModel';
+import { FilterTagComponent } from './nlp/summary/filterTag/filterTagCmp';
+import { FilterTagMainComponent } from './nlp/summary/filterTag/filterTagMainCmp';
 import { benefitSummaryResponse, filterKeys } from './nlp/summary/mock';
 
 @Component({
@@ -19,6 +22,10 @@ export class AppComponent implements OnInit {
   filterType = BenefitSummaryFilterType;
   benefitNLPSearchSummaryData: BenefitSummarySearchResult;
   data: any;
+  changingValue: Subject<boolean> = new Subject();
+
+  @ViewChild("nlpFilter", {static: true}) filterTag!: FilterTagMainComponent;
+
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
   ) {}
@@ -70,5 +77,10 @@ export class AppComponent implements OnInit {
       );
 
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
+  }
+
+  addFilter() {
+    // this.changingValue.next(true);
+    this.filterTag.addComponent({body: 'hello world', headline: ' fdfd'});
   }
 }
