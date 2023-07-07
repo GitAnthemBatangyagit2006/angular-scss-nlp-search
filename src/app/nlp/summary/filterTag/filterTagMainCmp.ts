@@ -6,12 +6,13 @@ import { FilterTagDirective } from "../filterTag/filterTagDirective";
 
 
 
+
 @Component({
   selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
   <div class="ad-banner-example">
     <h3>Advertisementsxx</h3>
-    <ng-template #filterTag [filter-tag]></ng-template>
+    <ng-template [filter-tag]></ng-template>
   </div>
 `
 })
@@ -21,6 +22,7 @@ export class FilterTagMainComponent  implements OnInit {
 
   @Input() changing: Subject<boolean>;
 
+  filterTags = [];
   currentAdIndex = -1;
 
   @ViewChild(FilterTagDirective, {static: true}) adHost!: FilterTagDirective;
@@ -28,7 +30,7 @@ export class FilterTagMainComponent  implements OnInit {
   private clearTimer: VoidFunction | undefined;
 
   ngOnInit(): void {
-    console.log('fdfd')
+
     this.addComponent({body:'Hello worldzzs', headline: 'headline...'});
 
     this.changing?.subscribe(v => { 
@@ -36,14 +38,26 @@ export class FilterTagMainComponent  implements OnInit {
     });
   }
 
-
   addComponent(data: any) {
+    this.currentAdIndex += 1;
+    data.index = this.currentAdIndex;
+    data.body = data.body + this.currentAdIndex;
     const viewContainerRef = this.adHost.viewContainerRef;
     //viewContainerRef.clear();
 
     const adItem = new FilterItem(FilterTagComponent, data);
     const componentRef = viewContainerRef.createComponent<FilterTagComponent>(adItem.component);
     componentRef.instance.data = adItem.data;
+    componentRef.instance.removeFilterTag.subscribe((d: any) => {
+      this.removeFilterTag(data);
+    })
+    this.filterTags.push(componentRef);
+    data.componentRef = componentRef;
+  }
+
+  removeFilterTag(data: any) {
+    console.log(`i'm here deleted ${JSON.stringify(data.body)}`);
+    data.componentRef.destroy();
   }
 
 }
