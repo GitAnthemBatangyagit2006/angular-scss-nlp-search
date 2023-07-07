@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { FilterItem } from "../filterTag/filterItemCmp";
-import { FilterTagComponent } from "../filterTag/filterTagCmp";
+import { AdComponent, FilterTagComponent } from "../filterTag/filterTagCmp";
 import { FilterTagDirective } from "../filterTag/filterTagDirective";
 
 
@@ -25,7 +25,7 @@ export class FilterTagMainComponent  implements OnInit {
 
   ngOnInit(): void {
     console.log('fdfd')
-    this.loadComponent();
+    //this.loadComponent();
   }
 
 
@@ -34,8 +34,8 @@ export class FilterTagMainComponent  implements OnInit {
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const adItem = new FilterItem(FilterTagComponent, {body:'Hello world', headline: 'headline...'});
-    const componentRef = viewContainerRef.createComponent<FilterTagComponent>(adItem.component);
+    const adItem = new FilterItem(FilterTagComponent, {body:'Hello worldz', headline: 'headline...'});
+    const componentRef = viewContainerRef.createComponent<AdComponent>(adItem.component);
     componentRef.instance.data = adItem.data;
     
 

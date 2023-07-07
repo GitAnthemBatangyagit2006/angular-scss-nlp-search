@@ -1,5 +1,8 @@
 import { Component, Input } from "@angular/core";
 
+export interface AdComponent {
+  data: any;
+}
 
 @Component({
   template: `
@@ -10,6 +13,6 @@ import { Component, Input } from "@angular/core";
     </div>
   `
 })
-export class FilterTagComponent {
+export class FilterTagComponent implements AdComponent {
   @Input() data: any;
 }

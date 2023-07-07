@@ -10,6 +10,8 @@ import { ApiService } from './app.service';
 import { BenefitNLPSearchSummaryComponent } from './nlp/summary/benefitNLPSearchSummaryCmp';
 import { BenefitNLPSearchDetailsComponent } from './nlp/details/benefitNLPSearchDetails';
 import { FilterTagMainComponent } from './nlp/summary/filterTag/filterTagMainCmp';
+import { FilterTagDirective } from './nlp/summary/filterTag/filterTagDirective';
+import { FilterTagComponent } from './nlp/summary/filterTag/filterTagCmp';
 
 export function getWindow() {
   return window;
@@ -17,7 +19,7 @@ export function getWindow() {
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule],
-  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent, FilterTagMainComponent],
+  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent, FilterTagMainComponent, FilterTagDirective, FilterTagComponent],
   providers: [
     HttpClient,
     ApiService,
