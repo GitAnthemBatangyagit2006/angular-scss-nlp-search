@@ -9,7 +9,7 @@ import { FilterTagDirective } from "../filterTag/filterTagDirective";
   selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
   <div class="ad-banner-example">
-    <h3>Advertisements</h3>
+    <h3>Advertisementsxx</h3>
     <ng-template [filter-tag]></ng-template>
   </div>
 `
