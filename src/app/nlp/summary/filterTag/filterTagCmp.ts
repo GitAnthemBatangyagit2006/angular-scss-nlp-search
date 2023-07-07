@@ -6,11 +6,11 @@ export interface AdComponent {
 
 
 @Component({
+  styleUrls: ['filterTags.scss'],
   template: `
-    <div class="job-ad">
-      <h4>{{data.headline}}</h4>
-      {{data.body}}
-      <button (click)="removeTag()">delete</button>
+    <div class="filter-tag-wrapper" role="buttn" (click) ="removeTag()">
+        <span>{{data.headline}}</span>
+        <span class="motif-icon motif-delete"></span>
     </div>
   `
 })

@@ -43,6 +43,9 @@ export class AppComponent implements OnInit {
         transformBenefitSummaryRequest
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
+
+    //populate filter ags
+    this.populateFilterTags();
   }
 
   filter() {
@@ -79,8 +82,15 @@ export class AppComponent implements OnInit {
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
   }
 
+  populateFilterTags(){
+    this.benefitNLPSearchSummaryData?.filters.forEach((filter) => {
+      if (filter.selected) {
+        this.filterTag.addFilterTag({body: 'hello world', headline: filter.value});
+      }
+    })
+  }
   addFilter() {
     // this.changingValue.next(true);
-    this.filterTag.addComponent({body: 'hello world', headline: ' fdfd'});
+    this.filterTag.addFilterTag({body: 'hello world', headline: ' fdfd'});
   }
 }

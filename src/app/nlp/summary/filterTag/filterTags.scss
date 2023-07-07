@@ -1,4 +1,28 @@
+@import './../../../../styles/colors.scss';
+@import './../../../../styles/icons.scss';
+//@import './styles/breakpoint.scss';
+
 .nlp-filter-tags-container{
   border: 1px solid;
-  
+  padding: 20px 20px;
+  margin: 10px 10x;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filter-tag-wrapper {
+    white-space: nowrap;
+    display: flex;
+    height: 30px;
+    padding: 7px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 16px;
+    border: 1px solid $ant-motif-highlight-ocean;
+    color: $ant-motif-highlight-ocean;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
 }

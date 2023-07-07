@@ -6,7 +6,7 @@
 -->
 
 
-<div class='nlp-filter-tags-container'>
+<div>
     <nlp-summary-filter #nlpFilter [changing]="changingValue"></nlp-summary-filter>  
     <button (click)="addFilter($event)">add filter</button>
 </div>
@@ -16,7 +16,7 @@
 <button (click) = "filter()" value="hitme">filter</button>
 <ul>
 
-    <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData.filters">
+    <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
         <ng-container *ngIf="filter.type===filterType.NETWORK">
          <li>
             <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">

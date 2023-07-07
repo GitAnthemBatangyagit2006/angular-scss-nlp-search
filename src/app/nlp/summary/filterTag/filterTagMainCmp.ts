@@ -11,9 +11,11 @@ import { FilterTagDirective } from "../filterTag/filterTagDirective";
   styleUrls: ['filterTags.scss'],
   selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
-  <div class="ad-banner-example">
-    <h3>Advertisementsxx</h3>
-    <ng-template [filter-tag]></ng-template>
+  <div >
+    <h3>Filters</h3>
+    <div class="nlp-filter-tags-container">
+      <ng-template [filter-tag]></ng-template>
+    </div>
   </div>
 `
 })
@@ -33,7 +35,7 @@ export class FilterTagMainComponent  implements OnInit {
   ngOnInit(): void {
   }
 
-  addComponent(data: any) {
+  addFilterTag(data: any) {
     this.currentAdIndex += 1;
     data.index = this.currentAdIndex;
     data.body = data.body + this.currentAdIndex;
