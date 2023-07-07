@@ -39,7 +39,6 @@ export class FilterTagMainComponent  implements OnInit {
   }
 
   addComponent(data: any) {
-    this.currentAdIndex += 1;
     data.index = this.currentAdIndex;
     data.body = data.body + this.currentAdIndex;
     const viewContainerRef = this.adHost.viewContainerRef;
@@ -51,7 +50,6 @@ export class FilterTagMainComponent  implements OnInit {
     componentRef.instance.removeFilterTag.subscribe((d: any) => {
       this.removeFilterTag(data);
     })
-    this.filterTags.push(componentRef);
     data.componentRef = componentRef;
   }
 
