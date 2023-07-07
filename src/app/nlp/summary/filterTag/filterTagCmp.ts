@@ -6,6 +6,7 @@ import { Component, Input } from "@angular/core";
     <div class="job-ad">
       <h4>{{data.headline}}</h4>
       {{data.body}}
+      <div>fdfdfd</div>
     </div>
   `
 })

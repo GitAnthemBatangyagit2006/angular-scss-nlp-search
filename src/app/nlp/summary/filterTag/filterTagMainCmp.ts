@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { FilterItem } from "../filterTag/filterItemCmp";
 import { FilterTagComponent } from "../filterTag/filterTagCmp";
 import { FilterTagDirective } from "../filterTag/filterTagDirective";
@@ -6,15 +6,15 @@ import { FilterTagDirective } from "../filterTag/filterTagDirective";
 
 
 @Component({
-  selector: '[nlp-summary-filter]',
+  selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
   <div class="ad-banner-example">
     <h3>Advertisements</h3>
-    <ng-template filter-tag></ng-template>
+    <ng-template [filter-tag]></ng-template>
   </div>
 `
 })
-export class FilterTagMainComponent {
+export class FilterTagMainComponent  implements OnInit {
 
 
   currentAdIndex = -1;
@@ -24,12 +24,10 @@ export class FilterTagMainComponent {
   private clearTimer: VoidFunction | undefined;
 
   ngOnInit(): void {
-   // this.loadComponent();
+    console.log('fdfd')
+    this.loadComponent();
   }
 
-  ngOnDestroy() {
-    this.clearTimer?.();
-  }
 
   loadComponent() {
 
@@ -39,6 +37,7 @@ export class FilterTagMainComponent {
     const adItem = new FilterItem(FilterTagComponent, {body:'Hello world', headline: 'headline...'});
     const componentRef = viewContainerRef.createComponent<FilterTagComponent>(adItem.component);
     componentRef.instance.data = adItem.data;
+    
 
   }
 
