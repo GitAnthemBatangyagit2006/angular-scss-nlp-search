@@ -31,7 +31,7 @@ export class BenefitNLPFilterTagsMainComponent {
   currentFilterTagIndex = -1;
 
   
-  @ViewChild(BenefitNLPFilterTagsDirective, { static: true })
+  @ViewChild(BenefitNLPFilterTagsDirective, { static: false })
   filterTagDirective!: BenefitNLPFilterTagsDirective;
 
 

@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
 
-  @ViewChild('nlpSearchSummaryFilterTag', { static: true }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
+  @ViewChild('nlpSearchSummaryFilterTag', { static: false }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
         transformBenefitSummaryRequest
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
-
+    this.populateFilterTags();
 
   }
 
@@ -114,8 +114,4 @@ export class AppComponent implements OnInit {
       );
   }
 
-  ngAfterViewInit() {
-        //populate filter ags
-        this.populateFilterTags();
-  }
 }
