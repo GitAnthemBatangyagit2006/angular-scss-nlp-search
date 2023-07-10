@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
         this.benefitNLPSearchSummaryData.selectedFilters
       );
 
-    console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
+    this.filterTag.toggleFilterTag({ description: targetFilter.value }, targetFilter.selected);
   }
 
   populateFilterTags(){

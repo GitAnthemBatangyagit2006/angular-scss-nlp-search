@@ -54,6 +54,15 @@ export class FilterTagMainComponent {
     filterTag.componentReference = componentRef;
 
     this.filterTags.set(filterTag.description, filterTag);
+
+  }
+  
+  toggleFilterTag(selectedFilterTag: FilterTag, flag: boolean) {
+    const matchingFilterTag = this.filterTags.get(selectedFilterTag.description);
+    console.log('heelo',matchingFilterTag);
+    if (!flag && matchingFilterTag) {
+      this.removeFilterTag(matchingFilterTag);
+    }
   }
 
   removeFilterTag(filterTag: FilterTag) {
