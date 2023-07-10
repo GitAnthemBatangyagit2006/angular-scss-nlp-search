@@ -7,14 +7,13 @@ import {
 
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { BenefitSummaryFilter, FilterTag } from '../benefitNLP';
+import { BenefitSummaryFilter } from '../benefitNLP';
 import { BenefitNLPFilterTagComponent } from '../filterTag/benefitNLPFilterTagCmp';
-import { FilterItem } from '../filterTag/filterItemCmp';
-import { FilterTagComponent } from '../filterTag/filterTagCmp';
+import { BenefitNLPFilterItem } from '../filterTag/benefitNLPFilterItem';
 import { FilterTagDirective } from '../filterTag/filterTagDirective';
 
 @Component({
-  styleUrls: ['benefitNLPFilterTags'],
+  styleUrls: ['./benefitNLPFilterTags.scss'],
   selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
   <div >
@@ -35,7 +34,7 @@ export class BenefitNLPFilterTagsMainComponent {
   filterTagDirective!: FilterTagDirective;
 
   addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
-    const filterItem = new FilterItem(FilterTagComponent, benefitSummaryFilter);
+    const filterItem = new BenefitNLPFilterItem(BenefitNLPFilterTagComponent, benefitSummaryFilter);
     const componentRef =
       this.filterTagDirective.viewContainerRef.createComponent<BenefitNLPFilterTagComponent>(
         filterItem.component

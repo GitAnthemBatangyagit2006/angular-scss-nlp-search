@@ -7,6 +7,7 @@ import {
   BenefitSummarySearchResult,
 } from './nlp/summary/benefitNLP';
 import { BenefitNLPSearchSummaryModel } from './nlp/summary/benefitNLPSearchSummaryModel';
+import { BenefitNLPFilterTagsMainComponent } from './nlp/summary/filterTag/benefitNLPFilterTagsMainCmp';
 
 import {
   benefitSummaryResponse,

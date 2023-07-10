@@ -4,7 +4,7 @@ import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
 
 
 @Component({
-  styleUrls: ['filterTags.scss'],
+  styleUrls: ['benefitNLPFilterTags.scss'],
   template: `
     <div class="filter-tag-wrapper" role="buttn" (click) ="removeTag()">
         <span>{{benefitSummaryFilter.value}}</span>
