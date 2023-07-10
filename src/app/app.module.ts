@@ -12,6 +12,7 @@ import { BenefitNLPSearchDetailsComponent } from './nlp/details/benefitNLPSearch
 
 import { BenefitNLPFilterTagsMainComponent } from './nlp/summary/filterTag/benefitNLPFilterTagsMainCmp';
 import { BenefitNLPFilterTagComponent } from './nlp/summary/filterTag/benefitNLPFilterTagCmp';
+import { BenefitNLPFilterTagsDirective } from './nlp/summary/filterTag/benefitNLPFilterTagsDirective';
 
 export function getWindow() {
   return window;
@@ -19,7 +20,7 @@ export function getWindow() {
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule],
-  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent, BenefitNLPFilterTagsMainComponent, BenefitNLPFilterTagComponent],
+  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent, BenefitNLPFilterTagsMainComponent, BenefitNLPFilterTagComponent, BenefitNLPFilterTagsDirective],
   providers: [
     HttpClient,
     ApiService,
