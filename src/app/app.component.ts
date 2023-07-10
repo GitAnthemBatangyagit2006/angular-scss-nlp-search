@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
 
-  @ViewChild('nlpFilter', { static: true }) filterTag!: BenefitNLPFilterTagsMainComponent;
+  @ViewChild('nlpSearchSummaryFilterTag', { static: true }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
@@ -46,8 +46,7 @@ export class AppComponent implements OnInit {
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
 
-    //populate filter ags
-    this.populateFilterTags();
+
   }
 
   filter() {
@@ -85,7 +84,7 @@ export class AppComponent implements OnInit {
         this.benefitNLPSearchSummaryData.selectedFilters
       );
 
-    this.filterTag.toggleFilterTag(targetFilter);
+    this.nlpSearchSummaryFilterTag.toggleFilterTag(targetFilter);
     console.log(
       `filtered list`,
       this.benefitNLPSearchSummaryData.filteredBenefitSummary.length
@@ -95,7 +94,7 @@ export class AppComponent implements OnInit {
   populateFilterTags() {
     this.benefitNLPSearchSummaryData?.filters.forEach((filter) => {
       if (filter.selected) {
-        this.filterTag.addFilterTag(filter);
+        this.nlpSearchSummaryFilterTag.addFilterTag(filter);
       }
     });
   }
@@ -106,12 +105,17 @@ export class AppComponent implements OnInit {
   }
 
   deleteAllFilterTags() {
-    this.filterTag.deleteAllFilterTags();
+    this.nlpSearchSummaryFilterTag.deleteAllFilterTags();
     this.benefitNLPSearchSummaryData.selectedFilters.length = 0;
     this.benefitNLPSearchSummaryData.filteredBenefitSummary =
       this.benefitNLPSearchSummaryModel.filterBenefitSummary(
         this.benefitNLPSearchSummaryData.benefitSummary,
         this.benefitNLPSearchSummaryData.selectedFilters
       );
+  }
+
+  ngAfterViewInit() {
+        //populate filter ags
+        this.populateFilterTags();
   }
 }

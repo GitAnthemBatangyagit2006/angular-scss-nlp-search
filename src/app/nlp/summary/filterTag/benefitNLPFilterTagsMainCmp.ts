@@ -4,6 +4,7 @@ import {
   Output,
   Type,
   ViewChild,
+ViewContainerRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BenefitSummaryFilter } from '../benefitNLP';
@@ -13,12 +14,13 @@ import { FilterTagDirective } from '../filterTag/filterTagDirective';
 
 @Component({
   styleUrls: ['./benefitNLPFilterTags.scss'],
-  selector: '[nlp-summary-filter],nlp-summary-filter',
+  selector: '[nlp-search-summary-filter-tags],nlp-search-summary-filter-tags',
   template: `
   <div >
     <h3>Filters</h3>
     <div class="nlp-filter-tags-container">
       <ng-template [filter-tag]></ng-template>
+      <ng-container #filterTagsContainer></ng-container>
     </div>
   </div>
 `,
@@ -29,25 +31,30 @@ export class BenefitNLPFilterTagsMainComponent {
   filterTags = new Map<string, BenefitSummaryFilter>();
   currentFilterTagIndex = -1;
 
+  /*
   @ViewChild(FilterTagDirective, { static: true })
   filterTagDirective!: FilterTagDirective;
+  */
+  @ViewChild("filterTagsContainer", { read: ViewContainerRef })
+  filterTagsContainer!: ViewContainerRef;
 
   addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
-    const filterItem = new BenefitNLPFilterItem(
-      BenefitNLPFilterTagComponent,
-      benefitSummaryFilter
-    );
-
+/*
     const componentRef =
       this.filterTagDirective.viewContainerRef.createComponent(
         BenefitNLPFilterTagComponent
       );
-    componentRef.instance.benefitSummaryFilter =
-      filterItem.benefitSummaryFilter;
+ */     
+
+      const componentRef =
+      this.filterTagsContainer.createComponent<BenefitNLPFilterTagComponent>(
+        BenefitNLPFilterTagComponent
+      );
+    componentRef.instance.benefitSummaryFilter = benefitSummaryFilter;
     componentRef.instance.benefitSummaryFilter.tagComponentReference =
       componentRef;
 
-    componentRef.instance.removeFilterTag.subscribe((filterTag: any) => {
+    componentRef.instance.removeFilterTag.subscribe((filterTag: BenefitSummaryFilter) => {
       this.removeFilterTag(filterTag, false);
     });
 

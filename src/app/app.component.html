@@ -6,7 +6,7 @@
 -->
 
 <div>
-    <nlp-summary-filter #nlpFilter (filterTagRemoved)="toggleFilter($event)"></nlp-summary-filter>  
+    <nlp-search-summary-filter-tags #nlpFilter (filterTagRemoved)="toggleFilter($event)"></nlp-search-summary-filter-tags>  
     <button (click)="deleteAllFilterTags()">Clear Filter</button>
 </div>
 
