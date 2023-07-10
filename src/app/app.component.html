@@ -5,32 +5,39 @@
 
 -->
 
-<div>
-    <nlp-search-summary-filter-tags #nlpSearchSummaryFilterTag (filterTagRemoved)="toggleFilter($event)"></nlp-search-summary-filter-tags>  
-    <button (click)="deleteAllFilterTags()">Clear Filter</button>
+<div class="parent">
+    <div class="child">hello world</div>
 </div>
 
 
-<h4>Networks</h4>
-<ul>
-    <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
-        <ng-container *ngIf="filter.type===filterType.NETWORK">
-         <li>
-            <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
-            <span [innerHTML]="filter.value"></span>
-        </li>
-        </ng-container>
-    </ng-container>
-</ul>
-<h4> Service Location</h4>
-<ul>
-    <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
-        <ng-container *ngIf="filter.type===filterType.PLACE_OF_SERVICE">
-         <li>
-            <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
-            <span [innerHTML]="filter.value"></span>
-        </li>
-        </ng-container>
-    </ng-container>
-</ul>
+<div *ngIf="this.benefitNLPSearchSummaryData">
+    <div>
+        <nlp-search-summary-filter-tags #nlpSearchSummaryFilterTag (filterTagRemoved)="toggleFilter($event)"></nlp-search-summary-filter-tags>  
+        <button (click)="deleteAllFilterTags()">Clear Filter</button>
+    </div>
 
+
+    <h4>Networks</h4>
+    <ul>
+        <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
+            <ng-container *ngIf="filter.type===filterType.NETWORK">
+            <li>
+                <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
+                <span [innerHTML]="filter.value"></span>
+            </li>
+            </ng-container>
+        </ng-container>
+    </ul>
+    <h4> Service Location</h4>
+    <ul>
+        <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
+            <ng-container *ngIf="filter.type===filterType.PLACE_OF_SERVICE">
+            <li>
+                <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
+                <span [innerHTML]="filter.value"></span>
+            </li>
+            </ng-container>
+        </ng-container>
+    </ul>
+
+</div>

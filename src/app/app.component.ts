@@ -114,4 +114,7 @@ export class AppComponent implements OnInit {
       );
   }
 
+ delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 }
