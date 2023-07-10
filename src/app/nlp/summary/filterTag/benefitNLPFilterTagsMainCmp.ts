@@ -1,22 +1,20 @@
-import { NgTemplateOutlet } from '@angular/common';
+
 import {
   Component,
   EventEmitter,
-  Input,
-  OnInit,
   Output,
-  TemplateRef,
   ViewChild,
-  ViewContainerRef,
+
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BenefitSummaryFilter, FilterTag } from '../benefitNLP';
+import { BenefitNLPFilterTagComponent } from '../filterTag/benefitNLPFilterTagCmp';
 import { FilterItem } from '../filterTag/filterItemCmp';
 import { FilterTagComponent } from '../filterTag/filterTagCmp';
 import { FilterTagDirective } from '../filterTag/filterTagDirective';
 
 @Component({
-  styleUrls: ['filterTags.scss'],
+  styleUrls: ['benefitNLPFilterTags'],
   selector: '[nlp-summary-filter],nlp-summary-filter',
   template: `
   <div >
@@ -27,7 +25,7 @@ import { FilterTagDirective } from '../filterTag/filterTagDirective';
   </div>
 `,
 })
-export class FilterTagMainComponent {
+export class BenefitNLPFilterTagsMainComponent {
   @Output() filterTagRemoved = new EventEmitter();
 
   filterTags = new Map<string, BenefitSummaryFilter>();
@@ -39,7 +37,7 @@ export class FilterTagMainComponent {
   addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
     const filterItem = new FilterItem(FilterTagComponent, benefitSummaryFilter);
     const componentRef =
-      this.filterTagDirective.viewContainerRef.createComponent<FilterTagComponent>(
+      this.filterTagDirective.viewContainerRef.createComponent<BenefitNLPFilterTagComponent>(
         filterItem.component
       );
 
@@ -52,7 +50,10 @@ export class FilterTagMainComponent {
       this.removeFilterTag(filterTag, false);
     });
 
-    this.filterTags.set(componentRef.instance.benefitSummaryFilter.value, componentRef.instance.benefitSummaryFilter );
+    this.filterTags.set(
+      componentRef.instance.benefitSummaryFilter.value,
+      componentRef.instance.benefitSummaryFilter
+    );
   }
 
   toggleFilterTag(selectedFilterTag: BenefitSummaryFilter) {
@@ -73,10 +74,10 @@ export class FilterTagMainComponent {
   }
 
   deleteAllFilterTags() {
-   this.filterTags.forEach( (filter: BenefitSummaryFilter) => {
-     filter.tagComponentReference.destroy();
-     filter.selected = false;
-   })
-   this.filterTags.clear();
+    this.filterTags.forEach((filter: BenefitSummaryFilter) => {
+      filter.tagComponentReference.destroy();
+      filter.selected = false;
+    });
+    this.filterTags.clear();
   }
 }

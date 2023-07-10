@@ -12,7 +12,7 @@ import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
     </div>
   `
 })
-export class FilterTagComponent {
+export class BenefitNLPFilterTagComponent {
   @Output() removeFilterTag = new EventEmitter();
   @Input() benefitSummaryFilter: BenefitSummaryFilter;
 
