@@ -34,7 +34,6 @@ export class BenefitNLPFilterTagsMainComponent {
   @ViewChild(BenefitNLPFilterTagsDirective, { static: true })
   filterTagDirective!: BenefitNLPFilterTagsDirective;
 
-
   addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
 
     const componentRef =
