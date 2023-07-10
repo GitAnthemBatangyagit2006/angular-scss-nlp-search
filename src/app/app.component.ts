@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
 
-  @ViewChild('nlpSearchSummaryFilterTag', { static: false }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
+  @ViewChild('nlpSearchSummaryFilterTag', { static: true }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
