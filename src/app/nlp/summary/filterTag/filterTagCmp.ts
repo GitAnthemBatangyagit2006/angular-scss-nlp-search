@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Subject } from "rxjs/internal/Subject";
 import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
 
 
@@ -17,5 +18,11 @@ export class FilterTagComponent {
 
   removeTag() {
     this.removeFilterTag.emit(this.filterTag);
+  }
+  
+  ngOnDestroy() {
+    if (this.removeFilterTag) {
+      this.removeFilterTag.unsubscribe();
+    }
   }
 }

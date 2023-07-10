@@ -27,40 +27,36 @@ import { FilterTagDirective } from '../filterTag/filterTagDirective';
   </div>
 `,
 })
-export class FilterTagMainComponent implements OnInit {
-  @Output()
-  addTag = new EventEmitter();
-
-  @Input() changing: Subject<boolean>;
-
-  filterTags = [];
-  currentAdIndex = -1;
-
-  @ViewChild(FilterTagDirective, {static: true}) filterTagDirective!: FilterTagDirective;
+export class FilterTagMainComponent {
+  filterTags = new Map<string, FilterTag>();
+  currentFilterTagIndex = -1;
 
 
-  ngOnInit(): void {}
+  @ViewChild(FilterTagDirective, { static: true })
+  filterTagDirective!: FilterTagDirective;
 
   addFilterTag(filterTag: FilterTag) {
-    this.currentAdIndex += 1;
-    filterTag.index = this.currentAdIndex;
-    filterTag.description = filterTag.description + this.currentAdIndex;
+    this.currentFilterTagIndex += 1;
+    filterTag.index = this.currentFilterTagIndex;
+    //Remove this
+    filterTag.description = filterTag.description + this.currentFilterTagIndex;
 
     const filterItem = new FilterItem(FilterTagComponent, filterTag);
-    const componentRef = this.filterTagDirective.viewContainerRef.createComponent<FilterTagComponent>(
-      filterItem.component
-    );
+    const componentRef =
+      this.filterTagDirective.viewContainerRef.createComponent<FilterTagComponent>(
+        filterItem.component
+      );
 
-    console.log(filterItem.filterTag);
     componentRef.instance.filterTag = filterItem.filterTag;
     componentRef.instance.removeFilterTag.subscribe((filterTag: any) => {
       this.removeFilterTag(filterTag);
     });
     filterTag.componentReference = componentRef;
+
+    this.filterTags.set(filterTag.description, filterTag);
   }
 
   removeFilterTag(filterTag: FilterTag) {
-    console.log(`i'm here deleted ${JSON.stringify(filterTag.description)}`);
     filterTag.componentReference.destroy();
   }
 }
