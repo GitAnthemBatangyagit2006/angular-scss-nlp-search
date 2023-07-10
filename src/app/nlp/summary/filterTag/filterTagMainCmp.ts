@@ -28,44 +28,47 @@ import { FilterTagDirective } from '../filterTag/filterTagDirective';
 `,
 })
 export class FilterTagMainComponent {
-  filterTags = new Map<string, FilterTag>();
-  currentFilterTagIndex = -1;
+  @Output() filterTagRemoved = new EventEmitter();
 
+  filterTags = new Map<string, BenefitSummaryFilter>();
+  currentFilterTagIndex = -1;
 
   @ViewChild(FilterTagDirective, { static: true })
   filterTagDirective!: FilterTagDirective;
 
-  addFilterTag(filterTag: FilterTag) {
-    this.currentFilterTagIndex += 1;
-    filterTag.index = this.currentFilterTagIndex;
-    //Remove this
-    filterTag.description = filterTag.description + this.currentFilterTagIndex;
-
-    const filterItem = new FilterItem(FilterTagComponent, filterTag);
+  addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
+    const filterItem = new FilterItem(FilterTagComponent, benefitSummaryFilter);
     const componentRef =
       this.filterTagDirective.viewContainerRef.createComponent<FilterTagComponent>(
         filterItem.component
       );
 
-    componentRef.instance.filterTag = filterItem.filterTag;
+    componentRef.instance.benefitSummaryFilter =
+      filterItem.benefitSummaryFilter;
+    componentRef.instance.benefitSummaryFilter.tagComponentReference =
+      componentRef;
+
     componentRef.instance.removeFilterTag.subscribe((filterTag: any) => {
-      this.removeFilterTag(filterTag);
+      this.removeFilterTag(filterTag, false);
     });
-    filterTag.componentReference = componentRef;
 
-    this.filterTags.set(filterTag.description, filterTag);
-
+    this.filterTags.set(componentRef.instance.benefitSummaryFilter.value, componentRef.instance.benefitSummaryFilter );
   }
-  
-  toggleFilterTag(selectedFilterTag: FilterTag, flag: boolean) {
-    const matchingFilterTag = this.filterTags.get(selectedFilterTag.description);
-    console.log('heelo',matchingFilterTag);
-    if (!flag && matchingFilterTag) {
-      this.removeFilterTag(matchingFilterTag);
+
+  toggleFilterTag(selectedFilterTag: BenefitSummaryFilter) {
+    const matchingFilterTag = this.filterTags.get(selectedFilterTag.value);
+    if (!selectedFilterTag.selected && matchingFilterTag) {
+      this.removeFilterTag(matchingFilterTag, true);
+    } else {
+      this.addFilterTag(selectedFilterTag);
     }
   }
 
-  removeFilterTag(filterTag: FilterTag) {
-    filterTag.componentReference.destroy();
+  removeFilterTag(benefitSummaryFilter: BenefitSummaryFilter, noEmit: boolean) {
+    benefitSummaryFilter.tagComponentReference.destroy();
+    benefitSummaryFilter.selected = false;
+    if (!noEmit) {
+      this.filterTagRemoved.emit(benefitSummaryFilter);
+    }
   }
 }

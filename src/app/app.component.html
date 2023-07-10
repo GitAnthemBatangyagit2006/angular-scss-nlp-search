@@ -6,15 +6,13 @@
 -->
 
 <div>
-    <nlp-summary-filter #nlpFilter></nlp-summary-filter>  
+    <nlp-summary-filter #nlpFilter (filterTagRemoved)="toggleFilter($event)"></nlp-summary-filter>  
     <button (click)="addFilter($event)">add filter</button>
 </div>
 
 
-
-<button (click) = "filter()" value="hitme">filter</button>
+<h4>Networks</h4>
 <ul>
-
     <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
         <ng-container *ngIf="filter.type===filterType.NETWORK">
          <li>
@@ -24,3 +22,15 @@
         </ng-container>
     </ng-container>
 </ul>
+<h4> Service Location</h4>
+<ul>
+    <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
+        <ng-container *ngIf="filter.type===filterType.PLACE_OF_SERVICE">
+         <li>
+            <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
+            <span [innerHTML]="filter.value"></span>
+        </li>
+        </ng-container>
+    </ng-container>
+</ul>
+

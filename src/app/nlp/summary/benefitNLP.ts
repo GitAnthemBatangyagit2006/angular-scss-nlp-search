@@ -1,3 +1,5 @@
+import { ComponentRef } from "@angular/core";
+import { FilterTagComponent } from "./filterTag/filterTagCmp";
 
 
 export type OverrideType<T, R> = Omit<T, keyof R> & R;
@@ -216,6 +218,7 @@ export interface BenefitSummaryFilter {
   type: BenefitSummaryFilterType;
   value: string;
   selected: boolean;
+  tagComponentReference?: ComponentRef<FilterTagComponent>;
 }
 
 export interface BenefitSummarySearchResult {
@@ -317,7 +320,7 @@ export enum NetworkType {
   OUT_NETWORK = "Out of Network"
 }
 
-export interface FilterTag {
+export interface FilterTag extends BenefitSummaryFilter {
   analyticTag?: string;
   ariaLabel?: string;
   componentReference?: any;
