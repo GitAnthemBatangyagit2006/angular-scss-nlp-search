@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
     this.filterTag.toggleFilterTag(targetFilter);
     console.log(
       `filtered list`,
-      this.benefitNLPSearchSummaryData.filteredBenefitSummary
+      this.benefitNLPSearchSummaryData.filteredBenefitSummary.length
     );
   }
 

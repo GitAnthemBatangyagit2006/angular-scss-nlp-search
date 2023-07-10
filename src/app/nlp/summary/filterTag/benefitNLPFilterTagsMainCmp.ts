@@ -1,10 +1,9 @@
-
 import {
   Component,
   EventEmitter,
   Output,
+  Type,
   ViewChild,
-
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BenefitSummaryFilter } from '../benefitNLP';
@@ -34,12 +33,15 @@ export class BenefitNLPFilterTagsMainComponent {
   filterTagDirective!: FilterTagDirective;
 
   addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
-    const filterItem = new BenefitNLPFilterItem(BenefitNLPFilterTagComponent, benefitSummaryFilter);
-    const componentRef =
-      this.filterTagDirective.viewContainerRef.createComponent<BenefitNLPFilterTagComponent>(
-        filterItem.component
-      );
+    const filterItem = new BenefitNLPFilterItem(
+      BenefitNLPFilterTagComponent,
+      benefitSummaryFilter
+    );
 
+    const componentRef =
+      this.filterTagDirective.viewContainerRef.createComponent(
+        BenefitNLPFilterTagComponent
+      );
     componentRef.instance.benefitSummaryFilter =
       filterItem.benefitSummaryFilter;
     componentRef.instance.benefitSummaryFilter.tagComponentReference =
