@@ -11,7 +11,11 @@ import {
 import { BenefitNLPSearchSummaryModel } from './nlp/summary/benefitNLPSearchSummaryModel';
 import { FilterTagComponent } from './nlp/summary/filterTag/filterTagCmp';
 import { FilterTagMainComponent } from './nlp/summary/filterTag/filterTagMainCmp';
-import { benefitSummaryResponse, benefitSummaryresponse2, filterKeys } from './nlp/summary/mock';
+import {
+  benefitSummaryResponse,
+  benefitSummaryresponse2,
+  filterKeys,
+} from './nlp/summary/mock';
 
 @Component({
   selector: 'my-app',
@@ -24,7 +28,7 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
 
-  @ViewChild("nlpFilter", {static: true}) filterTag!: FilterTagMainComponent;
+  @ViewChild('nlpFilter', { static: true }) filterTag!: FilterTagMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
@@ -58,21 +62,25 @@ export class AppComponent implements OnInit {
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
   }
 
-
   toggleFilter(targetFilter: BenefitSummaryFilter) {
-   // targetFilter.selected = !targetFilter.selected;
+    // targetFilter.selected = !targetFilter.selected;
     // remove from the filter if unchecked
     if (!targetFilter.selected) {
       this.benefitNLPSearchSummaryData.selectedFilters =
         this.benefitNLPSearchSummaryData.selectedFilters.filter(
           (filter) =>
-            !(filter.value == targetFilter.value &&
-            filter.type === targetFilter.type)
+            !(
+              filter.value == targetFilter.value &&
+              filter.type === targetFilter.type
+            )
         );
     } else {
       this.benefitNLPSearchSummaryData.selectedFilters.push(targetFilter);
     }
-    console.log(`filter`,this.benefitNLPSearchSummaryData.selectedFilters.length);
+    console.log(
+      `filter`,
+      this.benefitNLPSearchSummaryData.selectedFilters.length
+    );
     this.benefitNLPSearchSummaryData.filteredBenefitSummary =
       this.benefitNLPSearchSummaryModel.filterBenefitSummary(
         this.benefitNLPSearchSummaryData.benefitSummary,
@@ -80,20 +88,32 @@ export class AppComponent implements OnInit {
       );
 
     this.filterTag.toggleFilterTag(targetFilter);
-    console.log(`filtered list`,this.benefitNLPSearchSummaryData.filteredBenefitSummary);
+    console.log(
+      `filtered list`,
+      this.benefitNLPSearchSummaryData.filteredBenefitSummary
+    );
   }
 
-  populateFilterTags(){
+  populateFilterTags() {
     this.benefitNLPSearchSummaryData?.filters.forEach((filter) => {
       if (filter.selected) {
         this.filterTag.addFilterTag(filter);
       }
-    })
+    });
   }
 
   deSelectFilter(selectedFilter: BenefitSummaryFilter) {
     console.log(selectedFilter.selected);
-    this.toggleFilter(selectedFilter)
+    this.toggleFilter(selectedFilter);
   }
-  
+
+  deleteAllFilterTags() {
+    this.filterTag.deleteAllFilterTags();
+    this.benefitNLPSearchSummaryData.selectedFilters.length = 0;
+    this.benefitNLPSearchSummaryData.filteredBenefitSummary =
+      this.benefitNLPSearchSummaryModel.filterBenefitSummary(
+        this.benefitNLPSearchSummaryData.benefitSummary,
+        this.benefitNLPSearchSummaryData.selectedFilters
+      );
+  }
 }

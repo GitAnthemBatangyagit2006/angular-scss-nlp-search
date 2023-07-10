@@ -71,4 +71,12 @@ export class FilterTagMainComponent {
       this.filterTagRemoved.emit(benefitSummaryFilter);
     }
   }
+
+  deleteAllFilterTags() {
+   this.filterTags.forEach( (filter: BenefitSummaryFilter) => {
+     filter.tagComponentReference.destroy();
+     filter.selected = false;
+   })
+   this.filterTags.clear();
+  }
 }

@@ -2,6 +2,7 @@ import {
   BenefitSummaryFilterType,
   CoverageTypeCode,
   NetworkType,
+NlpBenefitsSummarySearchResult,
 } from './benefitNLP';
 
 export const filterKeys = [
@@ -12,7 +13,7 @@ export const filterKeys = [
   },
 ];
 
-export const benefitSummaryResponse = {
+export const benefitSummaryResponse: NlpBenefitsSummarySearchResult = {
   benefitsSummaries: [
     {
       benefit: {
@@ -126,7 +127,7 @@ export const benefitSummaryResponse = {
   documentId: '190711534958-01012023',
 };
 
-export const benefitSummaryresponse2 = {
+export const benefitSummaryresponse2: NlpBenefitsSummarySearchResult = {
   benefitsSummaries: [
     {
       benefit: {

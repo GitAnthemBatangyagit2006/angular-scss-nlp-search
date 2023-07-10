@@ -112,7 +112,7 @@ export class BenefitNLPSearchSummaryModel {
     ];
     return transformedBenefitsListAndFilters;
   }
-
+  
   private match(
     filters: BenefitSummaryFilter[],
     targetType: BenefitSummaryFilterType,
