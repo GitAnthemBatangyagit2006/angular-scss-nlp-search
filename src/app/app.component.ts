@@ -5,12 +5,9 @@ import {
   BenefitSummaryFilter,
   BenefitSummaryFilterType,
   BenefitSummarySearchResult,
-  CoverageTypeCode,
-  NetworkType,
 } from './nlp/summary/benefitNLP';
 import { BenefitNLPSearchSummaryModel } from './nlp/summary/benefitNLPSearchSummaryModel';
-import { FilterTagComponent } from './nlp/summary/filterTag/filterTagCmp';
-import { FilterTagMainComponent } from './nlp/summary/filterTag/filterTagMainCmp';
+
 import {
   benefitSummaryResponse,
   benefitSummaryresponse2,
@@ -28,7 +25,7 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
 
-  @ViewChild('nlpFilter', { static: true }) filterTag!: FilterTagMainComponent;
+  @ViewChild('nlpFilter', { static: true }) filterTag!: BenefitNLPFilterTagsMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel

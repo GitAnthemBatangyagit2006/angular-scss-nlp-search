@@ -1,5 +1,6 @@
 import { ComponentRef } from "@angular/core";
-import { FilterTagComponent } from "./filterTag/filterTagCmp";
+import { BenefitNLPFilterTagComponent } from "./filterTag/benefitNLPFilterTagCmp";
+
 
 
 export type OverrideType<T, R> = Omit<T, keyof R> & R;
@@ -218,7 +219,7 @@ export interface BenefitSummaryFilter {
   type: BenefitSummaryFilterType;
   value: string;
   selected: boolean;
-  tagComponentReference?: ComponentRef<FilterTagComponent>;
+  tagComponentReference?: ComponentRef<BenefitNLPFilterTagComponent>;
 }
 
 export interface BenefitSummarySearchResult {
