@@ -9,8 +9,8 @@ ViewContainerRef,
 import { Subject } from 'rxjs';
 import { BenefitSummaryFilter } from '../benefitNLP';
 import { BenefitNLPFilterTagComponent } from '../filterTag/benefitNLPFilterTagCmp';
-import { BenefitNLPFilterItem } from '../filterTag/benefitNLPFilterItem';
-import { FilterTagDirective } from '../filterTag/filterTagDirective';
+import { BenefitNLPFilterTagsDirective } from '../filterTag/benefitNLPFilterTagsDirective';
+
 
 @Component({
   styleUrls: ['./benefitNLPFilterTags.scss'],
@@ -20,7 +20,6 @@ import { FilterTagDirective } from '../filterTag/filterTagDirective';
     <h3>Filters</h3>
     <div class="nlp-filter-tags-container">
       <ng-template [filter-tag]></ng-template>
-      <ng-container #filterTagsContainer></ng-container>
     </div>
   </div>
 `,
@@ -31,25 +30,19 @@ export class BenefitNLPFilterTagsMainComponent {
   filterTags = new Map<string, BenefitSummaryFilter>();
   currentFilterTagIndex = -1;
 
-  /*
-  @ViewChild(FilterTagDirective, { static: true })
-  filterTagDirective!: FilterTagDirective;
-  */
-  @ViewChild("filterTagsContainer", { read: ViewContainerRef })
-  filterTagsContainer!: ViewContainerRef;
+  
+  @ViewChild(BenefitNLPFilterTagsDirective, { static: true })
+  filterTagDirective!: BenefitNLPFilterTagsDirective;
+
 
   addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
-/*
+
     const componentRef =
       this.filterTagDirective.viewContainerRef.createComponent(
         BenefitNLPFilterTagComponent
       );
- */     
 
-      const componentRef =
-      this.filterTagsContainer.createComponent<BenefitNLPFilterTagComponent>(
-        BenefitNLPFilterTagComponent
-      );
+
     componentRef.instance.benefitSummaryFilter = benefitSummaryFilter;
     componentRef.instance.benefitSummaryFilter.tagComponentReference =
       componentRef;

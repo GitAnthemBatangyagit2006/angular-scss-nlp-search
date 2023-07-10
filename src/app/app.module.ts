@@ -9,7 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ApiService } from './app.service';
 import { BenefitNLPSearchSummaryComponent } from './nlp/summary/benefitNLPSearchSummaryCmp';
 import { BenefitNLPSearchDetailsComponent } from './nlp/details/benefitNLPSearchDetails';
-import { FilterTagDirective } from './nlp/summary/filterTag/filterTagDirective';
+
 import { BenefitNLPFilterTagsMainComponent } from './nlp/summary/filterTag/benefitNLPFilterTagsMainCmp';
 import { BenefitNLPFilterTagComponent } from './nlp/summary/filterTag/benefitNLPFilterTagCmp';
 
@@ -19,7 +19,7 @@ export function getWindow() {
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule],
-  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent, BenefitNLPFilterTagsMainComponent, FilterTagDirective, BenefitNLPFilterTagComponent],
+  declarations: [AppComponent, HelloComponent, NewComponent, BenefitNLPSearchSummaryComponent,BenefitNLPSearchDetailsComponent, BenefitNLPFilterTagsMainComponent, BenefitNLPFilterTagComponent],
   providers: [
     HttpClient,
     ApiService,

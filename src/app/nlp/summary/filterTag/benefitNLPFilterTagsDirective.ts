@@ -4,6 +4,7 @@ import { Directive, ViewContainerRef } from '@angular/core';
 @Directive({
   selector: '[filter-tag]'
 })
-export class FilterTagDirective {
+export class BenefitNLPFilterTagsDirective
+ {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }
