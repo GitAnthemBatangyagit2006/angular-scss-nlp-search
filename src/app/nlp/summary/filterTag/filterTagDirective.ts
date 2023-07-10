@@ -5,5 +5,5 @@ import { Directive, ViewContainerRef } from '@angular/core';
   selector: '[filter-tag]'
 })
 export class FilterTagDirective {
-  constructor(public viewContainerRef: ViewContainerRef) { console.log('d')}
+  constructor(public viewContainerRef: ViewContainerRef) {}
 }
