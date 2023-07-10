@@ -1,24 +1,21 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-
-export interface AdComponent {
-  data: any;
-}
+import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
 
 
 @Component({
   styleUrls: ['filterTags.scss'],
   template: `
     <div class="filter-tag-wrapper" role="buttn" (click) ="removeTag()">
-        <span>{{data.headline}}</span>
+        <span>{{filterTag.description}}</span>
         <span class="motif-icon motif-delete"></span>
     </div>
   `
 })
-export class FilterTagComponent implements AdComponent {
+export class FilterTagComponent {
   @Output() removeFilterTag = new EventEmitter();
-  @Input() data: any;
+  @Input() filterTag: FilterTag;
 
   removeTag() {
-    this.removeFilterTag.emit(this.data);
+    this.removeFilterTag.emit(this.filterTag);
   }
 }

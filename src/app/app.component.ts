@@ -85,12 +85,12 @@ export class AppComponent implements OnInit {
   populateFilterTags(){
     this.benefitNLPSearchSummaryData?.filters.forEach((filter) => {
       if (filter.selected) {
-        this.filterTag.addFilterTag({body: 'hello world', headline: filter.value});
+        this.filterTag.addFilterTag({description: 'hello world'});
       }
     })
   }
   addFilter() {
     // this.changingValue.next(true);
-    this.filterTag.addFilterTag({body: 'hello world', headline: ' fdfd'});
+    this.filterTag.addFilterTag({description: 'hello world'});
   }
 }

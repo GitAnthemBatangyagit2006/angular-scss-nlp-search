@@ -316,3 +316,11 @@ export enum NetworkType {
   IN_NETWORK = "In Network",
   OUT_NETWORK = "Out of Network"
 }
+
+export interface FilterTag {
+  analyticTag?: string;
+  ariaLabel?: string;
+  componentReference?: any;
+  description: string;
+  index?: number;
+}
