@@ -23,7 +23,8 @@
             <ng-container *ngIf="filter.type===filterType.NETWORK">
             <li>
                 <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
-                <span [innerHTML]="filter.value"></span>
+                <span [innerHTML]='filter.value'></span>
+                <span [innerHTML]="content.toolTip[filter.value.replace(regspace,'').toLowerCase()]"></span>
             </li>
             </ng-container>
         </ng-container>

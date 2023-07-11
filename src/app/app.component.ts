@@ -15,6 +15,10 @@ import {
   filterKeys,
 } from './nlp/summary/mock';
 
+export interface content {
+  toolTip: {[key: string]: string}
+}
+
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -25,6 +29,14 @@ export class AppComponent implements OnInit {
   benefitNLPSearchSummaryData: BenefitSummarySearchResult;
   data: any;
   changingValue: Subject<boolean> = new Subject();
+  regspace = /\s+/g;
+  
+  content: content = {
+     toolTip : {
+    "innetwork": 'James',
+    "outofnetwork": 'my tooltipxxxx',
+  }
+};
 
   @ViewChild('nlpSearchSummaryFilterTag', { static: false }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
 
