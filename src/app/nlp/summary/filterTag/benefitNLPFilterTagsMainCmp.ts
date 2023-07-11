@@ -1,16 +1,16 @@
 import {
   Component,
   EventEmitter,
+  Input,
   Output,
   Type,
   ViewChild,
-ViewContainerRef,
+  ViewContainerRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BenefitSummaryFilter } from '../benefitNLP';
 import { BenefitNLPFilterTagComponent } from '../filterTag/benefitNLPFilterTagCmp';
 import { BenefitNLPFilterTagsDirective } from '../filterTag/benefitNLPFilterTagsDirective';
-
 
 @Component({
   styleUrls: ['./benefitNLPFilterTags.scss'],
@@ -26,29 +26,33 @@ import { BenefitNLPFilterTagsDirective } from '../filterTag/benefitNLPFilterTags
 })
 export class BenefitNLPFilterTagsMainComponent {
   @Output() filterTagRemoved = new EventEmitter();
+  @Input() initialFilters: BenefitSummaryFilter[];
 
   filterTags = new Map<string, BenefitSummaryFilter>();
   currentFilterTagIndex = -1;
 
-  
   @ViewChild(BenefitNLPFilterTagsDirective, { static: true })
   filterTagDirective!: BenefitNLPFilterTagsDirective;
 
-  addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
+  ngOnInit() {
+    this.populateFilterTags(this.initialFilters);
+  }
 
+  addFilterTag(benefitSummaryFilter: BenefitSummaryFilter) {
     const componentRef =
       this.filterTagDirective.viewContainerRef.createComponent(
         BenefitNLPFilterTagComponent
       );
 
-
     componentRef.instance.benefitSummaryFilter = benefitSummaryFilter;
     componentRef.instance.benefitSummaryFilter.tagComponentReference =
       componentRef;
 
-    componentRef.instance.removeFilterTag.subscribe((filterTag: BenefitSummaryFilter) => {
-      this.removeFilterTag(filterTag, false);
-    });
+    componentRef.instance.removeFilterTag.subscribe(
+      (filterTag: BenefitSummaryFilter) => {
+        this.removeFilterTag(filterTag, false);
+      }
+    );
 
     this.filterTags.set(
       componentRef.instance.benefitSummaryFilter.value,
@@ -65,7 +69,6 @@ export class BenefitNLPFilterTagsMainComponent {
     }
   }
 
-
   removeFilterTag(benefitSummaryFilter: BenefitSummaryFilter, noEmit: boolean) {
     benefitSummaryFilter.tagComponentReference.destroy();
     benefitSummaryFilter.selected = false;
@@ -80,5 +83,13 @@ export class BenefitNLPFilterTagsMainComponent {
       filter.selected = false;
     });
     this.filterTags.clear();
+  }
+
+  populateFilterTags(selectedFilters: BenefitSummaryFilter[]) {
+    selectedFilters?.forEach((filter) => {
+      if (filter.selected) {
+        this.addFilterTag(filter);
+      }
+    });
   }
 }

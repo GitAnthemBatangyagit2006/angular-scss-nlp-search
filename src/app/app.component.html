@@ -12,8 +12,8 @@
 
 <div *ngIf="this.benefitNLPSearchSummaryData">
     <div>
-        <nlp-search-summary-filter-tags #nlpSearchSummaryFilterTag (filterTagRemoved)="toggleFilter($event)"></nlp-search-summary-filter-tags>  
-        <button (click)="deleteAllFilterTags()">Clear Filter</button>
+        <nlp-search-summary-filter-tags #nlpSearchSummaryFilterTag (filterTagRemoved)="toggleFilter($event)" [initialFilters]="this.benefitNLPSearchSummaryData.selectedFilters"></nlp-search-summary-filter-tags>  
+        <button (click)="clearAll()">Clear Filter</button>
     </div>
 
 

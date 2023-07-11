@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
 
-  @ViewChild('nlpSearchSummaryFilterTag', { static: true }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
+  @ViewChild('nlpSearchSummaryFilterTag', { static: false }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.benefitNLPSearchSummaryModel.transformBenefitSummaryToModel;
     const transformBenefitSummaryRequest = {
-      nlpBenefitsSummarySearchResult: benefitSummaryresponse2,
+      nlpBenefitsSummarySearchResult: benefitSummaryResponse,
       contractUid: '9856396FB58D00B4C75EC0A892FA7937',
       effectiveDate: '2023-01-01',
       filterKeys: filterKeys,
@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
         transformBenefitSummaryRequest
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
-    this.populateFilterTags();
 
   }
 
@@ -104,7 +103,7 @@ export class AppComponent implements OnInit {
     this.toggleFilter(selectedFilter);
   }
 
-  deleteAllFilterTags() {
+  clearAllFilters() {
     this.nlpSearchSummaryFilterTag.deleteAllFilterTags();
     this.benefitNLPSearchSummaryData.selectedFilters.length = 0;
     this.benefitNLPSearchSummaryData.filteredBenefitSummary =
