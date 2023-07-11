@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as Benefits from './benefit';
-import { BenefitsListAndFilters, BenefitSummaryFilter, BenefitSummaryFilterType, BenefitSummarySearchResult, TransformBenefitSummaryRequest } from './benefitNLP';
+import {
+  BenefitsListAndFilters,
+  BenefitSummaryFilter,
+  BenefitSummaryFilterType,
+  BenefitSummarySearchResult,
+  TransformBenefitSummaryRequest,
+} from './benefitNLP';
 
 @Injectable({ providedIn: 'root' })
 export class BenefitNLPSearchSummaryModel {
@@ -43,22 +49,31 @@ export class BenefitNLPSearchSummaryModel {
     if (selectedFilters.length === 0) {
       return benefitSummarylist;
     }
-    return benefitSummarylist.filter((benefit) => {
-      return (
-        benefit.network.serviceLocations.some((serviceLocation: string) => {
+ 
+    const finalist = benefitSummarylist.filter((benefit) => {
+    
+       const posMatch = benefit.network.serviceLocations.some((serviceLocation: string) => {
           return this.match(
             selectedFilters,
             BenefitSummaryFilterType.PLACE_OF_SERVICE,
             serviceLocation
           );
-        }) ||
-        this.match(
+        }) 
+
+        const networkMatch = this.match(
           selectedFilters,
           BenefitSummaryFilterType.NETWORK,
           benefit.network.networkCode.description ?? ''
         )
-      );
+        /*
+        if (networkMatch && networkMatch) {
+          return benefit;
+        }
+        */
+        return networkMatch && networkMatch;
     });
+
+    return finalist;
   }
 
   getModfiedFilter(
@@ -73,7 +88,7 @@ export class BenefitNLPSearchSummaryModel {
     };
     const key = `${BenefitSummaryFilterType.PLACE_OF_SERVICE}-${filterValue}`;
     const map = new Map();
-    return [key, modifiedFilter]
+    return [key, modifiedFilter];
   }
 
   getTransformedBenefitsListAndFilters(
@@ -81,8 +96,10 @@ export class BenefitNLPSearchSummaryModel {
     defaultFilters: BenefitSummaryFilter[]
   ): BenefitsListAndFilters {
     const filterMap = new Map();
-    const transformedBenefitsListAndFilters: BenefitsListAndFilters =
-      { benefitsSummaries: [], availableFilters: [] };
+    const transformedBenefitsListAndFilters: BenefitsListAndFilters = {
+      benefitsSummaries: [],
+      availableFilters: [],
+    };
     transformedBenefitsListAndFilters.benefitsSummaries =
       benefitSummaryResponseDTO.benefitsSummaries;
     benefitSummaryResponseDTO.benefitsSummaries?.forEach(
@@ -112,17 +129,17 @@ export class BenefitNLPSearchSummaryModel {
     ];
     return transformedBenefitsListAndFilters;
   }
-  
+
   private match(
     filters: BenefitSummaryFilter[],
     targetType: BenefitSummaryFilterType,
     valueToCheck: string
-  ) {
-    return filters.some((filter: BenefitSummaryFilter) => {
-      return (
+  ): boolean {
+
+    return filters.some(
+      (filter: BenefitSummaryFilter) =>
         filter.type === targetType &&
         valueToCheck.toLowerCase() === filter.value.toLowerCase()
-      );
-    });
+    );
   }
 }
