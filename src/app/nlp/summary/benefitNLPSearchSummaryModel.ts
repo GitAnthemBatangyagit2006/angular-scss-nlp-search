@@ -5,6 +5,7 @@ import {
   BenefitSummaryFilter,
   BenefitSummaryFilterType,
   BenefitSummarySearchResult,
+  CoverageTypeCode,
   TransformBenefitSummaryRequest,
 } from './benefitNLP';
 
@@ -42,6 +43,11 @@ export class BenefitNLPSearchSummaryModel {
     };
   }
 
+  hasFilterSetForThisType (filters: BenefitSummaryFilter[],
+    targetType: BenefitSummaryFilterType,) {
+    return filters.some((filter: BenefitSummaryFilter) => filter.type === targetType);
+  }
+
   filterBenefitSummary(
     benefitSummarylist: Benefits.NlpBenefitsSummary[],
     selectedFilters: BenefitSummaryFilter[]
@@ -51,8 +57,8 @@ export class BenefitNLPSearchSummaryModel {
     }
  
     const finalist = benefitSummarylist.filter((benefit) => {
-    
-       const posMatch = benefit.network.serviceLocations.some((serviceLocation: string) => {
+       const noFilterSetForTypeServiceLocation =  !this.hasFilterSetForThisType( selectedFilters,BenefitSummaryFilterType.PLACE_OF_SERVICE);
+       const posMatch = noFilterSetForTypeServiceLocation || benefit.network.serviceLocations.some((serviceLocation: string) => {
           return this.match(
             selectedFilters,
             BenefitSummaryFilterType.PLACE_OF_SERVICE,
@@ -60,19 +66,17 @@ export class BenefitNLPSearchSummaryModel {
           );
         }) 
 
-        const networkMatch = this.match(
+        const noFilterSetForTypeNetwork=  !this.hasFilterSetForThisType( selectedFilters,BenefitSummaryFilterType.NETWORK);
+        const networkMatch = noFilterSetForTypeNetwork || this.match(
           selectedFilters,
           BenefitSummaryFilterType.NETWORK,
           benefit.network.networkCode.description ?? ''
         )
-        /*
-        if (networkMatch && networkMatch) {
-          return benefit;
-        }
-        */
-        return networkMatch && networkMatch;
+
+        return posMatch && networkMatch;
     });
 
+    console.log('filteredlist', finalist.length)
     return finalist;
   }
 
@@ -135,11 +139,11 @@ export class BenefitNLPSearchSummaryModel {
     targetType: BenefitSummaryFilterType,
     valueToCheck: string
   ): boolean {
-
-    return filters.some(
+    
+    return  filters.some(
       (filter: BenefitSummaryFilter) =>
         filter.type === targetType &&
         valueToCheck.toLowerCase() === filter.value.toLowerCase()
-    );
+    )
   }
 }
