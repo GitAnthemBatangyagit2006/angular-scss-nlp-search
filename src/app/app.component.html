@@ -19,8 +19,8 @@
 -->
 
     <div>
-        <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
-            <div></div>
+        <ng-container *ngFor="let filter of benefitNLPSearchSummaryData.selectedFilters">
+            <nlp-search-summary-filter-tag [selectedFilter]="filter"></nlp-search-summary-filter-tag>
         </ng-container>  
     </div>
 

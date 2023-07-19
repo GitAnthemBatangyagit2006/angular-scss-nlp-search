@@ -14,7 +14,7 @@ import { BenefitNLPFilterTagsDirective } from '../filterTag/benefitNLPFilterTags
 
 @Component({
   styleUrls: ['./benefitNLPFilterTags.scss'],
-  selector: '[nlp-search-summary-filter-tags],nlp-search-summary-filter-tags',
+  selector: '[nlp-search-summary-filter-tagsX],nlp-search-summary-filter-tagsX',
   template: `
   <div >
     <h3>Filters</h3>

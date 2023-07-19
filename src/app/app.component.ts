@@ -94,8 +94,10 @@ export class AppComponent implements OnInit {
         this.benefitNLPSearchSummaryData.benefitSummary,
         this.benefitNLPSearchSummaryData.selectedFilters
       );
+      
+    // Use this if you are dynamically calling loading compoonent.
+    //this.nlpSearchSummaryFilterTag.toggleFilterTag(targetFilter);
 
-    this.nlpSearchSummaryFilterTag.toggleFilterTag(targetFilter);
     console.log(
       `filtered list`,
       this.benefitNLPSearchSummaryData.filteredBenefitSummary.length
