@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Subject } from "rxjs/internal/Subject";
-import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BenefitSummaryFilter, FilterTag } from '../benefitNLP';
 
 @Component({
   styleUrls: ['benefitNLPFilterTags.scss'],
@@ -11,20 +9,18 @@ import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
         <span>{{selectedFilter.value}}</span>
         <span class="motif-icon motif-delete"></span>
     </div>
-  `
+  `,
 })
 export class BenefitNLPFilterTagComponent2 {
   @Output() removeFilterTag = new EventEmitter();
   @Input() selectedFilter: BenefitSummaryFilter;
 
   removeTag() {
-    this.selectedFilter.selected=false;
-   this.removeFilterTag.emit(this.selectedFilter);
+    this.selectedFilter.selected = false;
+    this.removeFilterTag.emit(this.selectedFilter);
   }
-  
+
   ngOnDestroy() {
-    if (this.removeFilterTag) {
-      this.removeFilterTag.unsubscribe();
-    }
+   this.removeFilterTag?.unsubscribe();
   }
 }

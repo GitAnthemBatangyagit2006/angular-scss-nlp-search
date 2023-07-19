@@ -16,7 +16,7 @@ import {
 } from './nlp/summary/mock';
 
 export interface content {
-  toolTip: {[key: string]: string}
+  toolTip: { [key: string]: string };
 }
 
 @Component({
@@ -30,15 +30,16 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
   regspace = /\s+/g;
-  
-  content: content = {
-     toolTip : {
-    "innetwork": 'James',
-    "outofnetwork": 'my tooltipxxxx',
-  }
-};
 
-  @ViewChild('nlpSearchSummaryFilterTag', { static: false }) nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
+  content: content = {
+    toolTip: {
+      innetwork: 'James',
+      outofnetwork: 'my tooltipxxxx',
+    },
+  };
+
+  @ViewChild('nlpSearchSummaryFilterTag', { static: false })
+  nlpSearchSummaryFilterTag!: BenefitNLPFilterTagsMainComponent;
 
   constructor(
     public benefitNLPSearchSummaryModel: BenefitNLPSearchSummaryModel
@@ -57,7 +58,6 @@ export class AppComponent implements OnInit {
         transformBenefitSummaryRequest
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
-
   }
 
   filter() {
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
   toggleFilter(targetFilter: BenefitSummaryFilter) {
     // targetFilter.selected = !targetFilter.selected;
     // remove from the filter if unchecked
-    console.log('fdfd')
+    console.log('fdfd');
     if (!targetFilter.selected) {
       this.benefitNLPSearchSummaryData.selectedFilters =
         this.benefitNLPSearchSummaryData.selectedFilters.filter(
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
         this.benefitNLPSearchSummaryData.benefitSummary,
         this.benefitNLPSearchSummaryData.selectedFilters
       );
-      
+
     // Use this if you are dynamically calling loading compoonent.
     //this.nlpSearchSummaryFilterTag.toggleFilterTag(targetFilter);
 
@@ -128,7 +128,11 @@ export class AppComponent implements OnInit {
       );
   }
 
- delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  test(targetFilter: BenefitSummaryFilter) {
+    console.log(targetFilter);
+  }
 }
