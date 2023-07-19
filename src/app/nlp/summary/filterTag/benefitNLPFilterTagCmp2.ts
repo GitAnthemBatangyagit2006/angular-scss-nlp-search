@@ -18,7 +18,8 @@ export class BenefitNLPFilterTagComponent2 {
   @Input() selectedFilter: BenefitSummaryFilter;
 
   removeTag() {
-   //this.removeFilterTag.emit(this.selectedFilter);
+    this.selectedFilter.selected=false;
+   this.removeFilterTag.emit(this.selectedFilter);
   }
   
   ngOnDestroy() {

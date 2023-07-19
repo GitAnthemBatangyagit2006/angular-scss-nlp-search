@@ -20,7 +20,7 @@
 
     <div>
         <ng-container *ngFor="let filter of benefitNLPSearchSummaryData.selectedFilters">
-            <nlp-search-summary-filter-tag [selectedFilter]="filter"></nlp-search-summary-filter-tag>
+            <nlp-search-summary-filter-tag [selectedFilter]="filter" (removeTag)="toggleFilter($event)"></nlp-search-summary-filter-tag>
         </ng-container>  
     </div>
 
