@@ -73,6 +73,7 @@ export class AppComponent implements OnInit {
   toggleFilter(targetFilter: BenefitSummaryFilter) {
     // targetFilter.selected = !targetFilter.selected;
     // remove from the filter if unchecked
+    console.log('fdfd')
     if (!targetFilter.selected) {
       this.benefitNLPSearchSummaryData.selectedFilters =
         this.benefitNLPSearchSummaryData.selectedFilters.filter(
@@ -86,7 +87,7 @@ export class AppComponent implements OnInit {
       this.benefitNLPSearchSummaryData.selectedFilters.push(targetFilter);
     }
     console.log(
-      `filter`,
+      `filterx`,
       this.benefitNLPSearchSummaryData.selectedFilters.length
     );
     this.benefitNLPSearchSummaryData.filteredBenefitSummary =
