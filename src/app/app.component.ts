@@ -24,7 +24,6 @@ export interface content {
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   filterType = BenefitSummaryFilterType;
@@ -63,12 +62,18 @@ export class AppComponent implements OnInit {
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
 
-    this.content.noBenefitSummaryMessage = ` <p class="nlp-no-benefit-summary-message-line1">
-    We couldn’t find results for Rehab
-   </p>
-   <p class="nlp-no-benefit-summary-message-line2">
-     Please check your spelling or try a different search term. You can also check out the categories below.
-   </p>`;
+    this.content.noBenefitSummaryMessage = ` 
+    <div>
+        <div class="motif-icon motif-search-1"></div>
+        <h3 class="nlp-no-benefit-summary-message-line1">
+          We couldn’t find results for Rehab
+        </h3>
+        <p class="nlp-no-benefit-summary-message-line2">
+
+          Please check your spelling or try a different search term. <br />You can also check out the categories below.
+        </p>
+   </div>
+   `;
   }
 
   filter() {

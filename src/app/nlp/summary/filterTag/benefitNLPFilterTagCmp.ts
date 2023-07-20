@@ -10,6 +10,7 @@ import { BenefitSummaryFilter, FilterTag } from "../benefitNLP";
         <span>{{benefitSummaryFilter.value}}</span>
         <span class="motif-icon motif-delete"></span>
     </div>
+
   `
 })
 export class BenefitNLPFilterTagComponent {

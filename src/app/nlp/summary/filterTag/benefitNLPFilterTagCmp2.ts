@@ -9,6 +9,9 @@ import { BenefitSummaryFilter, FilterTag } from '../benefitNLP';
       <span [innerHTML]="selectedFilter.value"></span>
       <span class="motif-icon motif-delete"></span>
     </div>
+    <div class="nlp-no-benefit-summary-message-wrapper">
+    testfdfd
+  </div>
   `
 })
 export class BenefitNLPFilterTagComponent2 {
