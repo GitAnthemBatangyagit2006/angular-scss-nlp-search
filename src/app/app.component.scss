@@ -7,3 +7,15 @@
     color:red;
   }
 }
+
+.nlp-no-benefit-summary-message-wrapper {
+  border: 1px solid;
+  .nlp-no-benefit-summary-message-line1 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .nlp-no-benefit-summary-message-line2 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

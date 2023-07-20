@@ -49,3 +49,11 @@
     </ul>
 
 </div>
+
+
+<div *ngIf="1==0 else noBenefitSummaryMessage">
+</div>    
+<ng-template #noBenefitSummaryMessage>
+    <div class="nlp-no-benefit-summary-message-wrapper" [innerHTML]="content.noBenefitSummaryMessage"></div>
+  </ng-template>
+  

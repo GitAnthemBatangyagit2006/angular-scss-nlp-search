@@ -5,11 +5,11 @@ import { BenefitSummaryFilter, FilterTag } from '../benefitNLP';
   styleUrls: ['benefitNLPFilterTags.scss'],
   selector: 'nlp-search-summary-filter-tag',
   template: `
-    <div class="filter-tag-wrapper" role="buttn" (click) ="removeTag()">
-        <span>{{selectedFilter.value}}</span>
-        <span class="motif-icon motif-delete"></span>
+    <div class="filter-tag-wrapper" role="button" (click)="removeTag()">
+      <span [innerHTML]="selectedFilter.value"></span>
+      <span class="motif-icon motif-delete"></span>
     </div>
-  `,
+  `
 })
 export class BenefitNLPFilterTagComponent2 {
   @Output() removeFilterTag = new EventEmitter();
@@ -21,6 +21,6 @@ export class BenefitNLPFilterTagComponent2 {
   }
 
   ngOnDestroy() {
-   this.removeFilterTag?.unsubscribe();
+    this.removeFilterTag?.unsubscribe();
   }
 }

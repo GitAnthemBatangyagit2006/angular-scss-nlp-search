@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import {
@@ -17,12 +17,14 @@ import {
 
 export interface content {
   toolTip: { [key: string]: string };
+  noBenefitSummaryMessage: string;
 }
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   filterType = BenefitSummaryFilterType;
@@ -31,11 +33,13 @@ export class AppComponent implements OnInit {
   changingValue: Subject<boolean> = new Subject();
   regspace = /\s+/g;
 
+
   content: content = {
     toolTip: {
       innetwork: 'James',
       outofnetwork: 'my tooltipxxxx',
     },
+    noBenefitSummaryMessage: ''
   };
 
   @ViewChild('nlpSearchSummaryFilterTag', { static: false })
@@ -58,6 +62,13 @@ export class AppComponent implements OnInit {
         transformBenefitSummaryRequest
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
+
+    this.content.noBenefitSummaryMessage = ` <p class="nlp-no-benefit-summary-message-line1">
+    We couldn’t find results for Rehab
+   </p>
+   <p class="nlp-no-benefit-summary-message-line2">
+     Please check your spelling or try a different search term. You can also check out the categories below.
+   </p>`;
   }
 
   filter() {
