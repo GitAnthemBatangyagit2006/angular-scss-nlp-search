@@ -62,19 +62,20 @@ export class AppComponent implements OnInit {
       );
     console.log(this.benefitNLPSearchSummaryData.filteredBenefitSummary);
 
-    this.content.noBenefitSummaryMessage = ` 
-    <div>
-        <div class="motif-icon motif-search-1"></div>
-        <h3 class="nlp-no-benefit-summary-message-line1">
-          We couldn’t find results for Rehab
-        </h3>
-        <p class="nlp-no-benefit-summary-message-line2">
+    this.content.noBenefitSummaryMessage = ` <div class="nlp-no-benefit-summary-icon">
+    <span class="motif-icon motif-search-1"></span>
+ </div>
+ <h3 class="nlp-no-benefit-summary-message-line1">
+   We couldn’t find results for &ldquo;##KEYWORD##&rdquo;
+ </h3>
+ <p class="nlp-no-benefit-summary-message-line2">
 
-          Please check your spelling or try a different search term. <br />You can also check out the categories below.
-        </p>
-   </div>
-   `;
+   Please check your spelling or try a different search term. <br />You can also check out the categories below.
+ </p>`;
+ 
+ 
   }
+
 
   filter() {
     this.benefitNLPSearchSummaryData.filteredBenefitSummary =

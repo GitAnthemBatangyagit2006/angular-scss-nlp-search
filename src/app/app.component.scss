@@ -14,14 +14,14 @@
 .nlp-no-benefit-summary-message-wrapper::ng-deep {
   border: 1px solid;
   text-align: center;
-    .motif-search-1 {
-      border: 2px solid;
-      font-size: 148px;
-      width: 148px;
-      height: 148px;
-      transform: rotate(270deg);
-      color: $ant-motif-accent-medium-gray;
-    }
+   .nlp-no-benefit-summary-icon {
+    margin: 24px 24px;
+      .motif-search-1 {
+        font-size: 100px;
+        transform: rotate(270deg);
+        color: $ant-motif-accent-medium-gray;
+      }
+   }
     .nlp-no-benefit-summary-message-line1 {
       font-size: 22px;
       font-weight: 700;
