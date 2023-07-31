@@ -18,6 +18,8 @@ import {
 export interface content {
   toolTip: { [key: string]: string };
   noBenefitSummaryMessage: string;
+  showLess: string,
+  showMore: string,
 }
 
 @Component({
@@ -31,6 +33,9 @@ export class AppComponent implements OnInit {
   data: any;
   changingValue: Subject<boolean> = new Subject();
   regspace = /\s+/g;
+  model = {
+    serviceNote: ''
+  }
 
 
   content: content = {
@@ -38,7 +43,9 @@ export class AppComponent implements OnInit {
       innetwork: 'James',
       outofnetwork: 'my tooltipxxxx',
     },
-    noBenefitSummaryMessage: ''
+    noBenefitSummaryMessage: '',
+    showMore: 'show more',
+    showLess: 'Show Less'
   };
 
   @ViewChild('nlpSearchSummaryFilterTag', { static: false })
@@ -73,7 +80,9 @@ export class AppComponent implements OnInit {
    Please check your spelling or try a different search term. <br />You can also check out the categories below.
  </p>`;
  
- 
+    this.model.serviceNote = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It `;
+    this.content.showMore = 'show more',
+    this.content.showLess = 'Show Less'
   }
 
 
