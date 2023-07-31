@@ -34,7 +34,10 @@ export class AppComponent implements OnInit {
   changingValue: Subject<boolean> = new Subject();
   regspace = /\s+/g;
   model = {
-    serviceNote: ''
+    serviceNote: '',
+    selectedNetwork : {
+      benefitSummary: ''
+    }
   }
 
 
@@ -80,9 +83,11 @@ export class AppComponent implements OnInit {
    Please check your spelling or try a different search term. <br />You can also check out the categories below.
  </p>`;
  
-    this.model.serviceNote = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It `;
+    this.model.serviceNote = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It`;
     this.content.showMore = 'show more',
     this.content.showLess = 'Show Less'
+
+    this.model.selectedNetwork.benefitSummary = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It `;
   }
 
 

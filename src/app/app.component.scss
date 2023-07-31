@@ -58,3 +58,14 @@
   right: 0;
   bottom: 0;
 }
+
+
+button.show-more-toggle {
+  background: none;
+  border: none;
+  color: $primary;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 0;
+}

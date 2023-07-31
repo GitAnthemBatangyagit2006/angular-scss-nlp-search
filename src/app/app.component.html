@@ -1,76 +1,138 @@
-
-
 <!--
 <search-summary></search-summary>
 
 -->
 
 <div class="parent">
-    <div class="child">hello world</div>
+  <div class="child">hello world</div>
 </div>
 
-
 <div *ngIf="this.benefitNLPSearchSummaryData">
-    <!--
+  <!--
     <div>
         <nlp-search-summary-filter-tags #nlpSearchSummaryFilterTag (filterTagRemoved)="toggleFilter($event)" [initialFilters]="this.benefitNLPSearchSummaryData.selectedFilters"></nlp-search-summary-filter-tags>  
         <button (click)="clearAll()">Clear Filter</button>
     </div>
 -->
 
-    <div>
-        <ng-container *ngFor="let filter of benefitNLPSearchSummaryData.selectedFilters">
-            <nlp-search-summary-filter-tag [selectedFilter]="filter" (removeTag)="testx(filter)"></nlp-search-summary-filter-tag>
-        </ng-container>  
-    </div>
+  <div>
+    <ng-container
+      *ngFor="let filter of benefitNLPSearchSummaryData.selectedFilters"
+    >
+      <nlp-search-summary-filter-tag
+        [selectedFilter]="filter"
+        (removeTag)="testx(filter)"
+      ></nlp-search-summary-filter-tag>
+    </ng-container>
+  </div>
 
-    <h4>Networks</h4>
-    <ul>
-        <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
-            <ng-container *ngIf="filter.type===filterType.NETWORK">
-            <li>
-                <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
-                <span [innerHTML]='filter.value'></span>
-                <span [innerHTML]="content.toolTip[filter.value.replace(regspace,'').toLowerCase()]"></span>
-            </li>
-            </ng-container>
-        </ng-container>
-    </ul>
-    <h4> Service Location</h4>
-    <ul>
-        <ng-container *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters">
-            <ng-container *ngIf="filter.type===filterType.PLACE_OF_SERVICE">
-            <li>
-                <input type="checkbox" [checked]="filter.selected" [(ngModel)]="filter.selected" (ngModelChange)="toggleFilter(filter)">
-                <span [innerHTML]="filter.value"></span>
-            </li>
-            </ng-container>
-        </ng-container>
-    </ul>
-
+  <h4>Networks</h4>
+  <ul>
+    <ng-container
+      *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters"
+    >
+      <ng-container *ngIf="filter.type === filterType.NETWORK">
+        <li>
+          <input
+            type="checkbox"
+            [checked]="filter.selected"
+            [(ngModel)]="filter.selected"
+            (ngModelChange)="toggleFilter(filter)"
+          />
+          <span [innerHTML]="filter.value"></span>
+          <span
+            [innerHTML]="
+              content.toolTip[filter.value.replace(regspace, '').toLowerCase()]
+            "
+          ></span>
+        </li>
+      </ng-container>
+    </ng-container>
+  </ul>
+  <h4>Service Location</h4>
+  <ul>
+    <ng-container
+      *ngFor="let filter of this.benefitNLPSearchSummaryData?.filters"
+    >
+      <ng-container *ngIf="filter.type === filterType.PLACE_OF_SERVICE">
+        <li>
+          <input
+            type="checkbox"
+            [checked]="filter.selected"
+            [(ngModel)]="filter.selected"
+            (ngModelChange)="toggleFilter(filter)"
+          />
+          <span [innerHTML]="filter.value"></span>
+        </li>
+      </ng-container>
+    </ng-container>
+  </ul>
 </div>
 
-
-<div *ngIf="1==0 else noBenefitSummaryMessage">
-    hello world
-</div>    
+<div *ngIf="1 == 0; else noBenefitSummaryMessage">hello world</div>
 <ng-template #noBenefitSummaryMessage>
-    <div class="nlp-no-benefit-summary-message-wrapper" [innerHTML]="content.noBenefitSummaryMessage"></div>
+  <div
+    class="nlp-no-benefit-summary-message-wrapper"
+    [innerHTML]="content.noBenefitSummaryMessage"
+  ></div>
 </ng-template>
-  
 
-<div *ngIf="model.serviceNote">
-    <p id="nlp-service-additional-information2-content-service-note" class="title"
-      [innerHTML]="content.serviceNotes"></p>
+<div *ngIf="model?.serviceNote">
+  <p
+    id="nlp-service-additional-information2-content-service-note"
+    class="title"
+    [innerHTML]="content.serviceNotes"
+  ></p>
 
-    <div #serviceNotesContent class="note-field" [class.show]="serviceNoteShowMore"
-      [class.note-text]="serviceNotesContent.scrollHeight > 36">
-      <p id="nlp-service-additional-information2-model-service-note" class="note"
-        [innerHTML]="model.serviceNote">
-      </p>
+  <div>
+    <span
+      id="nlp-service-additional-information2-model-service-note"
+      [innerHTML]="
+        model.serviceNote
+          | slice
+            : 0
+            : (model.serviceNote.length > 300 && !serviceNoteShowMore
+                ? 200
+                : model.serviceNote.length)
+      "
+    >
+    </span>
+    <span *ngIf="model.serviceNote?.length > 300 && !serviceNoteShowMore">&nbsp;...</span>
+  </div>
+  <div>
+    <button
+      id="nlp-service-additional-information2-service-note-show-more"
+      class="show-more-toggle"
+      *ngIf="model.serviceNote.length > 300"
+      (click)="serviceNoteShowMore = !serviceNoteShowMore"
+      role="button"
+      [attr.aria-label]="
+        serviceNoteShowMore
+          ? content.ariaLabelShowLess
+          : content.ariaLabelShowMore
+      "
+      [innerHTML]="serviceNoteShowMore ? content.showLess : content.showMore"></button>
+  </div>
+</div>
+<hr>
+
+<div class="nlp-service-summary" *ngIf="model.selectedNetwork.benefitSummary">
+    <h4 id="nlp-serivce-summary-title" class="section-title" [innerHTML]="content.benefitSummaryTitle"
+      rolw="heading" aria-level="2"></h4>
+
+    <div>
+      <span id="nlp-srvice-summary-selected-network-benfit-summary"
+        [innerHTML]="model.selectedNetwork.benefitSummary | slice:0:(model.selectedNetwork.benefitSummary?.length > 300 && !benefitSummaryShowMore? 200: model.selectedNetwork.benefitSummary?.length)">
+      </span>
+      <span *ngIf="model.selectedNetwork.benefitSummary?.length > 300 && !benefitSummaryShowMore">&nbsp;...</span>
     </div>
-    <div><button id="nlp-service-additional-information2-service-note-show-more" class="show-more-toggle"
-        *ngIf="serviceNotesContent.scrollHeight > 36" (click)="serviceNoteShowMore = !serviceNoteShowMore"
+
+    <div>
+      <button id="nlp-service-additional-information2-service-note-show-more" class="show-more-toggle"
+        *ngIf="model.selectedNetwork.benefitSummary.length > 300" (click)="benefitSummaryShowMore = !benefitSummaryShowMore"
         role="button"
-        [attr.aria-label]="serviceNoteShowMore ? content.ariaLabelShowLess : content.ariaLabelShowMore"
-        [innerHTML]="serviceNoteShowMore ? content.showLess : content.showMore"></button></div>
+        [attr.aria-label]="benefitSummaryShowMore? content.ariaLabelShowLess: content.ariaLabelShowMore"
+        [innerHTML]="benefitSummaryShowMore ? content.showLess : content.showMore"></button>
+    </div>
+
+  </div>
