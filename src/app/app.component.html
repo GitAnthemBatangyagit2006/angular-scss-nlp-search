@@ -58,3 +58,19 @@
     <div class="nlp-no-benefit-summary-message-wrapper" [innerHTML]="content.noBenefitSummaryMessage"></div>
 </ng-template>
   
+
+<div *ngIf="model.serviceNote">
+    <p id="nlp-service-additional-information2-content-service-note" class="title"
+      [innerHTML]="content.serviceNotes"></p>
+
+    <div #serviceNotesContent class="note-field" [class.show]="serviceNoteShowMore"
+      [class.note-text]="serviceNotesContent.scrollHeight > 24">
+      <p id="nlp-service-additional-information2-model-service-note" class="note"
+        [innerHTML]="model.serviceNote">
+      </p>
+    </div>
+    <div><button id="nlp-service-additional-information2-service-note-show-more" class="show-more-toggle"
+        *ngIf="serviceNotesContent.scrollHeight > 24" (click)="serviceNoteShowMore = !serviceNoteShowMore"
+        role="button"
+        [attr.aria-label]="serviceNoteShowMore ? content.ariaLabelShowLess : content.ariaLabelShowMore"
+        [innerHTML]="serviceNoteShowMore ? content.showLess : content.showMore"></button></div>

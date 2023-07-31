@@ -32,3 +32,29 @@
       font-weight: 400;
     } 
 }
+
+.note-text {
+  height: 2.9rem;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  text-align: justify;
+  border: 0 solid;
+}
+
+.note-field-base:not(.show)::after {
+  padding-left: 0.5rem;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.note-field:not(.show)::after {
+  content: "...";
+  padding-left: 0.5rem;
+  background-color: white;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
